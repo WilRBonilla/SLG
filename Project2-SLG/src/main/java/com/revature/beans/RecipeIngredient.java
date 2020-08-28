@@ -4,40 +4,46 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
-public class Stock {
+@Table(name = "Recipe_Ingredient")
+public class RecipeIngredient {
 
 	@Id
 	@GeneratedValue
-	private int s_id;
+	private int ring_id;
 	@OneToOne
 	@JoinColumn(name = "ing_id")
 	private Ingredient ingredient;
+	@ManyToOne
+	@JoinColumn(name = "r_id")
+	private Recipe recipe;
 	private int amount;
-	private int price;
-	public Stock() {
+	
+	public RecipeIngredient() {
 		super();
 	}
-	public Stock(Ingredient ingredient, int amount, int price) {
+	public RecipeIngredient(Ingredient ingredient, Recipe recipe, int amount) {
 		super();
 		this.ingredient = ingredient;
+		this.recipe = recipe;
 		this.amount = amount;
-		this.price = price;
 	}
-	public Stock(int s_id, Ingredient ingredient, int amount, int price) {
+	public RecipeIngredient(int ring_id, Ingredient ingredient, Recipe recipe, int amount) {
 		super();
-		this.s_id = s_id;
+		this.ring_id = ring_id;
 		this.ingredient = ingredient;
+		this.recipe = recipe;
 		this.amount = amount;
-		this.price = price;
 	}
-	public int getS_id() {
-		return s_id;
+	public int getRing_id() {
+		return ring_id;
 	}
-	public void setS_id(int s_id) {
-		this.s_id = s_id;
+	public void setRing_id(int ring_id) {
+		this.ring_id = ring_id;
 	}
 	public Ingredient getIngredient() {
 		return ingredient;
@@ -45,17 +51,17 @@ public class Stock {
 	public void setIngredient(Ingredient ingredient) {
 		this.ingredient = ingredient;
 	}
+	public Recipe getRecipe() {
+		return recipe;
+	}
+	public void setRecipe(Recipe recipe) {
+		this.recipe = recipe;
+	}
 	public int getAmount() {
 		return amount;
 	}
 	public void setAmount(int amount) {
 		this.amount = amount;
-	}
-	public int getPrice() {
-		return price;
-	}
-	public void setPrice(int price) {
-		this.price = price;
 	}
 	@Override
 	public int hashCode() {
@@ -63,8 +69,8 @@ public class Stock {
 		int result = 1;
 		result = prime * result + amount;
 		result = prime * result + ((ingredient == null) ? 0 : ingredient.hashCode());
-		result = prime * result + price;
-		result = prime * result + s_id;
+		result = prime * result + ((recipe == null) ? 0 : recipe.hashCode());
+		result = prime * result + ring_id;
 		return result;
 	}
 	@Override
@@ -75,7 +81,7 @@ public class Stock {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Stock other = (Stock) obj;
+		RecipeIngredient other = (RecipeIngredient) obj;
 		if (amount != other.amount)
 			return false;
 		if (ingredient == null) {
@@ -83,17 +89,20 @@ public class Stock {
 				return false;
 		} else if (!ingredient.equals(other.ingredient))
 			return false;
-		if (price != other.price)
+		if (recipe == null) {
+			if (other.recipe != null)
+				return false;
+		} else if (!recipe.equals(other.recipe))
 			return false;
-		if (s_id != other.s_id)
+		if (ring_id != other.ring_id)
 			return false;
 		return true;
 	}
 	@Override
 	public String toString() {
-		return "Stock [s_id=" + s_id + ", ingredient=" + ingredient + ", amount=" + amount + ", price=" + price + "]";
+		return "RecipeIngredient [ring_id=" + ring_id + ", ingredient=" + ingredient + ", recipe=" + recipe
+				+ ", amount=" + amount + "]";
 	}
-	
 	
 	
 	
