@@ -1,3 +1,12 @@
+DROP TABLE shoppers;
+DROP TABLE recipe;
+DROP TABLE pantry;
+DROP TABLE ingredient;
+DROP TABLE recipe_ingredient;
+DROP TABLE note;
+DROP TABLE shopping_list;
+DROP TABLE note;
+DROP TABLE stock;
 
 CREATE TABLE shoppers (
     u_id NUMBER(10) PRIMARY KEY,
@@ -129,4 +138,26 @@ INSERT INTO ingredient VALUES (24, 'Cream', 'ounces');
 INSERT INTO ingredient VALUES (25, 'Pasta', 'ounces');
 INSERT INTO ingredient VALUES (26, 'Parsley', 'ounces');
 /* Parmesan Cheese */ 
+
+/*Shrimp Scampi*/
+
+INSERT INTO ingredient VALUES (27, 'Shrimp', 'ounces');
+INSERT INTO ingredient VALUES (28, 'White Wine', 'ounces');
+INSERT INTO ingredient VALUES (29, 'Lemon', 'ounces');
+/*Butter, Garlic*/
+
+/*Apple Pie*/
+INSERT INTO ingredient VALUES (30, 'Brown Sugar', 'ounces');
+INSERT INTO ingredient VALUES (31, 'Apples', 'ounces');
+INSERT INTO ingredient VALUES (32, 'Cinnamon', 'ounces');
+
+/*Flour, Butter*/
+
+/*Burritos*/
+INSERT INTO ingredient VALUES (33, 'Lettuce', 'ounces');
+
+/* Steak, Rice, Cheese, Salsa */
+
+/*Lasagna*/
+/* Pasta, Cheese, Tomato Sauce, Ground Beef, Garlic */
 
