@@ -1,3 +1,4 @@
+
 CREATE TABLE shoppers (
     u_id NUMBER(10) PRIMARY KEY,
     f_name VARCHAR2(50),
@@ -78,12 +79,18 @@ ALTER TABLE stock ADD CONSTRAINT fk_stock_ingredient FOREIGN KEY
 (ing_id) REFERENCES ingredient(ing_id) ON DELETE CASCADE;
 
 
-Insert into recipe Values(1,'Chicken Parmesan','italian','','');
-Insert into recipe Values(2,'Enchiladas','mexican','','');
-Insert into recipe Values(3,'Philly Cheesesteak','american','philly','classic');
-Insert into recipe Values(4,'Moussaka','Greek','','');
-Insert into recipe Values(5,'Vegetable Biryani','indian','vegan','vegetarian');
-Insert into recipe Values(6,'Fettuccine Alfredo','italian','easy','');
+INSERT INTO RECIPE VALUES(1,'Chicken Parmesan','italian','classic','');
+INSERT INTO RECIPE VALUES(2,'Enchiladas','mexican','spicy','beef');
+INSERT INTO RECIPE VALUES(3,'Philly Cheesesteak','american','cheesy','classic');
+INSERT INTO RECIPE VALUES(4,'Moussaka','greek','family','unique');
+INSERT INTO RECIPE VALUES(5,'Vegetable Biryani','indian','vegan','unique');
+INSERT INTO RECIPE VALUES(6,'Fettuccine Alfredo','italian','easy','cheesy');
+INSERT INTO RECIPE VALUES(7,'Shrimp Scampi', 'french', 'easy','seafood');
+INSERT INTO RECIPE VALUES(8,'Apple Pie', 'american', 'dessert','classic');
+INSERT INTO RECIPE VALUES(9,'Burritos','mexican','easy','spicy');
+INSERT INTO RECIPE VALUES(10,'Lasagna', 'italian','family','classic');
+INSERT INTO RECIPE VALUES(11,'Tres Leches', 'mexican','fancy','dessert');
+INSERT INTO RECIPE VALUES(12,'Lobster Roll', 'american','fancy','seafood');
 
 /*Chicken Parmesan*/
 INSERT INTO ingredient VALUES (1, 'Chicken Breast', 'ounces');
@@ -122,5 +129,4 @@ INSERT INTO ingredient VALUES (24, 'Cream', 'ounces');
 INSERT INTO ingredient VALUES (25, 'Pasta', 'ounces');
 INSERT INTO ingredient VALUES (26, 'Parsley', 'ounces');
 /* Parmesan Cheese */ 
-
 
