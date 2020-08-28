@@ -21,7 +21,6 @@ public class RecipeServiceImpl implements RecipeService {
 	public Recipe findByTitle(String title) {
 		return rr.findByTitle(title);
 	}
-
 	public List<Recipe> findByCuisine(String cuisine) {
 		return rr.findByCuisine(cuisine);
 	}
@@ -33,8 +32,19 @@ public class RecipeServiceImpl implements RecipeService {
 	public List<Recipe> findByTag2(String tag2) {
 		return rr.findByTag2(tag2);
 	}
-	public List<Recipe> findByTag1AndTag2(String tag1, String tag2){
+	
+	public List<Recipe> findByTag1AndTag2(String tag1, String tag2) {
 		return rr.findByTag1AndTag2(tag1, tag2);
+	}	
+	public List<Recipe> findByCuisineAndTag1(String cuisine, String tag1) {
+		return rr.findByCuisineAndTag1(cuisine, tag1);
+	}
+
+	public List<Recipe> findByCuisineAndTag2(String cuisine, String tag2){
+		return rr.findByCuisineAndTag2(cuisine, tag2);
+	}
+	public List<Recipe> findByCuisineAndTag1AndTag2(String tag1, String tag2, String cuisine){
+		return rr.findByCuisineAndTag1AndTag2(cuisine,tag1, tag2);
 	}
 	public List<Recipe> allRecipes() {
 		return (List<Recipe>) rr.findAll();
@@ -52,5 +62,7 @@ public class RecipeServiceImpl implements RecipeService {
 			return false;
 		}
 	}
+
+	
 
 }
