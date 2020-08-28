@@ -16,7 +16,7 @@ public class RecipeIngredient {
 	@GeneratedValue
 	private int ring_id;
 	@OneToOne
-	@JoinColumn(name = "ring_id")
+	@JoinColumn(name = "ing_id")
 	private Ingredient ingredient;
 	@ManyToOne
 	@JoinColumn(name = "r_id")
