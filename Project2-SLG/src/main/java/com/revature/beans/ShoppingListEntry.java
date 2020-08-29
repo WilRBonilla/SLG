@@ -1,6 +1,8 @@
 package com.revature.beans;
 
 
+import java.util.List;
+
 /*
  * I think this table/object is very confusing.
  */
@@ -20,7 +22,7 @@ public class ShoppingListEntry {
 	private int entry_id;
 	@OneToMany
 	@JoinColumn(name = "ing_id")
-	private Ingredient ingredient;
+	private List<Ingredient> ingredient;
 	@OneToOne
 	@JoinColumn(name = "u_id")
 	private Shopper user;
@@ -32,7 +34,7 @@ public class ShoppingListEntry {
 		super();
 	}
 	
-	public ShoppingListEntry(Ingredient ingredient, Shopper user, int amount, Note note) {
+	public ShoppingListEntry(List<Ingredient> ingredient, Shopper user, int amount, Note note) {
 		super();
 		this.ingredient = ingredient;
 		this.user = user;
@@ -40,7 +42,7 @@ public class ShoppingListEntry {
 		this.note = note;
 	}
 
-	public ShoppingListEntry(int entry_id, Ingredient ingredient, Shopper user, int amount, Note note) {
+	public ShoppingListEntry(int entry_id, List<Ingredient> ingredient, Shopper user, int amount, Note note) {
 		super();
 		this.entry_id = entry_id;
 		this.ingredient = ingredient;
@@ -57,11 +59,11 @@ public class ShoppingListEntry {
 		this.entry_id = entry_id;
 	}
 
-	public Ingredient getIngredient() {
+	public List<Ingredient> getIngredient() {
 		return ingredient;
 	}
 
-	public void setIngredient(Ingredient ingredient) {
+	public void setIngredient(List<Ingredient> ingredient) {
 		this.ingredient = ingredient;
 	}
 
