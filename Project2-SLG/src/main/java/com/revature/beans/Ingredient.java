@@ -12,6 +12,7 @@ public class Ingredient {
 	private int ing_id;
 	private String name;
 	private String units;
+	
 	public Ingredient() {
 		super();
 	}

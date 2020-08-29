@@ -20,20 +20,20 @@ public class Pantry {
 	@OneToOne
 	@JoinColumn(name = "u_id")
 	private Shopper shopper;
-	@OneToMany
+	@OneToOne
 	@JoinColumn(name = "ing_id")
-	private List<Ingredient> ingredient;
+	private Ingredient ingredient;
 	private int amount;
 	public Pantry() {
 		super();
 	}
-	public Pantry(Shopper shopper, List<Ingredient> ingredient, int amount) {
+	public Pantry(Shopper shopper, Ingredient ingredient, int amount) {
 		super();
 		this.shopper = shopper;
 		this.ingredient = ingredient;
 		this.amount = amount;
 	}
-	public Pantry(int p_id, Shopper shopper, List<Ingredient> ingredient, int amount) {
+	public Pantry(int p_id, Shopper shopper, Ingredient ingredient, int amount) {
 		super();
 		this.p_id = p_id;
 		this.shopper = shopper;
@@ -54,10 +54,10 @@ public class Pantry {
 	public void setShopper(Shopper shopper) {
 		this.shopper = shopper;
 	}
-	public List<Ingredient> getIngredient() {
+	public Ingredient getIngredient() {
 		return ingredient;
 	}
-	public void setIngredient(List<Ingredient> ingredient) {
+	public void setIngredient(Ingredient ingredient) {
 		this.ingredient = ingredient;
 	}
 	public int getAmount() {

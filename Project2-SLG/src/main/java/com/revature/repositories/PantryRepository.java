@@ -1,11 +1,12 @@
 package com.revature.repositories;
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import com.revature.beans.Pantry;
 
+@Repository
 public interface PantryRepository extends CrudRepository<Pantry, Integer>{
 
-	public Pantry findByP_id(int p_id);
-	public Pantry findByU_id(int u_id);
+	public Pantry findAllByShopper(int shopper);
 }

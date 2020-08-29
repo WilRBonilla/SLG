@@ -16,7 +16,7 @@ public class IngredientServiceImpl implements IngredientService {
 	}
 
 	public Ingredient getIngredient(int ing_id) {
-		return ir.findByIng_Id(ing_id);
+		return ir.findById(ing_id).get();
 	}
 
 	public Ingredient findByName(String name) {
