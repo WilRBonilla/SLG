@@ -270,6 +270,45 @@ INSERT INTO recipe_ingredient VALUES (51, 19, 10, 2);
 
 --Tres Leches
 --Sugar, Milk, Flour, Butter, Cream
+
+INSERT INTO recipe_ingredient VALUES (52, 34, 11, 5);
+INSERT INTO recipe_ingredient VALUES (53, 35, 11, 4);
+INSERT INTO recipe_ingredient VALUES (54, 4, 11, 8);
+INSERT INTO recipe_ingredient VALUES (55, 23, 11, 4);
+INSERT INTO recipe_ingredient VALUES (56, 24, 11, 4);
+
+--Lobster Roll
+-- Lobster, Mayonnaise, Long Roll, Butter, Lettuce
+INSERT INTO recipe_ingredient VALUES (57, 36, 12, 8);
+INSERT INTO recipe_ingredient VALUES (58, 37, 12, 2);
+INSERT INTO recipe_ingredient VALUES (59, 14, 12, 2);
+INSERT INTO recipe_ingredient VALUES (60, 23, 12, 4);
+INSERT INTO recipe_ingredient VALUES (61, 33, 12, 3);
+
+--Shrimp Gumbo
+--Okra, Chicken Stock, Onion, Shrimp, Rice,
+INSERT INTO recipe_ingredient VALUES (62, 38, 13, 4);
+INSERT INTO recipe_ingredient VALUES (63, 39, 13, 12);
+INSERT INTO recipe_ingredient VALUES (64, 11, 13, 2);
+INSERT INTO recipe_ingredient VALUES (65, 27, 13, 5);
+INSERT INTO recipe_ingredient VALUES (66, 20, 13, 6);
+
+--Szechuan Chicken
+-- Red Chilies, Chicken Breast, Onion, Bell Pepper, Garlic
+INSERT INTO recipe_ingredient VALUES (67, 40, 14, 4);
+INSERT INTO recipe_ingredient VALUES (68, 1, 14, 9);
+INSERT INTO recipe_ingredient VALUES (69, 11, 14, 2);
+INSERT INTO recipe_ingredient VALUES (70, 12, 14, 4);
+INSERT INTO recipe_ingredient VALUES (71, 19, 14, 3);
+
+--Veggie Risotto
+--Asparagus, Veggie Stock, Bell Pepper, Rice, White Wine
+INSERT INTO recipe_ingredient VALUES (72, 41, 15, 5);
+INSERT INTO recipe_ingredient VALUES (73, 22, 15, 12);
+INSERT INTO recipe_ingredient VALUES (74, 12, 15, 3);
+INSERT INTO recipe_ingredient VALUES (75, 20, 15, 8);
+INSERT INTO recipe_ingredient VALUES (76, 28, 15, 5);
+=======
 INSERT INTO recipe_ingredient VALUES (48, 34, 11, 5);
 INSERT INTO recipe_ingredient VALUES (49, 35, 11, 4);
 INSERT INTO recipe_ingredient VALUES (50, 4, 11, 8);
