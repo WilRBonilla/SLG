@@ -1,5 +1,7 @@
 package com.revature.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,11 +18,11 @@ public class PantryServiceImpl implements PantryService{
 		return pr.save(p);
 	}
 	public Pantry findByP_id(int p_id) {
-		return pr.findByP_id(p_id);
+		return pr.findById(p_id).get();
 	}
 	
-	public Pantry findByU_id(int u_id) {
-		return pr.findByU_id(u_id);
+	public List<Pantry> findByU_id(int u_id) {
+		return (List<Pantry>) pr.findAllByShopper(u_id);
 	}
 	
 	public Pantry updatePantry(Pantry p) {
@@ -35,6 +37,11 @@ public class PantryServiceImpl implements PantryService{
 			return false;
 		}
 
+	}
+	@Override
+	public List<Pantry> findAllByShopper(int u_id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 

@@ -20,9 +20,10 @@ public class ShoppingListEntry {
 	@Id
 	@GeneratedValue
 	private int entry_id;
-	@OneToMany
+	
+	@OneToOne
 	@JoinColumn(name = "ing_id")
-	private List<Ingredient> ingredient;
+	private Ingredient ingredient;
 	@OneToOne
 	@JoinColumn(name = "u_id")
 	private Shopper user;
@@ -30,11 +31,13 @@ public class ShoppingListEntry {
 	@OneToOne
 	@JoinColumn(name = "n_id")
 	private Note note;
+	
+	
 	public ShoppingListEntry() {
 		super();
 	}
 	
-	public ShoppingListEntry(List<Ingredient> ingredient, Shopper user, int amount, Note note) {
+	public ShoppingListEntry(Ingredient ingredient, Shopper user, int amount, Note note) {
 		super();
 		this.ingredient = ingredient;
 		this.user = user;
@@ -42,7 +45,7 @@ public class ShoppingListEntry {
 		this.note = note;
 	}
 
-	public ShoppingListEntry(int entry_id, List<Ingredient> ingredient, Shopper user, int amount, Note note) {
+	public ShoppingListEntry(int entry_id, Ingredient ingredient, Shopper user, int amount, Note note) {
 		super();
 		this.entry_id = entry_id;
 		this.ingredient = ingredient;
@@ -59,11 +62,11 @@ public class ShoppingListEntry {
 		this.entry_id = entry_id;
 	}
 
-	public List<Ingredient> getIngredient() {
+	public Ingredient getIngredient() {
 		return ingredient;
 	}
 
-	public void setIngredient(List<Ingredient> ingredient) {
+	public void setIngredient(Ingredient ingredient) {
 		this.ingredient = ingredient;
 	}
 

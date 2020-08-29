@@ -9,5 +9,4 @@ import com.revature.beans.Ingredient;
 public interface IngredientRepository extends CrudRepository<Ingredient, Integer>{
 	
 	public Ingredient findByName(String Name);
-	public Ingredient findByIng_Id(int ing_id);
 }

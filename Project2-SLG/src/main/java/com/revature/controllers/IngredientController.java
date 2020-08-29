@@ -9,7 +9,7 @@ import com.revature.services.IngredientService;
 public class IngredientController {
 
 	
-	@Autowired
+//	@Autowired
 	IngredientService is;
 	
 }
