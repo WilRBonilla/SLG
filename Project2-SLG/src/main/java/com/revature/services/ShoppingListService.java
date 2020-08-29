@@ -2,6 +2,7 @@ package com.revature.services;
 
 import java.util.List;
 
+import com.revature.beans.Shopper;
 import com.revature.beans.ShoppingListEntry;
 
 /*
@@ -9,11 +10,11 @@ import com.revature.beans.ShoppingListEntry;
  */
 public interface ShoppingListService {
 	
-	public ShoppingListEntry addShoppingList(ShoppingListEntry sl);
+	public List<ShoppingListEntry> addShoppingList(List<ShoppingListEntry> sl);
 	// Thoughts: we don't need to get shopping list by its own id, but do need it for user's id.
 	public ShoppingListEntry getShoppingList(int id);
-	public List<ShoppingListEntry> findByUser(int uid);
-	public boolean updateShoppingList(ShoppingListEntry change);
+	public List<ShoppingListEntry> findByUser(Shopper u);
+	public boolean updateShoppingList(List<ShoppingListEntry> change);
 	public boolean deleteShoppingList(ShoppingListEntry sl);
 
 }

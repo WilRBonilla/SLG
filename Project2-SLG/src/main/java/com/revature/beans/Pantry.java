@@ -1,5 +1,7 @@
 package com.revature.beans;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -20,22 +22,48 @@ public class Pantry {
 	private Shopper shopper;
 	@OneToMany
 	@JoinColumn(name = "ing_id")
-	private Ingredient ingredient;
+	private List<Ingredient> ingredient;
 	private int amount;
 	public Pantry() {
 		super();
 	}
-	public Pantry(Shopper shopper, Ingredient ingredient, int amount) {
+	public Pantry(Shopper shopper, List<Ingredient> ingredient, int amount) {
 		super();
 		this.shopper = shopper;
 		this.ingredient = ingredient;
 		this.amount = amount;
 	}
-	public Pantry(int p_id, Shopper shopper, Ingredient ingredient, int amount) {
+	public Pantry(int p_id, Shopper shopper, List<Ingredient> ingredient, int amount) {
 		super();
 		this.p_id = p_id;
 		this.shopper = shopper;
 		this.ingredient = ingredient;
+		this.amount = amount;
+	}
+	
+	
+	public int getP_id() {
+		return p_id;
+	}
+	public void setP_id(int p_id) {
+		this.p_id = p_id;
+	}
+	public Shopper getShopper() {
+		return shopper;
+	}
+	public void setShopper(Shopper shopper) {
+		this.shopper = shopper;
+	}
+	public List<Ingredient> getIngredient() {
+		return ingredient;
+	}
+	public void setIngredient(List<Ingredient> ingredient) {
+		this.ingredient = ingredient;
+	}
+	public int getAmount() {
+		return amount;
+	}
+	public void setAmount(int amount) {
 		this.amount = amount;
 	}
 	@Override
