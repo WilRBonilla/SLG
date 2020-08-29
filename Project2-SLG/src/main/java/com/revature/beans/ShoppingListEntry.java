@@ -1,6 +1,8 @@
 package com.revature.beans;
 
 
+import java.util.List;
+
 /*
  * I think this table/object is very confusing.
  */
@@ -14,13 +16,13 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Shopping_List")
-public class ShoppingList {
+public class ShoppingListEntry {
 	@Id
 	@GeneratedValue
 	private int entry_id;
 	@OneToMany
 	@JoinColumn(name = "ing_id")
-	private Ingredient ingredient;
+	private List<Ingredient> ingredient;
 	@OneToOne
 	@JoinColumn(name = "u_id")
 	private Shopper user;
@@ -28,11 +30,11 @@ public class ShoppingList {
 	@OneToOne
 	@JoinColumn(name = "n_id")
 	private Note note;
-	public ShoppingList() {
+	public ShoppingListEntry() {
 		super();
 	}
 	
-	public ShoppingList(Ingredient ingredient, Shopper user, int amount, Note note) {
+	public ShoppingListEntry(List<Ingredient> ingredient, Shopper user, int amount, Note note) {
 		super();
 		this.ingredient = ingredient;
 		this.user = user;
@@ -40,7 +42,7 @@ public class ShoppingList {
 		this.note = note;
 	}
 
-	public ShoppingList(int entry_id, Ingredient ingredient, Shopper user, int amount, Note note) {
+	public ShoppingListEntry(int entry_id, List<Ingredient> ingredient, Shopper user, int amount, Note note) {
 		super();
 		this.entry_id = entry_id;
 		this.ingredient = ingredient;
@@ -57,11 +59,11 @@ public class ShoppingList {
 		this.entry_id = entry_id;
 	}
 
-	public Ingredient getIngredient() {
+	public List<Ingredient> getIngredient() {
 		return ingredient;
 	}
 
-	public void setIngredient(Ingredient ingredient) {
+	public void setIngredient(List<Ingredient> ingredient) {
 		this.ingredient = ingredient;
 	}
 
@@ -109,7 +111,7 @@ public class ShoppingList {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ShoppingList other = (ShoppingList) obj;
+		ShoppingListEntry other = (ShoppingListEntry) obj;
 		if (amount != other.amount)
 			return false;
 		if (entry_id != other.entry_id)

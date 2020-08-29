@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @ComponentScan("com.revature")
-@EnableJpaRepositories("com.revature.repositories")
+@EnableJpaRepositories("com.revature.repositories") 
 @EntityScan("com.revature.beans")
 public class Project2SlgApplication {
 
