@@ -3,7 +3,7 @@ package com.revature.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.revature.beans.ShoppingList;
+import com.revature.beans.ShoppingListEntry;
 import com.revature.repositories.ShoppingListRepository;
 
 @Service
@@ -12,29 +12,29 @@ public class ShoppingListImpl implements ShoppingListService {
 	ShoppingListRepository slr;
 
 	@Override
-	public ShoppingList addShoppingList(ShoppingList sl) {
+	public ShoppingListEntry addShoppingList(ShoppingListEntry sl) {
 		return slr.save(sl);
 	}
 
 	// This method is a little weird conceptually. We'll have to return
 	// An Arraylist of shopping list items, right?
 	@Override
-	public ShoppingList getShoppingList(int id) {
+	public ShoppingListEntry getShoppingList(int id) {
 		return slr.findById(id).get();
 	}
 
 	@Override
-	public ShoppingList findByUser(int uid) {
+	public ShoppingListEntry findByUser(int uid) {
 		return slr.findByUser(uid);
 	}
 
 	@Override
-	public ShoppingList updateShoppingList(ShoppingList change) {
+	public ShoppingListEntry updateShoppingList(ShoppingListEntry change) {
 		return slr.save(change);
 	}
 
 	@Override
-	public boolean deleteShoppingList(ShoppingList sl) {
+	public boolean deleteShoppingList(ShoppingListEntry sl) {
 		try {
 			slr.delete(sl);
 		} catch (IllegalArgumentException e) {
