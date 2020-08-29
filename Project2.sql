@@ -1,12 +1,11 @@
-DROP TABLE shoppers;
-DROP TABLE recipe;
-DROP TABLE pantry;
-DROP TABLE ingredient;
-DROP TABLE recipe_ingredient;
-DROP TABLE note;
 DROP TABLE shopping_list;
+DROP TABLE pantry;
 DROP TABLE note;
 DROP TABLE stock;
+DROP TABLE shoppers;
+DROP TABLE recipe_ingredient;
+DROP TABLE recipe;
+DROP TABLE ingredient;
 
 CREATE TABLE shoppers (
     u_id NUMBER(10) PRIMARY KEY,
@@ -31,13 +30,6 @@ CREATE TABLE pantry (
     amount NUMBER(10)
 );
 
-ALTER TABLE pantry ADD CONSTRAINT fk_pantry_shoppers FOREIGN KEY
-(u_id) REFERENCES shoppers(u_id) ON DELETE CASCADE;
-
-ALTER TABLE pantry ADD CONSTRAINT fk_pantry_ingredient FOREIGN KEY
-(ing_id) REFERENCES ingredient(ing_id) ON DELETE CASCADE;
-
-
 CREATE TABLE ingredient (
     ing_id NUMBER(10) PRIMARY KEY,
     name VARCHAR2(100),
@@ -50,12 +42,6 @@ CREATE TABLE recipe_ingredient (
     r_id NUMBER(10),
     amount NUMBER(10)
 );
-
-ALTER TABLE recipe_ingredient ADD CONSTRAINT fk_recipe_ing_ingredient FOREIGN KEY
-(ing_id) REFERENCES ingredient(ing_id) ON DELETE CASCADE;
-ALTER TABLE recipe_ingredient ADD CONSTRAINT fk_recipe_ing_recipe FOREIGN KEY
-(r_id) REFERENCES recipe(r_id) ON DELETE CASCADE;
-
 
 CREATE TABLE note(
     n_id NUMBER(10) PRIMARY KEY,
@@ -70,13 +56,6 @@ CREATE TABLE shopping_list (
     n_id NUMBER(10)
 );
 
-ALTER TABLE shopping_list ADD CONSTRAINT fk_shopping_list_note FOREIGN KEY
-(n_id) REFERENCES note(n_id) ON DELETE CASCADE;
-ALTER TABLE shopping_list ADD CONSTRAINT fk_shopping_list_ingredient FOREIGN KEY
-(ing_id) REFERENCES ingredient(ing_id) ON DELETE CASCADE;
-ALTER TABLE shopping_list ADD CONSTRAINT fk_shopping_list_shoppers FOREIGN KEY
-(u_id) REFERENCES shoppers(u_id) ON DELETE CASCADE;
-
 CREATE TABLE stock (
     s_id NUMBER(10) PRIMARY KEY,
     ing_id NUMBER(10),
@@ -87,8 +66,29 @@ CREATE TABLE stock (
 ALTER TABLE stock ADD CONSTRAINT fk_stock_ingredient FOREIGN KEY
 (ing_id) REFERENCES ingredient(ing_id) ON DELETE CASCADE;
 
+ALTER TABLE pantry ADD CONSTRAINT fk_pantry_shoppers FOREIGN KEY
+(u_id) REFERENCES shoppers(u_id) ON DELETE CASCADE;
 
-INSERT INTO RECIPE VALUES(1,'Chicken Parmesan','italian','classic','');
+ALTER TABLE pantry ADD CONSTRAINT fk_pantry_ingredient FOREIGN KEY
+(ing_id) REFERENCES ingredient(ing_id) ON DELETE CASCADE;
+
+ALTER TABLE shopping_list ADD CONSTRAINT fk_shopping_list_note FOREIGN KEY
+(n_id) REFERENCES note(n_id) ON DELETE CASCADE;
+
+ALTER TABLE shopping_list ADD CONSTRAINT fk_shopping_list_ingredient FOREIGN KEY
+(ing_id) REFERENCES ingredient(ing_id) ON DELETE CASCADE;
+
+ALTER TABLE shopping_list ADD CONSTRAINT fk_shopping_list_shoppers FOREIGN KEY
+(u_id) REFERENCES shoppers(u_id) ON DELETE CASCADE;
+
+ALTER TABLE recipe_ingredient ADD CONSTRAINT fk_recipe_ing_ingredient FOREIGN KEY
+(ing_id) REFERENCES ingredient(ing_id) ON DELETE CASCADE;
+
+ALTER TABLE recipe_ingredient ADD CONSTRAINT fk_recipe_ing_recipe FOREIGN KEY
+(r_id) REFERENCES recipe(r_id) ON DELETE CASCADE;
+
+
+INSERT INTO RECIPE VALUES(1,'Chicken Parmesan','italian','cheesy','classic');
 INSERT INTO RECIPE VALUES(2,'Enchiladas','mexican','spicy','beef');
 INSERT INTO RECIPE VALUES(3,'Philly Cheesesteak','american','cheesy','classic');
 INSERT INTO RECIPE VALUES(4,'Moussaka','greek','family','unique');
@@ -100,12 +100,15 @@ INSERT INTO RECIPE VALUES(9,'Burritos','mexican','easy','spicy');
 INSERT INTO RECIPE VALUES(10,'Lasagna', 'italian','family','classic');
 INSERT INTO RECIPE VALUES(11,'Tres Leches', 'mexican','fancy','dessert');
 INSERT INTO RECIPE VALUES(12,'Lobster Roll', 'american','fancy','seafood');
+INSERT INTO RECIPE VALUES(13,'Shrimp Gumbo', 'american', 'spicy','seafood');
+INSERT INTO RECIPE VALUES(14,'Szechuan Chicken', 'chinese', 'spicy', 'unique');
+INSERT INTO RECIPE VALUES(15, 'Veggie Risotto', 'italian', 'vegan', 'easy');
 
 /*Chicken Parmesan*/
-INSERT INTO ingredient VALUES (1, 'Chicken Breast', 'ounces');
+INSERT INTO ingredient VALUES (1, 'Chicken Breast', 'number');
 INSERT INTO ingredient VALUES (2, 'Eggs', 'number');
 INSERT INTO ingredient VALUES (3, 'Breadcrumbs', 'ounces');
-INSERT INTO ingredient VALUES (4, 'Flour', 'ounces');
+INSERT INTO ingredient VALUES (4, 'Flour', 'cups');
 INSERT INTO ingredient VALUES (5, 'Tomato Sauce', 'ounces');
 INSERT INTO ingredient VALUES (6, 'Parmesan', 'ounces');
 /* Enchiladas*/
@@ -115,10 +118,10 @@ INSERT INTO ingredient VALUES (9, 'Tortillas', 'number');
 INSERT INTO ingredient VALUES (10, 'Cheese', 'ounces');
 /* Tomato Sauce */
 /* Cheese Steak*/ 
-INSERT INTO ingredient VALUES (11, 'Onion', 'ounces');
-INSERT INTO ingredient VALUES (12, 'Bell Pepper', 'ounces');
+INSERT INTO ingredient VALUES (11, 'Onion', 'number');
+INSERT INTO ingredient VALUES (12, 'Bell Pepper', 'number');
 INSERT INTO ingredient VALUES (13, 'Steak', 'ounces');
-INSERT INTO ingredient VALUES (14, 'Long Roll', 'ounces');
+INSERT INTO ingredient VALUES (14, 'Long Roll', 'number');
 /* Cheese */
 /* Moussaka */
 INSERT INTO ingredient VALUES (15, 'Eggplant', 'ounces');
@@ -148,7 +151,7 @@ INSERT INTO ingredient VALUES (29, 'Lemon', 'ounces');
 
 /*Apple Pie*/
 INSERT INTO ingredient VALUES (30, 'Brown Sugar', 'ounces');
-INSERT INTO ingredient VALUES (31, 'Apples', 'ounces');
+INSERT INTO ingredient VALUES (31, 'Apples', 'number');
 INSERT INTO ingredient VALUES (32, 'Cinnamon', 'ounces');
 
 /*Flour, Butter*/
@@ -161,3 +164,56 @@ INSERT INTO ingredient VALUES (33, 'Lettuce', 'ounces');
 /*Lasagna*/
 /* Pasta, Cheese, Tomato Sauce, Ground Beef, Garlic */
 
+/*Tres Leches
+Flour, Butter, Cream*/
+INSERT INTO ingredient VALUES (34, 'Sugar', 'ounces');
+INSERT INTO ingredient VALUES (35, 'Milk', 'ounces');
+
+/*Lobster Roll
+Long Roll, Butter, Lettuce*/
+INSERT INTO ingredient VALUES (36, 'Lobster', 'ounces');
+INSERT INTO ingredient VALUES (37, 'Mayonnaise', 'ounces');
+
+/*Chicken Gumbo
+  Onion, Shrimp, Rice,*/
+INSERT INTO ingredient VALUES (38, 'Okra', 'ounces');
+INSERT INTO ingredient VALUES (39, 'Chicken Stock', 'ounces'); 
+
+/*Szechuan Chicken
+Chicken Breast, onion, bell pepper, garlic*/
+INSERT INTO ingredient VALUES (40, 'Red Chilies', 'number');
+
+/*Veggie Risotto
+Veggie Stock,Bell Pepper, Rice, White Wine */
+INSERT INTO ingredient VALUES (41, 'Asparagus', 'number');
+
+Select * From Ingredient;
+----------------------RECIPE_INGREDIENT-------------------------
+--Chicken Parm
+INSERT INTO recipe_ingredient VALUES (1, 1, 1, 4);
+INSERT INTO recipe_ingredient VALUES (2, 2, 1, 2);
+INSERT INTO recipe_ingredient VALUES (3, 3, 1, 6);
+INSERT INTO recipe_ingredient VALUES (4, 4, 1, 1);
+INSERT INTO recipe_ingredient VALUES (5, 5, 1, 16);
+INSERT INTO recipe_ingredient VALUES (6, 6, 1, 2);
+
+--Enchiladas
+INSERT INTO recipe_ingredient VALUES (7, 7, 2, 18);
+INSERT INTO recipe_ingredient VALUES (8, 8, 2, 6);
+INSERT INTO recipe_ingredient VALUES (9, 9, 2, 8);
+INSERT INTO recipe_ingredient VALUES (10, 10, 2, 10);
+INSERT INTO recipe_ingredient VALUES (11, 5, 2, 8);
+
+--CheeseSteak
+INSERT INTO recipe_ingredient VALUES (12, 11, 3, 2);
+INSERT INTO recipe_ingredient VALUES (13, 12, 3, 1);
+INSERT INTO recipe_ingredient VALUES (14, 13, 3, 20);
+INSERT INTO recipe_ingredient VALUES (15, 14, 3, 4);
+INSERT INTO recipe_ingredient VALUES (16, 10, 3, 12);
+
+--Moussaka
+INSERT INTO recipe_ingredient VALUES (17, 15, 4, 12);
+INSERT INTO recipe_ingredient VALUES (18, 16, 4, 10);
+INSERT INTO recipe_ingredient VALUES (19, 17, 4, 2);
+INSERT INTO recipe_ingredient VALUES (20, 18, 4, 4);
+INSERT INTO recipe_ingredient VALUES (21, 11, 4, 1);
