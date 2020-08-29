@@ -30,14 +30,22 @@ public class RecipeController {
 
 	}
 	@GetMapping(value = "/recipe/search")
-	public List<Recipe> findRecipe(@RequestParam(required = false) String tag1, @RequestParam(required = false) String tag2) {
+	public List<Recipe> findRecipe(@RequestParam(required = false) String cuisine, @RequestParam(required = false) String tag1, @RequestParam(required = false) String tag2) {
 		
-		if(tag1 != null && tag2 != null) {
+		if(cuisine != null && tag1 != null && tag2 != null) {
+			return rs.findByCuisineAndTag1AndTag2(cuisine, tag1, tag2);
+		} else if(cuisine !=null && tag1 != null && tag2 == null) {
+			return rs.findByCuisineAndTag1(cuisine, tag1);
+		} else if(cuisine !=null && tag2 != null && tag1 == null) {
+			return rs.findByCuisineAndTag2(cuisine,tag2);
+		} else if(tag1 !=null && tag2 !=null && cuisine == null){
 			return rs.findByTag1AndTag2(tag1, tag2);
-		} else if(tag1 != null) {
+		} else if(tag1 != null && cuisine == null && tag2== null) {
 			return rs.findByTag1(tag1);
-		} else if(tag2 != null) {
+		} else if (tag2 != null && cuisine == null && tag1== null) {
 			return rs.findByTag2(tag2);
+		} else if (cuisine != null && tag1 == null && tag2 == null) {
+			return rs.findByCuisine(cuisine);
 		} else {
 			return null;
 		}
