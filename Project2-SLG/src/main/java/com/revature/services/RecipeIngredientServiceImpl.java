@@ -21,11 +21,6 @@ public class RecipeIngredientServiceImpl implements RecipeIngredientService {
 	}
 
 	@Override
-	public List<RecipeIngredient> findAllByRecipeId(Recipe recipe) {
-		return recipeIngredientRepository.findAllByRecipeId(recipe.getR_id());
-	}
-
-	@Override
 	public RecipeIngredient updateRecipeIngredient(RecipeIngredient recipeIngredient) {
 		return recipeIngredientRepository.save(recipeIngredient);
 	}
@@ -45,6 +40,11 @@ public class RecipeIngredientServiceImpl implements RecipeIngredientService {
 	@Override
 	public RecipeIngredient getRecipeIngredient(int ring_id) {
 		return recipeIngredientRepository.findById(ring_id).get();
+	}
+
+	@Override
+	public List<RecipeIngredient> findAllByRecipe(Recipe recipe) {
+		return recipeIngredientRepository.findAllByRecipe(recipe.getR_id());
 	}
 
 }

@@ -31,7 +31,7 @@ public class RecipeIngredientController {
 	@GetMapping(value = "/recipeingredient/{recipe}", produces = "application/json")
 	public List<RecipeIngredient> getRecipeIngredients(@PathVariable("recipe") Recipe recipe) {
 		
-		return recipeIngredientService.findAllByRecipeId(recipe);
+		return recipeIngredientService.findAllByRecipe(recipe);
 		
 	}
 	

@@ -20,11 +20,6 @@ public class PantryServiceImpl implements PantryService{
 	public Pantry findByP_id(int p_id) {
 		return pr.findById(p_id).get();
 	}
-	
-	public List<Pantry> findByU_id(int u_id) {
-		return (List<Pantry>) pr.findAllByShopper(u_id);
-	}
-	
 	public Pantry updatePantry(Pantry p) {
 		return pr.save(p);
 	}
@@ -41,8 +36,6 @@ public class PantryServiceImpl implements PantryService{
 	@Override
 	public List<Pantry> findAllByShopper(int u_id) {
 		// TODO Auto-generated method stub
-		return null;
+		return (List<Pantry>) pr.findAllByShopper(u_id);
 	}
-	
-
 }

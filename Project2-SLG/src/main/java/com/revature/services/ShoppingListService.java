@@ -14,7 +14,7 @@ public interface ShoppingListService {
 	// Thoughts: we don't need to get shopping list by its own id, but do need it for user's id.
 	public ShoppingListEntry getShoppingList(int id);
 	public List<ShoppingListEntry> findByUser(Shopper u);
-	public boolean updateShoppingList(List<ShoppingListEntry> change);
+	public List<ShoppingListEntry> updateShoppingList(List<ShoppingListEntry> change);
 	public boolean deleteShoppingList(ShoppingListEntry sl);
 
 }

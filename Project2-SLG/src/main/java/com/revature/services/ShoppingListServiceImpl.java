@@ -35,17 +35,15 @@ public class ShoppingListServiceImpl implements ShoppingListService {
 
 	// This method doesn't really do anything.
 	@Override
-	public boolean updateShoppingList(List<ShoppingListEntry> change) {
-		
-		this.addShoppingList(change);
-	
-		return true;
+	public List<ShoppingListEntry> updateShoppingList(List<ShoppingListEntry> change) {		
+		return (List<ShoppingListEntry>) slr.saveAll(change);
 	}
 
 	@Override
 	public boolean deleteShoppingList(ShoppingListEntry sl) {
 		try {
 			slr.delete(sl);
+			return true;
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 		}
