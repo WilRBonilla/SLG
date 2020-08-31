@@ -29,20 +29,19 @@ public class ShoppingListServiceImpl implements ShoppingListService {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<ShoppingListEntry> findByUser(Shopper u) {
-		return (List<ShoppingListEntry>) slr.findByUser(u.getU_id());
+	public List<ShoppingListEntry> findByUser(int uid) {
+		return (List<ShoppingListEntry>) slr.findByUser(uid);
 	}
 
-	// This method doesn't really do anything.
 	@Override
 	public List<ShoppingListEntry> updateShoppingList(List<ShoppingListEntry> change) {		
 		return (List<ShoppingListEntry>) slr.saveAll(change);
 	}
 
 	@Override
-	public boolean deleteShoppingList(ShoppingListEntry sl) {
+	public boolean deleteShoppingList(int id) {
 		try {
-			slr.delete(sl);
+			slr.deleteById(id);
 			return true;
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
