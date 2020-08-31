@@ -2,13 +2,17 @@ package com.revature.beans;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 
 @Entity
 public class Ingredient {
 
 	@Id
-	@GeneratedValue
+//	@SequenceGenerator(name="ing_seq", initialValue=50, allocationSize=200)
+//	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ing_seq")
+//	@GeneratedValue
 	private int ing_id;
 	private String name;
 	private String units;
