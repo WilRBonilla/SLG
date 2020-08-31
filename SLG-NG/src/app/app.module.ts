@@ -13,6 +13,8 @@ import { ShoppinglistComponent } from './components/shoppinglist/shoppinglist.co
 import { HomeComponent } from './components/home/home.component';
 import { PantryComponent } from './components/pantry/pantry.component';
 
+import { SlgService } from './services/slg.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +32,7 @@ import { PantryComponent } from './components/pantry/pantry.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [SlgService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
