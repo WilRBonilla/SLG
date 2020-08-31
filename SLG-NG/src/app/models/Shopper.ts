@@ -6,8 +6,7 @@ export class Shopper {
     username: string;
     password: string;
 
-    constructor(u_id: number, f_name: string, l_name: string, username: string, password: string) {
-        this.u_id = u_id;
+    constructor(f_name: string, l_name: string, username: string, password: string) {
         this.f_name = f_name;
         this.l_name = l_name;
         this.username = username;
