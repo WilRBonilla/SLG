@@ -3,13 +3,15 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { StockComponent } from './components/stock/stock.component';
 import { RecipeComponent } from './components/recipe/recipe.component';
+import { ShoppinglistComponent } from './components/shoppinglist/shoppinglist.component';
+import { HomeComponent } from './components/home/home.component';
+import { PantryComponent } from './components/pantry/pantry.component';
 
 @NgModule({
   declarations: [
@@ -17,14 +19,16 @@ import { RecipeComponent } from './components/recipe/recipe.component';
     LoginComponent,
     RegisterComponent,
     StockComponent,
-    RecipeComponent
+    RecipeComponent,
+    ShoppinglistComponent,
+    HomeComponent,
+    PantryComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule,
-    NgbModule
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
