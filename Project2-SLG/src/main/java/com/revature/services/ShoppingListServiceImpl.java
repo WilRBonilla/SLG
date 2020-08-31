@@ -29,8 +29,8 @@ public class ShoppingListServiceImpl implements ShoppingListService {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<ShoppingListEntry> findByUser(Shopper u) {
-		return (List<ShoppingListEntry>) slr.findByUser(u.getU_id());
+	public List<ShoppingListEntry> findByUser(int u_id) {
+		return (List<ShoppingListEntry>) slr.findByUser(u_id);
 	}
 
 	// This method doesn't really do anything.

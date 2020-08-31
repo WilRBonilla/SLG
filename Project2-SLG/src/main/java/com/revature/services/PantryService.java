@@ -6,7 +6,7 @@ import com.revature.beans.Pantry;
 
 public interface PantryService {
 	
-	public Pantry addPantry(Pantry p);
+	public List<Pantry> addPantry(List<Pantry> p);
 	public Pantry findByP_id(int p_id);
 	public List<Pantry> findAllByShopper(int u_id);
 	public Pantry updatePantry(Pantry p);

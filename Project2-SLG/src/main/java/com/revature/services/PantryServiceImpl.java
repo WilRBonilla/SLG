@@ -14,8 +14,8 @@ public class PantryServiceImpl implements PantryService{
 	@Autowired
 	PantryRepository pr;
 	
-	public Pantry addPantry(Pantry p) {
-		return pr.save(p);
+	public List<Pantry> addPantry(List<Pantry> pantries) {
+		return (List<Pantry>) pr.saveAll(pantries);
 	}
 	public Pantry findByP_id(int p_id) {
 		return pr.findById(p_id).get();

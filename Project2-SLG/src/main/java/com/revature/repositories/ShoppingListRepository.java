@@ -8,5 +8,5 @@ import com.revature.beans.ShoppingListEntry;
 @Repository
 public interface ShoppingListRepository extends CrudRepository<ShoppingListEntry, Integer> {
 
-	public ShoppingListEntry findByUser(int uid);
+	public ShoppingListEntry findByUser(int u_id);
 }
