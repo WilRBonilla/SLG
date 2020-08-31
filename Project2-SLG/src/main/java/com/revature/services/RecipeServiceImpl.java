@@ -34,6 +34,10 @@ public class RecipeServiceImpl implements RecipeService {
 			return false;
 		}
 	}
+	
+	public Recipe getRecipe(int id) {
+		return rr.findById(id).get();
+	}
 
 	@Override
 	public Recipe findByTitle(String title) {

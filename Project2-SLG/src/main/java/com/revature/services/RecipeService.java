@@ -7,6 +7,7 @@ import com.revature.beans.Recipe;
 public interface RecipeService {
 
 	public Recipe addRecipe(Recipe r);
+	public Recipe getRecipe(int id);
 	public Recipe findByTitle(String title);
 	public List<Recipe> findByCuisine(String cuisine);
 	public List<Recipe> findByTag1(String tag1);
