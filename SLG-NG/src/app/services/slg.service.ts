@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 
 import { Recipe } from '../models/Recipe';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -14,7 +15,7 @@ export class SlgService {
   private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
   getAllRecipes() :Observable<Recipe[]> {
-    return this.http.get<Recipe>('http://localhost:8080/.do');
+    return this.http.get<Recipe[]>('http://localhost:8080/.do');
   }
 
   // getAllIngredients(): Observable<Ingredient[]> {
