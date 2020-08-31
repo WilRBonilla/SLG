@@ -66,16 +66,25 @@ public class RecipeServiceImpl implements RecipeService {
 
 	@Override
 	public List<Recipe> findByCuisineAndTag1(String cuisine, String tag1) {
-		return rr.findAllByCuisineAndTag1(cuisine, tag1);
+		List<Recipe> lr1 =rr.findAllByCuisineAndTag1(cuisine, tag1);
+		List<Recipe> lr2 =rr.findAllByCuisineAndTag2(cuisine, tag1);
+		lr1.addAll(lr2);
+		return lr1;
 	}
 
 	@Override
 	public List<Recipe> findByCuisineAndTag2(String cuisine, String tag2) {
-		return rr.findAllByCuisineAndTag2(cuisine, tag2);
+		List<Recipe> lr1 =rr.findAllByCuisineAndTag1(cuisine, tag2);
+		List<Recipe> lr2 =rr.findAllByCuisineAndTag2(cuisine, tag2);
+		lr1.addAll(lr2);
+		return lr1;
 	}
 
 	@Override
 	public List<Recipe> findByCuisineAndTag1AndTag2(String cuisine, String tag1, String tag2) {
-		return rr.findAllByCuisineAndTag1AndTag2(cuisine,tag1, tag2);
+		List<Recipe> lr1 =rr.findAllByCuisineAndTag1AndTag2(cuisine,tag1, tag2);
+		List<Recipe> lr2 =rr.findAllByCuisineAndTag1AndTag2(cuisine,tag2, tag1);
+		lr1.addAll(lr2);
+		return lr1;
 	}
 }
