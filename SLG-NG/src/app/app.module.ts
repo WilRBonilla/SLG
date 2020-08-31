@@ -11,6 +11,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { StockComponent } from './components/stock/stock.component';
 import { RecipeComponent } from './components/recipe/recipe.component';
 
+import { SlgService } from './services/slg.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +28,7 @@ import { RecipeComponent } from './components/recipe/recipe.component';
     HttpClientModule,
     NgbModule
   ],
-  providers: [],
+  providers: [SlgService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
