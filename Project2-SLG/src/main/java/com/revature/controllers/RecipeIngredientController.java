@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,7 +36,7 @@ public class RecipeIngredientController {
 		
 	}
 	
-	@RequestMapping(value = "/recipeingredient/{id}", consumes = "application/json")
+	@PutMapping(value = "/recipeingredient/{id}", consumes = "application/json")
 	public RecipeIngredient updateRecipeIngredient(@PathVariable("id") int id, @RequestBody RecipeIngredient recipeIngredient) {
 		recipeIngredient.setRing_id(id);
 		return recipeIngredientService.updateRecipeIngredient(recipeIngredient);
