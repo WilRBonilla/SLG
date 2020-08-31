@@ -31,6 +31,7 @@ public class ShoppingListServiceImpl implements ShoppingListService {
 	@Override
 	public List<ShoppingListEntry> findByUser(int uid) {
 		return (List<ShoppingListEntry>) slr.findByUser(uid);
+
 	}
 
 	@Override
