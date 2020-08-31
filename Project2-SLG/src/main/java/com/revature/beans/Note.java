@@ -1,12 +1,14 @@
 package com.revature.beans;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
 public class Note {
 
 	@Id
+	@GeneratedValue
 	private int n_id;
 	private String add_notes;
 	public Note() {
