@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.beans.Pantry;
+import com.revature.beans.Shopper;
 import com.revature.repositories.PantryRepository;
 
 @Service
@@ -35,7 +36,8 @@ public class PantryServiceImpl implements PantryService{
 	}
 	@Override
 	public List<Pantry> findAllByShopper(int u_id) {
-		// TODO Auto-generated method stub
-		return (List<Pantry>) pr.findAllByShopper(u_id);
+		Shopper user = new Shopper(); //is this a big no-no in spring? idk.
+		user.setU_id(u_id);
+		return (List<Pantry>) pr.findAllByShopper(user);
 	}
 }
