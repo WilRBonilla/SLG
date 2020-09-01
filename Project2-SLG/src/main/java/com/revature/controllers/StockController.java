@@ -1,6 +1,7 @@
 package com.revature.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -32,6 +33,11 @@ public class StockController {
 	public Stock updateStock(@PathVariable("id") int id, @RequestBody Stock change) {
 		change.setS_id(id);
 		return ss.updateStock(change);
+	}
+	
+	@DeleteMapping(value = "/stock/{id}")
+	public boolean removeStock(@PathVariable("id") int id) {
+		return ss.deleteStock(ss.getStock(id));
 	}
 
 }
