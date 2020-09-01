@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.revature.beans.Shopper;
 import com.revature.beans.ShoppingListEntry;
 import com.revature.services.ShoppingListService;
 
@@ -21,7 +22,7 @@ public class ShoppingListEntryController {
 	ShoppingListService sle;
 	
 	@PostMapping(value ="/addShoppingList", consumes ="application/json", produces ="application/json")
-	public List<ShoppingListEntry> addShoppingList(List<ShoppingListEntry> sl){
+	public List<ShoppingListEntry> addShoppingList(@RequestBody List<ShoppingListEntry> sl){
 		return sle.addShoppingList(sl);
 	}
 	
@@ -32,7 +33,9 @@ public class ShoppingListEntryController {
 	}
 	@GetMapping(value = "/shoppingList/{uid}", produces = "application/json")
 	public List<ShoppingListEntry> findByUser(@PathVariable("uid") int uid){
-		return sle.findByUser(uid);
+		Shopper s = new Shopper();
+		s.setU_id(uid);
+		return sle.findByUser(s);
 	}
 	
 	@PutMapping(value = "/shoppingList/{uid}", consumes = "application/json", produces = "application/json")

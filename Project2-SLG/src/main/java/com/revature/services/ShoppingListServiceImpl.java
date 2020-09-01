@@ -20,8 +20,7 @@ public class ShoppingListServiceImpl implements ShoppingListService {
 		return (List<ShoppingListEntry>) slr.saveAll(sl);
 	}
 
-	// This method is a little weird conceptually. We'll have to return
-	// An Arraylist of shopping list items, right?
+
 	@Override
 	public ShoppingListEntry getShoppingList(int id) {
 		return slr.findById(id).get();
@@ -29,8 +28,8 @@ public class ShoppingListServiceImpl implements ShoppingListService {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<ShoppingListEntry> findByUser(int uid) {
-		return (List<ShoppingListEntry>) slr.findByUser(uid);
+	public List<ShoppingListEntry> findByUser(Shopper shopper) {
+		return (List<ShoppingListEntry>) slr.findByUser(shopper);
 
 	}
 
