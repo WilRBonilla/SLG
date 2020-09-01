@@ -1,6 +1,7 @@
 body {
   text-align: center;
-  padding-top: 10%;
+  padding-top: 5%;
+  padding-bottom: 5%;
   height: 100%;
   
 }
@@ -8,13 +9,13 @@ body {
 nav {
     animation: expand 1s;
     box-shadow: 2px 5px 9px lightslategray;
-    margin: 30px auto;
+    margin: 30px 30px;
     text-align: center;
     border-radius: 10px;
     outline: none;
     height: fit-content;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 40px;
+    padding-bottom: 40px;
 }
 
 nav button:hover {
@@ -22,7 +23,7 @@ nav button:hover {
 }
 
 nav button:focus {
-    width: 150px;
+    width: 180px;
     background: linear-gradient(to right, lightblue, rgb(235, 239, 241), lightblue)
 }
 
@@ -31,9 +32,9 @@ nav select:hover {
 }
 
 nav select:focus {
-  width: 150px;
+  width: 180px;
   background: linear-gradient(to right, lightblue, rgb(235, 239, 241), lightblue);
-  padding-left: 35px;
+  padding-left: 50px;
 }
 
 nav button {
@@ -41,8 +42,8 @@ nav button {
     margin-right: 2.5%;
     border: 2px solid lightblue;
     border-radius: 10px;
-    height: 30px;
-    width: 130px;
+    height: 50px;
+    width: 160px;
     background: none;
     transition: 0.25s;
     outline: none;
@@ -57,14 +58,14 @@ nav select {
   margin-right: 2.5%;
   border: 2px solid lightblue;
   border-radius: 10px;
-  height: 30px;
-  width: 130px;
+  height: 50px;
+  width: 160px;
   background: none;
   transition: 0.25s;
   outline: none;
   -webkit-appearance: none;
   appearance: none;
-  padding-left: 25px;
+  padding-left: 40px;
 }
 
 @keyframes expand {
