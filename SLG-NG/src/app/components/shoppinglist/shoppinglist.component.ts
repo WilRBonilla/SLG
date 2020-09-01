@@ -14,17 +14,26 @@ export class ShoppinglistComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.shoppingListLoad();
   }
 
   ing: Ingredient = new Ingredient(1, "Chicken Breasts", "number");
   user: Shopper = new Shopper("william", "bonilla", "username3", "password");
   note: Note = new Note(1, "TEST NOTES");
+
+  
+  
   sl: ShoppingListEntry = new ShoppingListEntry(9001,this.ing, this.user, 2,  this.note);
   shoppingList: Array<ShoppingListEntry> = [
     this.sl
 
   ]
 
+    shoppingListLoad(){
+    let saveduser = JSON.parse(localStorage.getItem("user"));
+    console.log("SHOPPING LIST COMPONENT");
+    console.log(saveduser);
+  }
 
 
   

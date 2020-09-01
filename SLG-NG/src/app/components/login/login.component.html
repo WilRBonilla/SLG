@@ -1,0 +1,8 @@
+<div id="container">
+    <h1>LOGIN</h1>
+    <input id="usernameText" class="inputText" type="text" [(ngModel)] = "username"  placeholder="Username">
+    <input id="passwordText" class="inputText" type="password" [(ngModel)] = "password" placeholder="Password">
+    <button id="loginButton" (click)= "getLogin()" class="button" onmouseover="style='background: linear-gradient(to right, lightblue, rgb(235, 239, 241), lightblue)'" onmousedown="style='background: linear-gradient(to right, rgb(235, 239, 241), lightblue, rgb(235, 239, 241))'" onmouseup="style='background: linear-gradient(to right, lightblue, rgb(235, 239, 241), lightblue)'" onmouseout="style='background: none'">LOGIN</button>
+    <a id="register" routerLink="/register" >Register new account?</a>
+    
+</div>
