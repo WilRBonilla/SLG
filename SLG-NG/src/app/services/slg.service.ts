@@ -11,9 +11,6 @@ import { Shopper } from '../models/Shopper';
 import { ShoppingListEntry } from '../models/ShoppingListEntry';
 import { Stock } from '../models/Stock';
 
-
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -36,9 +33,9 @@ export class SlgService {
     return this.http.get<Recipe[]>('http://localhost:8080/');
   }
 
-  // getAllIngredients(): Observable<Ingredient[]> {
-  //   return this.http.get<Recipe>('http://localhost:8080/.do');
-  // }
+  getAllIngredients(): Observable<Ingredient[]> {
+    return this.http.get<Ingredient[]>('http://localhost:8080/ingredient');
+  }
 
 
 

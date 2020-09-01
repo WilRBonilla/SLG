@@ -12,6 +12,7 @@ import { RecipeComponent } from './components/recipe/recipe.component';
 import { ShoppinglistComponent } from './components/shoppinglist/shoppinglist.component';
 import { HomeComponent } from './components/home/home.component';
 import { PantryComponent } from './components/pantry/pantry.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 import { SlgService } from './services/slg.service';
 
@@ -24,7 +25,8 @@ import { SlgService } from './services/slg.service';
     RecipeComponent,
     ShoppinglistComponent,
     HomeComponent,
-    PantryComponent
+    PantryComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
