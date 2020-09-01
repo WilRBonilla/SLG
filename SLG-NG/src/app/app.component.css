@@ -1,3 +1,10 @@
+body {
+  text-align: center;
+  padding-top: 10%;
+  height: 100%;
+  
+}
+
 nav {
     animation: expand 1s;
     box-shadow: 2px 5px 9px lightslategray;
@@ -19,6 +26,16 @@ nav button:focus {
     background: linear-gradient(to right, lightblue, rgb(235, 239, 241), lightblue)
 }
 
+nav select:hover {
+  background: linear-gradient(to right, lightblue, rgb(235, 239, 241), lightblue)
+}
+
+nav select:focus {
+  width: 150px;
+  background: linear-gradient(to right, lightblue, rgb(235, 239, 241), lightblue);
+  padding-left: 35px;
+}
+
 nav button {
     margin-left: 2.5%;
     margin-right: 2.5%;
@@ -29,6 +46,25 @@ nav button {
     background: none;
     transition: 0.25s;
     outline: none;
+}
+
+nav option * {
+  height: 30px;
+}
+
+nav select {
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+  border: 2px solid lightblue;
+  border-radius: 10px;
+  height: 30px;
+  width: 130px;
+  background: none;
+  transition: 0.25s;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  padding-left: 25px;
 }
 
 @keyframes expand {
@@ -42,3 +78,70 @@ nav button {
       opacity: 1;
     }
   }
+
+  h1 {
+    animation: expand 1.5s;
+}
+
+#register {
+    animation: expand 1.5s;
+}
+
+.container { 
+  
+    animation: expand 1s;
+    box-shadow: 5px 10px 18px lightslategray;
+    padding: 20px;
+    width: 30%;
+    height: fit-content;
+    font-family: sans-serif;
+    color: darkblue;  
+    border-radius: 35px;
+    text-align: center;
+    margin: auto;
+
+}
+
+.inputText {
+    animation: expand 1.5s;
+    box-shadow: 2px 5px 9px lightslategray;
+    margin: 30px auto;
+    display: block;
+    text-align: center;
+    border-color: lightblue;
+    border-radius: 10px;
+    width: 60%;
+    height: 30px;
+    transition: 0.25s;
+    outline: none;
+}
+
+.inputText:focus {
+    width: 70%;
+    height: 37px;
+    border-color: darkblue;
+}
+
+.button {
+    animation: expand 1.5s;
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid lightblue;
+    width: 40%;
+    height: 50px;
+    outline: none;
+    color: darkblue;
+    border-radius: 10px;
+    transition: 0.25s;
+    cursor: pointer  
+}
+
+.button:hover {
+   
+    width: 45%;
+    background: linear-gradient(to right, lightblue, rgb(235, 239, 241), lightblue)
+}
+
