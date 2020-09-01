@@ -15,16 +15,34 @@ export class AppComponent {
   title = 'SLG-NG';
   login: boolean = true;
   register: boolean = false;
+
+  body: boolean = false;
+
+
   navbar: boolean = false;
 
   loginPage() {
     this.login = false;
     this.register = true;
+
+    this.body = false;
+    this.navbar = false;
   }
 
   registerPage() {
     this.login = true;
     this.register = false;
+
+    this.body = false;
+    this.navbar = false;
+  }
+
+  option(value: string) {
+    switch(value) {
+      case "logout" :
+        this.registerPage();
+    }
+
   }
   navbarFunc() {
     this.login = false;
@@ -67,6 +85,9 @@ export class AppComponent {
         if (this.shopper.u_id != 0) {
           this.navbarFunc();
           this.router.navigate(['/home']);
+
+          this.body = true;
+
         }else {
           console.log("incorrect log in info");
         }
