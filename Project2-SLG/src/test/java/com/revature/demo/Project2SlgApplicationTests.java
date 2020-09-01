@@ -1,38 +1,108 @@
 package com.revature.demo;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.Optional;
+
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import com.revature.beans.Ingredient;
-import com.revature.beans.Stock;
+import com.revature.controllers.IngredientController;
+import com.revature.repositories.IngredientRepository;
 import com.revature.services.IngredientService;
-import com.revature.services.IngredientServiceImpl;
-import com.revature.services.StockService;
-import com.revature.services.StockServiceImpl;
 
 @SpringBootTest
-@DataJpaTest
 class Project2SlgApplicationTests {
+	@Autowired 
+	IngredientService is;
 
+	@Autowired 
+	IngredientRepository irp;
+	
+	@Autowired
+	IngredientController ic;
+	
 	@Test
 	void contextLoads() {
 	}
 	
 	@Test
-	void testAddStock() {
-		StockService ss = new StockServiceImpl();
-		IngredientService is = new IngredientServiceImpl();
-		Ingredient i = is.getIngredient(1);
-		
-		Stock s = new Stock();
-		s.setS_id(1);
-		s.setPrice(5);
-		s.setAmount(20);
-		s.setIngredient(i);
-		assertEquals(s.toString(), ss.addStock(s).toString());
+	void addIngredient() {
+		Ingredient i = new Ingredient(500,"test","test");
+		IngredientRepository ir = Mockito.mock(IngredientRepository.class);
+		Mockito.when(ir.save(i)).thenReturn(i);
+		Ingredient t = is.addIngredient(i);
+		System.out.println(t);
+		t.setIng_id(500);
+		Assertions.assertEquals(i, t);
 	}
+	
+	@Test
+	void addIngredientController() {
+		Ingredient i = new Ingredient(500,"test","test");
+		IngredientRepository ir = Mockito.mock(IngredientRepository.class);
+		Mockito.when(ir.save(i)).thenReturn(i);
+		Ingredient t = ic.addIngredient(i);
+		t.setIng_id(500);
+		Assertions.assertEquals(i, t);
+	}
+	@Test
+	void getIngredient() {
+		Ingredient i = new Ingredient(500,"test","test");
+		IngredientRepository ir = Mockito.mock(IngredientRepository.class);
+		Mockito.when(ir.findByName(i.getName())).thenReturn(i);
+		Ingredient t = is.findByName(i.getName());
+		i.setIng_id(t.getIng_id());
+		Assertions.assertEquals(i, t);
+	}
+	@Test
+	void getIngredientController() {
+		Ingredient i = new Ingredient(500,"test","test");
+		IngredientRepository ir = Mockito.mock(IngredientRepository.class);
+		Mockito.when(ir.findByName(i.getName())).thenReturn(i);
+		Ingredient t = ic.findByName(i.getName());
+		i.setIng_id(t.getIng_id());
+		Assertions.assertEquals(i, t);
+	}
+	@Test
+	void FindIngredientByID() {
+		Ingredient i = new Ingredient(500,"test","test");
+		IngredientRepository ir = Mockito.mock(IngredientRepository.class);
+		Mockito.when(ir.findById(i.getIng_id())).thenReturn(Optional.of(i));
+		Ingredient t = is.getIngredient(i.getIng_id());
+		Assertions.assertEquals(i, t);
+	}
+	@Test
+	void FindIngredientByIDController() {
+		Ingredient i = new Ingredient(500,"test","test");
+		IngredientRepository ir = Mockito.mock(IngredientRepository.class);
+		Mockito.when(ir.findById(i.getIng_id())).thenReturn(Optional.of(i));
+		Ingredient t = ic.getIngredient(i.getIng_id());
+		Assertions.assertEquals(i, t);
+	}
+	@Test
+	void GetAllIngredients() {
+		Assertions.assertEquals(irp.findAll(), is.getAllIngredients());		
+	}
+	@Test
+	void GetAllIngredientsController() {
+		Assertions.assertEquals(irp.findAll(), ic.allIngredients());
+	}
+	@Test
+	void DeleteIngredient() {
+		Ingredient i = new Ingredient(500,"test","test");
+		assertTrue(ic.deleteIngredient(500));
+	}
+	@Test
+	void DeleteIngredientFalse() {
+		Ingredient i = new Ingredient(500,"test","test");
+		assertFalse(ic.deleteIngredient(800));
+	}
+	
 
 }
