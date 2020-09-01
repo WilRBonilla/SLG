@@ -12,7 +12,6 @@ import { ShoppingListEntry } from '../models/ShoppingListEntry';
 import { Stock } from '../models/Stock';
 
 
-
 @Injectable({
   providedIn: 'root'
 })
