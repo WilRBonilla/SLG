@@ -1,2 +1,0 @@
-# SLG
-ShoppingListGenerator
