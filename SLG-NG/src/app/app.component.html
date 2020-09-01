@@ -3,6 +3,10 @@
     <button routerLink="/shoppinglist">Shopping List</button>
     <button routerLink="/recipe">Recipe</button>
     <button routerLink="/pantry">Pantry</button>
+    <select name="Account" id="account" (change)="option($event.target.value)">
+        <option value="accountInfo">Account Info</option>
+        <option onclick="loginPage()" value="logout">Logout</option>
+    </select>
 </nav>
 <body>
     <div id="logincontainer" class="container" *ngIf="login"> 
@@ -22,5 +26,7 @@
         <button id="registerButton" routerLink="/login" (click) = "addShopper()" class="button" onmouseover="style='background: linear-gradient(to right, lightblue, rgb(235, 239, 241), lightblue)'" onmousedown="style='background: linear-gradient(to right, rgb(235, 239, 241), lightblue, rgb(235, 239, 241))'" onmouseup="style='background: linear-gradient(to right, lightblue, rgb(235, 239, 241), lightblue)'" onmouseout="style='background: none'">REGISTER</button>
         <a (click)="registerPage()">Cancel</a>  
     </div>
-    <router-outlet></router-outlet>   
+
+    <router-outlet *ngIf="body"></router-outlet>   
+
 </body>

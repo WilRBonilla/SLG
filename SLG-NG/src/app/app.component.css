@@ -26,6 +26,16 @@ nav button:focus {
     background: linear-gradient(to right, lightblue, rgb(235, 239, 241), lightblue)
 }
 
+nav select:hover {
+  background: linear-gradient(to right, lightblue, rgb(235, 239, 241), lightblue)
+}
+
+nav select:focus {
+  width: 150px;
+  background: linear-gradient(to right, lightblue, rgb(235, 239, 241), lightblue);
+  padding-left: 35px;
+}
+
 nav button {
     margin-left: 2.5%;
     margin-right: 2.5%;
@@ -36,6 +46,25 @@ nav button {
     background: none;
     transition: 0.25s;
     outline: none;
+}
+
+nav option * {
+  height: 30px;
+}
+
+nav select {
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+  border: 2px solid lightblue;
+  border-radius: 10px;
+  height: 30px;
+  width: 130px;
+  background: none;
+  transition: 0.25s;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  padding-left: 25px;
 }
 
 @keyframes expand {
