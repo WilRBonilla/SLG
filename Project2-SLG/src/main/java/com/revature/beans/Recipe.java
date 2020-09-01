@@ -32,6 +32,14 @@ public class Recipe {
 		this.tag1 = tag1;
 		this.tag2 = tag2;
 	}
+	
+	
+	public Recipe(String cuisine, String tag1, String tag2) {
+		super();
+		this.cuisine = cuisine;
+		this.tag1 = tag1;
+		this.tag2 = tag2;
+	}
 	public int getR_id() {
 		return r_id;
 	}
