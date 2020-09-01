@@ -7,5 +7,6 @@ public interface StockService {
 	public Stock addStock(Stock s);
 	public Stock getStock(int id);
 	public Stock updateStock(Stock change);
+	public boolean deleteStock(Stock s);
 
 }
