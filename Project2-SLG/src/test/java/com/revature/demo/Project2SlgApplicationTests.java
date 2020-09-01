@@ -40,6 +40,7 @@ class Project2SlgApplicationTests {
 		System.out.println(t);
 		t.setIng_id(500);
 		Assertions.assertEquals(i, t);
+
 	}
 	
 	@Test

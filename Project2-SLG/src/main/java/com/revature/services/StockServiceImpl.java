@@ -27,4 +27,15 @@ public class StockServiceImpl implements StockService{
 		return sr.save(change);
 	}
 
+	@Override
+	public boolean deleteStock(Stock s) {
+		try {
+			sr.delete(s);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
 }
