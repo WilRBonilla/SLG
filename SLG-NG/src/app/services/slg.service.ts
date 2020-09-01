@@ -34,9 +34,9 @@ export class SlgService {
     return this.http.get<Recipe[]>('http://localhost:8080/');
   }
 
-  // getAllIngredients(): Observable<Ingredient[]> {
-  //   return this.http.get<Recipe>('http://localhost:8080/.do');
-  // }
+  getAllIngredients(): Observable<Ingredient[]> {
+    return this.http.get<Ingredient[]>('http://localhost:8080/ingredient');
+  }
 
 
 
