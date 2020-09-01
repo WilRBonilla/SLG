@@ -6,6 +6,19 @@ body {
     
 }
 
+.div {
+    animation: expand 1s;
+    box-shadow: 5px 10px 18px lightslategray;
+    padding: 20px;
+    width: 90%;
+    height: fit-content;
+    font-family: sans-serif;
+    color: darkblue;  
+    border-radius: 35px;
+    text-align: center;
+    margin: auto;
+}
+
 h1 {
     animation: expand 1.5s;
 }
