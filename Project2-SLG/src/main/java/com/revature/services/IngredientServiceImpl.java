@@ -1,6 +1,4 @@
 package com.revature.services;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,11 +14,6 @@ public class IngredientServiceImpl implements IngredientService {
 	public Ingredient addIngredient(Ingredient i) {
 		return ir.save(i);
 	}
-	
-	@Override
-	public List<Ingredient> getAllIngredients() {
-		return (List<Ingredient>) ir.findAll();
-	}
 
 	public Ingredient getIngredient(int ing_id) {
 		return ir.findById(ing_id).get();
@@ -29,7 +22,6 @@ public class IngredientServiceImpl implements IngredientService {
 	public Ingredient findByName(String name) {
 		return ir.findByName(name);
 	}
-	
 	public boolean deleteIngredient(Ingredient i) {
 		try {
 			ir.delete(i);
@@ -38,7 +30,5 @@ public class IngredientServiceImpl implements IngredientService {
 			return false;
 		}
 	}
-
-	
 
 }

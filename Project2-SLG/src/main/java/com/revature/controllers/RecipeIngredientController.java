@@ -29,8 +29,12 @@ public class RecipeIngredientController {
 		return recipeIngredientService.addRecipeIngredient(recipeIngredient);
 	}
 	
-	@GetMapping(value = "/recipeingredient/{recipe}", produces = "application/json")
-	public List<RecipeIngredient> getRecipeIngredients(@PathVariable("recipe") Recipe recipe) {
+	
+	// To be clear, this gets the needed ingredients for a recipe, given the r_id.
+	@GetMapping(value = "/recipeingredient/{rid}", produces = "application/json")
+	public List<RecipeIngredient> getRecipeIngredients(@PathVariable("rid") int rid) {
+		Recipe recipe = new Recipe();
+		recipe.setR_id(rid);
 		
 		return recipeIngredientService.findAllByRecipe(recipe);
 		
