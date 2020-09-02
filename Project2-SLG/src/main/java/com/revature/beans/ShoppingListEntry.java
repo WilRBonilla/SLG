@@ -28,30 +28,27 @@ public class ShoppingListEntry {
 	@JoinColumn(name = "u_id")
 	private Shopper user;
 	private int amount;
-	@OneToOne
-	@JoinColumn(name = "n_id")
-	private Note note;
+
 	
 	
 	public ShoppingListEntry() {
 		super();
 	}
 	
-	public ShoppingListEntry(Ingredient ingredient, Shopper user, int amount, Note note) {
+	public ShoppingListEntry(Ingredient ingredient, Shopper user, int amount) {
 		super();
 		this.ingredient = ingredient;
 		this.user = user;
 		this.amount = amount;
-		this.note = note;
+		
 	}
 
-	public ShoppingListEntry(int entry_id, Ingredient ingredient, Shopper user, int amount, Note note) {
+	public ShoppingListEntry(int entry_id, Ingredient ingredient, Shopper user, int amount) {
 		super();
 		this.entry_id = entry_id;
 		this.ingredient = ingredient;
 		this.user = user;
 		this.amount = amount;
-		this.note = note;
 	}
 
 	public int getEntry_id() {
@@ -86,13 +83,8 @@ public class ShoppingListEntry {
 		this.amount = amount;
 	}
 
-	public Note getNote() {
-		return note;
-	}
+	
 
-	public void setNote(Note note) {
-		this.note = note;
-	}
 
 	@Override
 	public int hashCode() {
@@ -101,7 +93,6 @@ public class ShoppingListEntry {
 		result = prime * result + amount;
 		result = prime * result + entry_id;
 		result = prime * result + ((ingredient == null) ? 0 : ingredient.hashCode());
-		result = prime * result + ((note == null) ? 0 : note.hashCode());
 		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
@@ -124,11 +115,6 @@ public class ShoppingListEntry {
 				return false;
 		} else if (!ingredient.equals(other.ingredient))
 			return false;
-		if (note == null) {
-			if (other.note != null)
-				return false;
-		} else if (!note.equals(other.note))
-			return false;
 		if (user == null) {
 			if (other.user != null)
 				return false;
@@ -139,9 +125,10 @@ public class ShoppingListEntry {
 
 	@Override
 	public String toString() {
-		return "ShoppingList [entry_id=" + entry_id + ", ingredient=" + ingredient + ", user=" + user + ", amount="
-				+ amount + ", note=" + note + "]";
+		return "ShoppingListEntry [entry_id=" + entry_id + ", ingredient=" + ingredient + ", user=" + user + ", amount="
+				+ amount + "]";
 	}
+
 	
 	
 	

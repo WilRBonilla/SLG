@@ -1,11 +1,11 @@
-DROP TABLE shopping_list;
-DROP TABLE pantry;
-DROP TABLE note;
-DROP TABLE stock;
-DROP TABLE shoppers;
-DROP TABLE recipe_ingredient;
-DROP TABLE recipe;
-DROP TABLE ingredient;
+--DROP TABLE shopping_list;
+--DROP TABLE pantry;
+--DROP TABLE note;
+--DROP TABLE stock;
+--DROP TABLE shoppers;
+--DROP TABLE recipe_ingredient;
+--DROP TABLE recipe;
+--DROP TABLE ingredient;
 
 CREATE TABLE shoppers (
     u_id NUMBER(10) PRIMARY KEY,
@@ -45,6 +45,7 @@ CREATE TABLE recipe_ingredient (
 
 CREATE TABLE note(
     n_id NUMBER(10) PRIMARY KEY,
+    u_id NUMBER (10),
     add_notes VARCHAR2(300)
 );
 
@@ -52,8 +53,7 @@ CREATE TABLE shopping_list (
     entry_id NUMBER(10) PRIMARY KEY,
     ing_id NUMBER(10),
     u_id NUMBER(10),
-    amount NUMBER(10),
-    n_id NUMBER(10)
+    amount NUMBER(10)
 );
 
 CREATE TABLE stock (
@@ -72,8 +72,8 @@ ALTER TABLE pantry ADD CONSTRAINT fk_pantry_shoppers FOREIGN KEY
 ALTER TABLE pantry ADD CONSTRAINT fk_pantry_ingredient FOREIGN KEY
 (ing_id) REFERENCES ingredient(ing_id) ON DELETE CASCADE;
 
-ALTER TABLE shopping_list ADD CONSTRAINT fk_shopping_list_note FOREIGN KEY
-(n_id) REFERENCES note(n_id) ON DELETE CASCADE;
+ALTER TABLE note ADD CONSTRAINT fk_shopper_note FOREIGN KEY
+(u_id) REFERENCES shoppers(u_id) ON DELETE CASCADE;
 
 ALTER TABLE shopping_list ADD CONSTRAINT fk_shopping_list_ingredient FOREIGN KEY
 (ing_id) REFERENCES ingredient(ing_id) ON DELETE CASCADE;
@@ -316,25 +316,27 @@ INSERT INTO shoppers VALUES (14, 'Will', 'Bonilla', 'wb','12');
 INSERT INTO shoppers VALUES (15, 'Jack', 'McLean', 'jm','12');
 
 ---------------------------------Note------------------------------------
-INSERT INTO note VALUES (1, 'Zip-lock bags, Granola Bars, Garbage bags ');
-INSERT INTO note VALUES (2, 'Aluminum foil, Gatorade, Hand soap, Fabreeze');
+INSERT INTO note VALUES (1, 15, 'Zip-lock bags, Granola Bars, Garbage bags ');
+INSERT INTO note VALUES (2, 14, 'Aluminum foil, Gatorade, Hand soap, Fabreeze');
+INSERT INTO note VALUES (3, 13, 'Advil, Soda, Toothpaste');
+INSERT INTO note VALUES (4, 12, 'Gummy Bears, Paper Towels, Shampoo');
 
 
 --------------------------------Shopping_List----------------------------
 
-INSERT INTO shopping_list VALUES (1,1,15,4,1);
-INSERT INTO shopping_list VALUES (2,2,15,2,1);
-INSERT INTO shopping_list VALUES (3,3,15,6,1);
-INSERT INTO shopping_list VALUES (4,4,15,1,1);
-INSERT INTO shopping_list VALUES (5,5,15,16,1);
-INSERT INTO shopping_list VALUES (6,6,15,2,1);
+INSERT INTO shopping_list VALUES (1,1,15,4);
+INSERT INTO shopping_list VALUES (2,2,15,2);
+INSERT INTO shopping_list VALUES (3,3,15,6);
+INSERT INTO shopping_list VALUES (4,4,15,1);
+INSERT INTO shopping_list VALUES (5,5,15,16);
+INSERT INTO shopping_list VALUES (6,6,15,2);
 
-INSERT INTO shopping_list VALUES (7,1,14,4,2);
-INSERT INTO shopping_list VALUES (8,2,14,2,2);
-INSERT INTO shopping_list VALUES (9,3,14,6,2);
-INSERT INTO shopping_list VALUES (10,4,14,1,2);
-INSERT INTO shopping_list VALUES (11,5,14,16,2);
-INSERT INTO shopping_list VALUES (12,6,14,2,2);
+INSERT INTO shopping_list VALUES (7,1,14,4);
+INSERT INTO shopping_list VALUES (8,2,14,2);
+INSERT INTO shopping_list VALUES (9,3,14,6);
+INSERT INTO shopping_list VALUES (10,4,14,1);
+INSERT INTO shopping_list VALUES (11,5,14,16);
+INSERT INTO shopping_list VALUES (12,6,14,2);
 
 ----------------------------------Pantry---------------------------------
 
