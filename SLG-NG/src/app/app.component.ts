@@ -30,11 +30,11 @@ export class AppComponent {
   }
 
   registerPage() {
-    this.login = true;
+    this.login = false;
     this.register = false;
 
-    this.body = false;
-    this.navbar = false;
+    this.body = true;
+    this.navbar = true;
   }
 
   // option(value: string) {
