@@ -37,13 +37,13 @@ export class AppComponent {
     this.navbar = false;
   }
 
-  option(value: string) {
-    switch(value) {
-      case "logout" :
-        this.registerPage();
-    }
+  // option(value: string) {
+  //   switch(value) {
+  //     case "logout" :
+  //       this.registerPage();
+  //   }
 
-  }
+  // }
   navbarFunc() {
     this.login = false;
     this.navbar = true;
