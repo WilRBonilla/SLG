@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SlgService } from '../../services/slg.service';
 import { Ingredient } from '../../models/Ingredient';
+import { Recipe } from '../../models/Recipe';
 
 @Component({
   selector: 'app-admin',
@@ -19,6 +20,13 @@ export class AdminComponent implements OnInit {
   id: number = null;
   name: string = "";
   units: string = "";
+  selectedIngredientId: number = null;
+  recipeId: number = null;
+  title: string = "";
+  cuisine: string = "";
+  tag1: string = "";
+  tag2: string = "";
+
   
 
   getAllIngredients(){
@@ -41,6 +49,7 @@ export class AdminComponent implements OnInit {
       (response) => {
         console.log("Ingredient Successfully added");
         console.log(response);
+        this.getAllIngredients();
       }, 
       (response) => {
         console.log("Failed to add Ingredient");
@@ -52,9 +61,46 @@ export class AdminComponent implements OnInit {
     )
   }
 
+  deleteIngredient(){
+    console.log(this.selectedIngredientId);
+    this.slgService.deleteIngredient(this.selectedIngredientId).subscribe(
+      (response) => {
+        console.log("Ingredient Successfully deleted");
+        console.log(response);
+        this.getAllIngredients();
+      }, 
+      (response) => {
+        console.log("Failed to delete Ingredient");
+        console.log(response);
+      },
+      () => {
+        this.resetValues();
+      }
+    )
+  }
+
+  addRecipe(){
+    console.log("inside add recipe");
+    this.slgService.addRecipe(new Recipe(this.recipeId, this.title, this.cuisine, this.tag1, this.tag2)).subscribe(
+      (response) => {
+        console.log("Recipe Successfully added");
+        console.log(response);
+      }, 
+      (response) => {
+        console.log("Failed to add Recipe");
+        console.log(response);
+      },
+      () => {
+        this.resetValues();
+      }
+    )
+  }
+
   resetValues() {
+    this.id = this.allIngredients.length + 1;
     this.name = "";
     this.units = "";
+    this.selectedIngredientId = null;
   }
 
 }
