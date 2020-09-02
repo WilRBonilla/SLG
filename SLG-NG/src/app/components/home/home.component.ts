@@ -13,4 +13,6 @@ export class HomeComponent implements OnInit {
     
   }
 
+  username :String= "USERNAME HERE"
+
 }
