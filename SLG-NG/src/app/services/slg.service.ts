@@ -58,7 +58,7 @@ export class SlgService {
 
   addPantryList(pantryList: Pantry[]): Observable<Pantry[]> {
     return this.http.post<Pantry[]>('http://localhost:8080/pantry', pantryList, {headers: this.headers});
-
+  }
   addIngredient(ingredient :Ingredient): Observable<Ingredient> {
     return this.http.post<Ingredient>('http://localhost:8080/ingredient', ingredient, {headers: this.headers});
 
@@ -114,6 +114,10 @@ export class SlgService {
   addRecipe(recipe: Recipe): Observable<Recipe> {
     return this.http.post<Recipe>('http://localhost:8080/recipe', recipe, { headers: this.headers });
   }
+  getResultsByName(name): Observable <Recipe[]>{
+    return this.http.get<Recipe[]>('http://localhost:8080/recipe/'+name);
+  }
+  
 
 
   // -----------------------------END RECIPE SERVICES -----------------------------------------------------------------
