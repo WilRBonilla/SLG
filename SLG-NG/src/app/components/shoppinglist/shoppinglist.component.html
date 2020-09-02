@@ -2,14 +2,16 @@
   <h1>My Shopping List</h1>
 
   <div class="container">
-    <table class="table">
+    <table class="table table-hover">
       <th>Ingredient</th>
       <th>Quantity</th>
-
-      <tr *ngFor="let s of shoppingList">
-        <td>{{ s.ingredient.name }}</td>
-        <td>{{ s.amount }}</td>
-      </tr>
+      <tbody>
+        <tr *ngFor="let s of shoppingList" (click) = "purchaseItem(s)">
+          <td>{{ s.ingredient.name }}</td>
+          <td>{{ s.amount }}</td>
+        </tr>
+      </tbody>
     </table>
+    <button class="btn btn-primary">Purchase Slected Items</button>
   </div>
 </div>
