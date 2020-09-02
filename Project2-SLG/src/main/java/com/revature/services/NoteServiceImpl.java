@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.beans.Note;
+import com.revature.beans.Shopper;
 import com.revature.repositories.NoteRepository;
 
 @Service
@@ -33,6 +34,12 @@ public class NoteServiceImpl implements NoteService{
 		return noteRepository.findById(n_id).get();
 	}
 
+	@Override
+	public Note findByShopper(int u_id) {
+		return noteRepository.findByShopper(u_id);
+	}
+
+	
 	
 	
 	

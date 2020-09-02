@@ -32,5 +32,9 @@ public class NoteController {
 	public Note getNote(@PathVariable("n_id") int n_id) {
 		return noteService.getNote(n_id);
 	}
+	@GetMapping(value = "/note/{u_id}")
+	public Note getUserNote(@PathVariable("u_id") int u_id) {
+		return noteService.findByShopper(u_id);
+	}
 
 }
