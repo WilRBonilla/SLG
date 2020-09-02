@@ -38,8 +38,30 @@ export class SlgService {
     return this.http.get<Ingredient[]>('http://localhost:8080/ingredient');
   }
 
+
+  // -------------------------PANTRY SERVICES--------------------------------------------------------------------
+  getPantryByUser(uid: number): Observable<Pantry[]>{
+    return this.http.get<Pantry[]>('http://localhost:8080/pantry/user/' + uid);
+  }
+
+  updatePantry(pid: number, change: Pantry): Observable<Pantry> {
+    return this.http.put<Pantry>('http://localhost:8080/pantry/' + pid, change, {headers: this.headers});
+  }
+
+  getPantryItem(pid: number): Observable<Pantry> {
+    return this.http.get<Pantry>('http://localhost:8080/pantry/' + pid);
+  }
+
+  deletePantryItem(pid: number): Observable<Pantry> {
+    return this.http.delete<Pantry>('http://localhost:8080/pantry/' + pid);
+  }
+
+  addPantryList(pantryList: Pantry[]): Observable<Pantry[]> {
+    return this.http.post<Pantry[]>('http://localhost:8080/pantry', pantryList, {headers: this.headers});
+
   addIngredient(ingredient :Ingredient): Observable<Ingredient> {
     return this.http.post<Ingredient>('http://localhost:8080/ingredient', ingredient, {headers: this.headers});
+
   }
 
   deleteIngredient(ingId: number): Observable<Ingredient>{
