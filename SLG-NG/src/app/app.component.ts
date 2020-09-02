@@ -81,6 +81,8 @@ export class AppComponent {
     this.slgService.getLoginInfo(this.shopper).subscribe(
       (response) => {
         console.log(response);
+        // Upon success, this will save the user data to client and can be retrieved from any component.
+        localStorage.setItem("user", JSON.stringify(response));
         this.shopper = response;
         if (this.shopper.u_id != 0) {
           this.navbarFunc();
