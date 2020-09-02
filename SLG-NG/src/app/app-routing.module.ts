@@ -6,6 +6,7 @@ import { ShoppinglistComponent } from './components/shoppinglist/shoppinglist.co
 import { HomeComponent } from './components/home/home.component';
 import { PantryComponent} from './components/pantry/pantry.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { LoginComponent } from './components/login/login.component'
 
 const routes: Routes = [
   {path: 'stock', component: StockComponent},
@@ -14,6 +15,8 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'pantry', component: PantryComponent},
   {path: 'admin', component: AdminComponent},
+  {path: 'login', component: LoginComponent},
+  {path : '', redirectTo: '/login', pathMatch :'full'}
 ];
 
 @NgModule({
