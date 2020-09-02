@@ -16,6 +16,6 @@ export class AppComponent {
 
   public navbar: boolean;
 
-  }
+  
   
 }

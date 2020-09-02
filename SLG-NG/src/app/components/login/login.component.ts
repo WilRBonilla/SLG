@@ -2,23 +2,24 @@ import { Component, OnInit } from '@angular/core';
 import { SlgService } from 'src/app/services/slg.service';
 import { Shopper } from 'src/app/models/Shopper';
 import { Router } from '@angular/router';
-import { AppComponent } from 'src/app/app.component';
+import { NavbarService } from 'src/app/services/navbar.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent extends AppComponent implements OnInit {
+export class LoginComponent implements OnInit {
 
-  constructor(private slgService: SlgService, public router: Router) {
-    super(router);
+  constructor(private slgService: SlgService, public router: Router, private nav: NavbarService) {
+ 
    }
 
   ngOnInit(): void {
     this.login = true;
     this.register = false;
-    super.navbar = true;
+    this.nav.hide();
+    
   }
   login: boolean = true;
   register: boolean = false;
@@ -36,16 +37,6 @@ export class LoginComponent extends AppComponent implements OnInit {
 
   }
 
-  // option(value: string) {
-  //   switch(value) {
-  //     case "logout" :
-  //       this.registerPage();
-  //   }
-
-  // }
-  navbarFunc() {
-    super.navbar = true;
-  }
 
   id: number;
   username: string;
@@ -84,7 +75,7 @@ export class LoginComponent extends AppComponent implements OnInit {
         localStorage.setItem("user", JSON.stringify(response));
         this.shopper = response;
         if (this.shopper.u_id != 0) {
-          this.navbarFunc();
+          this.nav.show();
           this.router.navigate(['/home']);
 
 
