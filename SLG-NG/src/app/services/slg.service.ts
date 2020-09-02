@@ -80,24 +80,6 @@ export class SlgService {
 getRecipeResults(search: string): Observable<Recipe[]>{
   return this.http.get<Recipe[]>('http://localhost:8080/recipe/search'+ search);
 }
-resultsCuisine(cuisine: string): Observable<Recipe[]>{
-  return this.http.get<Recipe[]>('http://localhost:8080/recipe/search?cuisine='+cuisine);
-}
-// resultsTag1(tag1 : string): Observable<Recipe[]>{
-//   return this.http.get<Recipe[]>('http://localhost:8080/recipe/search?tag1='+tag1);
-// }
-// resultsTag2(tag2 : string): Observable<Recipe[]>{
-//   return this.http.get<Recipe[]>('http://localhost:8080/recipe/search?tag2='+tag2);
-// }
-// resultsTags(tag1 : string, tag2 : string): Observable<Recipe[]>{
-//   return this.http.get<Recipe[]>('http://localhost:8080/recipe/search?tag1='+tag1+'&tag2='+tag2);
-// }
-// resultsCuisineTag1(cuisine: string,tag1 : string): Observable<Recipe[]>{
-//   return this.http.get<Recipe[]>('http://localhost:8080/recipe/search?cuisine='+cuisine+'&tag1='+tag1);
-// }
-// resultsCuisineTag2(cuisine: string,tag2 : string): Observable<Recipe[]>{
-//   return this.http.get<Recipe[]>('http://localhost:8080/recipe/search?cuisine='+cuisine+'&tag1='+tag2);
-// }
 
 // -----------------------------END RECIPE SERVICES -----------------------------------------------------------------
 }
