@@ -38,6 +38,39 @@ export class SlgService {
     return this.http.get<Ingredient[]>('http://localhost:8080/ingredient');
   }
 
+  // -------------------------SHOPPING LIST ENTRY SERVICES ------------------------------------------------------
+  // This function gets the shopping list by userid.
+  getUserShoppingListEntries(uid: number): Observable<ShoppingListEntry[]>{
+    // Returns an array of ShoppingListEntry objects.
+    return this.http.get<ShoppingListEntry[]>('http://localhost:8080/shoppingList/'+ uid);
+  }
 
+  // This function retrieves a single entry. Doubt it'll be useful. here just in case
+  getOneShoppingListEntry(eid: number): Observable<ShoppingListEntry>{
+    return this.http.get<ShoppingListEntry>('http://localhost:8080/getShoppingListEntry/'+eid);
+  }
 
+  // This function adds an array of (one or more) entries to the DB
+  addToShoppingList(shopList: ShoppingListEntry[]): Observable<ShoppingListEntry[]>{
+    // Returns only the updated entities that we can add to our current array.
+    return this.http.post<ShoppingListEntry[]>('http://localhost:8080/addShoppingList', shopList, {headers: this.headers});
+  }
+
+  // This function appends UID to url and adds (or updates current entries) to the DB.
+  updateShoppingList(uid:number, shopList: ShoppingListEntry[]): Observable<ShoppingListEntry[]>{
+    // Returns only the updated entities in the shopping list.
+    return this.http.put<ShoppingListEntry[]>('http://localhost:8080/shoppingList/' + uid, shopList, {headers: this.headers})
+  }
+
+  // This function deletes a SLE with an eid.
+  deleteShoppingListEntry(eid: number){
+    // Returns nothing of importance, but have to see if we can still measure success.
+    return this.http.delete('http://localhost:8080/shoppingListEntry/' + eid)
+  }
+
+// -----------------------------END SHOPPING LIST ENTRY SERVICES-----------------------------------------------------
+
+// -----------------------------SHOPPER SERVICES ------------------------------------------------------------------
+
+// -----------------------------END SHOPPER SERVICES ------------------------------------------------------------------
 }
