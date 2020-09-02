@@ -1,17 +1,34 @@
+
 <div id="divcontainer">
     <div class=container-fluid
 style="color:white; border: 2px solid; background-color:  #39b7c0">
 <h1 style="font-size:48px;font-style:bold; padding: 40px 70px;">Pantry</h1>
+
 </div>
+    <button onmouseover="style='background: linear-gradient(to right, lightblue, rgb(235, 239, 241), lightblue)'" onmousedown="style='background: linear-gradient(to right, rgb(235, 239, 241), lightblue, rgb(235, 239, 241))'" onmouseup="style='background: linear-gradient(to right, lightblue, rgb(235, 239, 241), lightblue)'" onmouseout="style='background: none'">Add Food Item</button>
+
+    <button (click)="removeFoodItem()" onmouseover="style='background: linear-gradient(to right, lightblue, rgb(235, 239, 241), lightblue)'" onmousedown="style='background: linear-gradient(to right, rgb(235, 239, 241), lightblue, rgb(235, 239, 241))'" onmouseup="style='background: linear-gradient(to right, lightblue, rgb(235, 239, 241), lightblue)'" onmouseout="style='background: none'">Remove Food Item</button>
+
+    <button (click)= "updateFoodItem()" onmouseover="style='background: linear-gradient(to right, lightblue, rgb(235, 239, 241), lightblue)'" onmousedown="style='background: linear-gradient(to right, rgb(235, 239, 241), lightblue, rgb(235, 239, 241))'" onmouseup="style='background: linear-gradient(to right, lightblue, rgb(235, 239, 241), lightblue)'" onmouseout="style='background: none'">Update Food Item</button>
+
+    <div id="selecteditemdiv" *ngIf="isSelected">
+    <h4>Selected Item</h4>
+    <label  for="updateinput" style="margin-right: 30px;">{{selectedPantryItem.ingredient.name}}</label>
+    <input type="number" placeholder="Amount" id="updateinput" [(ngModel)]="foodAmount">
+    </div>
+
     <h3 style="margin-top: 50px;">My Pantry</h3>
         <div class="container-fluid">
-        <table class="table table-striped table-hover">
+        <table id="pantrytable" class="table table-striped table-hover" >
                <tr>
-                   <th>Ingredient</th>
+                   <th>Food Item</th>
                    <th>Amount</th>
                </tr>
                <tbody id="RecipeSeletions">
-               <tr></tr>
+               <tr *ngFor = "let p of pantryList" (click)="onSelect(p)">
+                    <td>{{p.ingredient.name}}</td>
+                    <td>{{p.amount}} {{p.ingredient.units}}</td>
+               </tr>
                </tbody>
            </table><br>
           </div>

@@ -16,8 +16,6 @@ export class AppComponent {
 
   public navbar: boolean;
 
-  logout(){
-    localStorage.removeItem("user");
   }
   
 }
