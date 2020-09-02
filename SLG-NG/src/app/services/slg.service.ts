@@ -38,6 +38,11 @@ export class SlgService {
     return this.http.get<Ingredient[]>('http://localhost:8080/ingredient');
   }
 
+  addIngredient(ingredient :Ingredient): Observable<Ingredient> {
+    console.log(ingredient);
+    return this.http.post<Ingredient>('http://localhost:8080/ingredient', ingredient, {headers: this.headers});
+  }
+
   // -------------------------SHOPPING LIST ENTRY SERVICES ------------------------------------------------------
   // This function gets the shopping list by userid.
   getUserShoppingListEntries(uid: number): Observable<ShoppingListEntry[]>{
