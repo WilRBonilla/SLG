@@ -60,7 +60,7 @@ CREATE TABLE stock (
     s_id NUMBER(10) PRIMARY KEY,
     ing_id NUMBER(10),
     amount NUMBER(10),
-    price NUMBER(10) 
+    price NUMBER(10,2) 
 );
 
 ALTER TABLE stock ADD CONSTRAINT fk_stock_ingredient FOREIGN KEY
@@ -308,3 +308,55 @@ INSERT INTO recipe_ingredient VALUES (74, 12, 15, 3);
 INSERT INTO recipe_ingredient VALUES (75, 20, 15, 8);
 INSERT INTO recipe_ingredient VALUES (76, 28, 15, 5);
 
+-------------------------------Shoppers----------------------------------
+
+INSERT INTO shoppers VALUES (12, 'Kevin', 'Malazarte', 'km','12');
+INSERT INTO shoppers VALUES (13, 'Alex', 'Jones', 'aj','12');
+INSERT INTO shoppers VALUES (14, 'Will', 'Bonilla', 'wb','12');
+INSERT INTO shoppers VALUES (15, 'Jack', 'McLean', 'jm','12');
+
+---------------------------------Note------------------------------------
+INSERT INTO note VALUES (1, 'Zip-lock bags, Granola Bars, Garbage bags ');
+INSERT INTO note VALUES (2, 'Aluminum foil, Gatorade, Hand soap, Fabreeze');
+
+
+--------------------------------Shopping_List----------------------------
+
+INSERT INTO shopping_list VALUES (1,1,15,4,1);
+INSERT INTO shopping_list VALUES (2,2,15,2,1);
+INSERT INTO shopping_list VALUES (3,3,15,6,1);
+INSERT INTO shopping_list VALUES (4,4,15,1,1);
+INSERT INTO shopping_list VALUES (5,5,15,16,1);
+INSERT INTO shopping_list VALUES (6,6,15,2,1);
+
+INSERT INTO shopping_list VALUES (7,1,14,4,2);
+INSERT INTO shopping_list VALUES (8,2,14,2,2);
+INSERT INTO shopping_list VALUES (9,3,14,6,2);
+INSERT INTO shopping_list VALUES (10,4,14,1,2);
+INSERT INTO shopping_list VALUES (11,5,14,16,2);
+INSERT INTO shopping_list VALUES (12,6,14,2,2);
+
+----------------------------------Pantry---------------------------------
+
+INSERT INTO pantry VALUES (1,15,9,12);
+INSERT INTO pantry VALUES (2,15,11,4);
+INSERT INTO pantry VALUES (3,15,18,2);
+
+---------------------------------Stock----------------------------------
+INSERT INTO stock Values (1,1,40,1.50);
+INSERT INTO stock Values (2,2,80,0.20);
+INSERT INTO stock VALUES (3,3,50,0.15);
+INSERT INTO stock VALUES (4,4,50,0.10);
+INSERT INTO stock VALUES (5,5,0,0.35);
+INSERT INTO stock VALUES (6,6,0,0.65);
+
+commit;
+
+--Select * from shoppers;
+--Select * from pantry;
+--Select * from shopping_list;
+--Select * from ingredient;
+--Select * from recipe_ingredient;
+--Select * from stock;
+--Select * from note;
+--Select * from recipe;
