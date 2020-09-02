@@ -46,11 +46,4 @@ recipeResults(){
     }
   )
 }
-cuisineResults(){
-  this.rservice.resultsCuisine(this.cuisine).subscribe(
-    (response) =>{
-      console.log(response);
-    }
-  )
-}
 }
