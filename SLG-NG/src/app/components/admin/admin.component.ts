@@ -12,4 +12,7 @@ export class AdminComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  id :number = 0;
+  name :string = "";
+
 }
