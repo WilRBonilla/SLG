@@ -1,1 +1,15 @@
-<p>shoppinglist works!</p>
+<div class="myShoppingList">
+  <h1>My Shopping List</h1>
+
+  <div class="container">
+    <table class="table">
+      <th>Ingredient</th>
+      <th>Quantity</th>
+
+      <tr *ngFor="let s of shoppingList">
+        <td>{{ s.ingredient.name }}</td>
+        <td>{{ s.amount }}</td>
+      </tr>
+    </table>
+  </div>
+</div>
