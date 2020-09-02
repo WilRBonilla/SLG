@@ -39,8 +39,11 @@ export class SlgService {
   }
 
   addIngredient(ingredient :Ingredient): Observable<Ingredient> {
-    console.log(ingredient);
     return this.http.post<Ingredient>('http://localhost:8080/ingredient', ingredient, {headers: this.headers});
+  }
+
+  deleteIngredient(ingId: number): Observable<Ingredient>{
+    return this.http.delete<Ingredient>('http://localhost:8080/ingredient/' + ingId)
   }
 
   // -------------------------SHOPPING LIST ENTRY SERVICES ------------------------------------------------------
@@ -73,18 +76,23 @@ export class SlgService {
     return this.http.delete('http://localhost:8080/shoppingListEntry/' + eid)
   }
 
-// -----------------------------END SHOPPING LIST ENTRY SERVICES-----------------------------------------------------
+  // -----------------------------END SHOPPING LIST ENTRY SERVICES-----------------------------------------------------
 
-// -----------------------------SHOPPER SERVICES --------------------------------------------------------------------
+  // -----------------------------SHOPPER SERVICES --------------------------------------------------------------------
 
-// -----------------------------END SHOPPER SERVICES ----------------------------------------------------------------
+  // -----------------------------END SHOPPER SERVICES ----------------------------------------------------------------
 
 
-// -----------------------------RECIPE SERVICES ---------------------------------------------------------------------
+  // -----------------------------RECIPE SERVICES ---------------------------------------------------------------------
 
-getRecipeResults(search: string): Observable<Recipe[]>{
-  return this.http.get<Recipe[]>('http://localhost:8080/recipe/search'+ search);
-}
+  getRecipeResults(search: string): Observable<Recipe[]>{
+    return this.http.get<Recipe[]>('http://localhost:8080/recipe/search'+ search);
+  }
 
-// -----------------------------END RECIPE SERVICES -----------------------------------------------------------------
+  addRecipe(recipe: Recipe): Observable<Recipe> {
+    return this.http.post<Recipe>('http://localhost:8080/recipe', recipe, { headers: this.headers });
+  }
+
+
+  // -----------------------------END RECIPE SERVICES -----------------------------------------------------------------
 }
