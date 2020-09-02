@@ -1,9 +1,9 @@
-div {
+#divcontainer {
     animation: expand 1s;
     box-shadow: 5px 10px 18px lightslategray;
     padding: 20px;
     width: 70%;
-    height: 500px;
+    height: fit-content;
     font-family: sans-serif;
     color: darkblue;  
     border-radius: 35px;
