@@ -10,3 +10,63 @@
     text-align: center;
     margin: auto;
 }
+
+.selectingredient {
+    border: 2px solid lightblue;
+    border-radius: 10px;
+    margin-left: 10px; 
+    height: 20px;
+    width: 100px;
+}
+
+#selecteditemdiv {
+    margin-top: 20px;
+}
+
+#updateinput {
+    border: 2px solid lightblue;
+    border-radius: 10px;
+}
+
+#additemdiv {
+    margin-top: 20px;
+}
+
+#addinput {
+    border: 2px solid lightblue;
+    border-radius: 10px;
+}
+
+#buttoncontainer {
+    animation: expand 1s;
+    box-shadow: 5px 10px 18px lightslategray;
+    padding: 20px;
+    width: 70%;
+    height: fit-content;
+    font-family: sans-serif;
+    color: darkblue;  
+    border-radius: 35px;
+    text-align: center;
+    margin: auto;
+    margin-bottom: 50px;
+
+}
+
+div button:hover {
+    background: linear-gradient(to right, lightblue, rgb(235, 239, 241), lightblue)
+}
+
+
+div button {
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    border: 2px solid lightblue;
+    border-radius: 10px;
+    height: 50px;
+    width: 160px;
+    background: none;
+    transition: 0.25s;
+    outline: none;
+    margin-top: 30px;
+}
+
