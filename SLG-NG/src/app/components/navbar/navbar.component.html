@@ -1,0 +1,10 @@
+<nav *ngIf="nav.visible">
+    <button routerLink="/home">Home</button>
+    <button routerLink="/shoppinglist">Shopping List</button>
+    <button routerLink="/recipe">Recipe</button>
+    <button routerLink="/pantry">Pantry</button>
+    <select name="Account" id="account" (change)="option($event.target.value)">
+        <option value="accountInfo">Account Info</option>
+        <option onclick="logout()" value="logout">Logout</option>
+    </select>
+</nav>

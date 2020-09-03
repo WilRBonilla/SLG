@@ -10,13 +10,11 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
 
-  constructor(private slgService: SlgService, public router: Router) {}
+  constructor(public router: Router) {}
   
-  title = 'SLG-NG';
-  login: boolean = true;
-  register: boolean = false;
+  title = 'Shopping List Generator';
 
-  body: boolean = false;
+  public navbar: boolean;
 
 
   navbar: boolean = false;
@@ -96,4 +94,5 @@ export class AppComponent {
       }
     )
   }
+
 }

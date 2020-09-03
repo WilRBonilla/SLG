@@ -16,6 +16,7 @@ export class PantryComponent implements OnInit {
   
   ngOnInit(): void {
     this.displayPantry();
+
     this.getIngredients();
   } 
   isAdding: boolean = false;
@@ -78,7 +79,43 @@ export class PantryComponent implements OnInit {
       this.newItem = new Pantry(<Shopper>this.shopper, <Ingredient>this.addItem, this.addItemAmount);
       console.log(this.newItem);
       this.slgService.addPantryItem(this.newItem).subscribe();
+
   }
+  isSelected: boolean = false;
+  selectedPantryItem: Pantry = new Pantry(0, new Shopper("N/A", "N/A", "N/A", "N/A"), new Ingredient(0, "N/A", "N/A"), 0);
+  pantryList: Array<Pantry> = [];
+  foodName: string;
+  foodAmount: number;
+
+  displayPantry() {
+    this.slgService.getPantryByUser(15).subscribe(
+      (response) => {
+        this.pantryList = response;
+      }
+    )
+  }
+  onSelect(selectedItem: any) {
+    this.selectedPantryItem = selectedItem;
+    console.log(this.selectedPantryItem);
+    this.isSelected = true;
+  }
+
+  updateFoodItem() {
+    this.selectedPantryItem.amount = this.foodAmount;
+    console.log(this.selectedPantryItem);
+    this.slgService.updatePantry(this.selectedPantryItem.p_id, this.selectedPantryItem);
+  }
+
+  removeFoodItem() {
+    console.log(this.selectedPantryItem.p_id);
+    this.slgService.deletePantryItem(this.selectedPantryItem.p_id);
+  }
+
+  addFoodItem() {
+
+  }
+
+
 
   getIngredient() {
     this.slgService.getIngredient(this.selectedItemId).subscribe(

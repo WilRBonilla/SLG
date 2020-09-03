@@ -38,7 +38,6 @@ recipeResults(){
   } else {
     this.search= undefined;
   }
-  console.log(this.search);
   this.rservice.getRecipeResults(this.search).subscribe(
     (response)=> {
       console.log(response);
@@ -46,11 +45,12 @@ recipeResults(){
     }
   )
 }
-cuisineResults(){
-  this.rservice.resultsCuisine(this.cuisine).subscribe(
-    (response) =>{
+nameResults(){
+  this.rservice.getResultsByName(this.name).subscribe(
+    (response)=> {
       console.log(response);
     }
   )
+
 }
 }

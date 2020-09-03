@@ -38,9 +38,11 @@ export class SlgService {
     return this.http.get<Ingredient[]>('http://localhost:8080/ingredient');
   }
 
+
   getIngredient(ing_id: number):Observable<Ingredient> {
     return this.http.get<Ingredient>('http://localhost:8080/ingredient/' + ing_id);
   }
+
 
   // -------------------------PANTRY SERVICES--------------------------------------------------------------------
   getPantryByUser(uid: number): Observable<Pantry[]>{
@@ -61,10 +63,22 @@ export class SlgService {
 
   addPantryList(pantryList: Pantry[]): Observable<Pantry[]> {
     return this.http.post<Pantry[]>('http://localhost:8080/pantry', pantryList, {headers: this.headers});
+
   }
 
   addPantryItem(pantry: Pantry): Observable<Pantry> {
     return this.http.post<Pantry>('http://localhost:8080/singlepantry', pantry, {headers: this.headers});
+
+
+  }
+  addIngredient(ingredient :Ingredient): Observable<Ingredient> {
+    return this.http.post<Ingredient>('http://localhost:8080/ingredient', ingredient, {headers: this.headers});
+
+  }
+
+  deleteIngredient(ingId: number): Observable<Ingredient>{
+    return this.http.delete<Ingredient>('http://localhost:8080/ingredient/' + ingId)
+
   }
 
   // -------------------------SHOPPING LIST ENTRY SERVICES ------------------------------------------------------
@@ -97,9 +111,10 @@ export class SlgService {
     return this.http.delete('http://localhost:8080/shoppingListEntry/' + eid)
   }
 
-// -----------------------------END SHOPPING LIST ENTRY SERVICES-----------------------------------------------------
+  // -----------------------------END SHOPPING LIST ENTRY SERVICES-----------------------------------------------------
 
-// -----------------------------SHOPPER SERVICES --------------------------------------------------------------------
+  // -----------------------------SHOPPER SERVICES --------------------------------------------------------------------
+
 
 getShopper(uid: number): Observable<Shopper> {
   return this.http.get<Shopper>('http://localhost:8080/shopper/' + uid);
@@ -108,29 +123,21 @@ getShopper(uid: number): Observable<Shopper> {
 // -----------------------------END SHOPPER SERVICES ----------------------------------------------------------------
 
 
-// -----------------------------RECIPE SERVICES ---------------------------------------------------------------------
 
-getRecipeResults(search: string): Observable<Recipe[]>{
-  return this.http.get<Recipe[]>('http://localhost:8080/recipe/search'+ search);
-}
-resultsCuisine(cuisine: string): Observable<Recipe[]>{
-  return this.http.get<Recipe[]>('http://localhost:8080/recipe/search?cuisine='+cuisine);
-}
-// resultsTag1(tag1 : string): Observable<Recipe[]>{
-//   return this.http.get<Recipe[]>('http://localhost:8080/recipe/search?tag1='+tag1);
-// }
-// resultsTag2(tag2 : string): Observable<Recipe[]>{
-//   return this.http.get<Recipe[]>('http://localhost:8080/recipe/search?tag2='+tag2);
-// }
-// resultsTags(tag1 : string, tag2 : string): Observable<Recipe[]>{
-//   return this.http.get<Recipe[]>('http://localhost:8080/recipe/search?tag1='+tag1+'&tag2='+tag2);
-// }
-// resultsCuisineTag1(cuisine: string,tag1 : string): Observable<Recipe[]>{
-//   return this.http.get<Recipe[]>('http://localhost:8080/recipe/search?cuisine='+cuisine+'&tag1='+tag1);
-// }
-// resultsCuisineTag2(cuisine: string,tag2 : string): Observable<Recipe[]>{
-//   return this.http.get<Recipe[]>('http://localhost:8080/recipe/search?cuisine='+cuisine+'&tag1='+tag2);
-// }
+  // -----------------------------RECIPE SERVICES ---------------------------------------------------------------------
 
-// -----------------------------END RECIPE SERVICES -----------------------------------------------------------------
+  getRecipeResults(search: string): Observable<Recipe[]>{
+    return this.http.get<Recipe[]>('http://localhost:8080/recipe/search'+ search);
+  }
+
+  addRecipe(recipe: Recipe): Observable<Recipe> {
+    return this.http.post<Recipe>('http://localhost:8080/recipe', recipe, { headers: this.headers });
+  }
+  getResultsByName(name): Observable <Recipe[]>{
+    return this.http.get<Recipe[]>('http://localhost:8080/recipe/'+name);
+  }
+  
+
+
+  // -----------------------------END RECIPE SERVICES -----------------------------------------------------------------
 }

@@ -1,8 +1,28 @@
-<div id="container">
+<!-- <div id="container">
     <h1>LOGIN</h1>
     <input id="usernameText" class="inputText" type="text" [(ngModel)] = "username"  placeholder="Username">
     <input id="passwordText" class="inputText" type="password" [(ngModel)] = "password" placeholder="Password">
     <button id="loginButton" (click)= "getLogin()" class="button" onmouseover="style='background: linear-gradient(to right, lightblue, rgb(235, 239, 241), lightblue)'" onmousedown="style='background: linear-gradient(to right, rgb(235, 239, 241), lightblue, rgb(235, 239, 241))'" onmouseup="style='background: linear-gradient(to right, lightblue, rgb(235, 239, 241), lightblue)'" onmouseout="style='background: none'">LOGIN</button>
     <a id="register" routerLink="/register" >Register new account?</a>
     
+</div> -->
+
+<div>
+<div id="logincontainer" class="container" *ngIf="login"> 
+    <h1>LOGIN</h1>
+    <input id="usernameText" class="inputText" type="text" [(ngModel)] = "username"  placeholder="Username">
+    <input id="passwordText" class="inputText" type="password" [(ngModel)] = "password" placeholder="Password">
+    <button id="loginButton" (click)= "getLogin()" class="button" onmouseover="style='background: linear-gradient(to right, lightblue, rgb(235, 239, 241), lightblue)'" onmousedown="style='background: linear-gradient(to right, rgb(235, 239, 241), lightblue, rgb(235, 239, 241))'" onmouseup="style='background: linear-gradient(to right, lightblue, rgb(235, 239, 241), lightblue)'" onmouseout="style='background: none'">LOGIN</button>
+    <a id="register"  (click)="loginPage()" >Register new account?</a> 
+</div>
+<div id="registercontainer" class="container" *ngIf="register">
+    <h1>ACCOUNT</h1>
+    <input id="usernameText" class="inputText" type="text" [(ngModel)] = "addusername" placeholder="Username">
+    <input id="passwordText" class="inputText" type="password" placeholder="Password">
+    <input id="confirmPasswordText" class="inputText" type="password" [(ngModel)] = "addpassword" placeholder="Confirm Password">
+    <input id="firstnameText" class="inputText" type="text" [(ngModel)] = "f_name" placeholder="First Name">
+    <input id="lastnameText" class="inputText" type="text" [(ngModel)] = "l_name" placeholder="Last Name">
+    <button id="registerButton" routerLink="/login" (click) = "addShopper()" class="button" onmouseover="style='background: linear-gradient(to right, lightblue, rgb(235, 239, 241), lightblue)'" onmousedown="style='background: linear-gradient(to right, rgb(235, 239, 241), lightblue, rgb(235, 239, 241))'" onmouseup="style='background: linear-gradient(to right, lightblue, rgb(235, 239, 241), lightblue)'" onmouseout="style='background: none'">REGISTER</button>
+    <a (click)="registerPage()">Cancel</a>  
+</div>
 </div>

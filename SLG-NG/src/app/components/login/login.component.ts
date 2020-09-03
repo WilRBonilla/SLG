@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SlgService } from 'src/app/services/slg.service';
 import { Shopper } from 'src/app/models/Shopper';
 import { Router } from '@angular/router';
+import { NavbarService } from 'src/app/services/navbar.service';
 
 @Component({
   selector: 'app-login',
@@ -10,10 +11,32 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private slgService: SlgService, public router: Router) { }
+  constructor(private slgService: SlgService, public router: Router, private nav: NavbarService) {
+ 
+   }
 
   ngOnInit(): void {
+    this.login = true;
+    this.register = false;
+    this.nav.hide();
+    
   }
+  login: boolean = true;
+  register: boolean = false;
+  
+
+  loginPage() {
+    this.login = false;
+    this.register = true;
+
+  }
+
+  registerPage() {
+    this.login = true;
+    this.register = false;
+
+  }
+
 
   id: number;
   username: string;
@@ -23,6 +46,22 @@ export class LoginComponent implements OnInit {
   tempFirst: string;
   tempSecond: string;
 
+  f_name: string;
+    l_name: string;
+    addusername: string;
+    addpassword: string;
+
+
+    addShopper() {
+      this.slgService.addShopper(new Shopper(this.f_name, this.l_name, this.addusername, this.addpassword)).subscribe(
+
+        (response) => {
+          console.log(response);
+        }
+
+      )
+    }
+
   getLogin() {
     this.tempFirst = "first";
     this.tempSecond = "second";
@@ -31,9 +70,15 @@ export class LoginComponent implements OnInit {
     this.slgService.getLoginInfo(this.shopper).subscribe(
       (response) => {
         console.log(response);
+        
+        // Upon success, this will save the user data to client and can be retrieved from any component.
+        localStorage.setItem("user", JSON.stringify(response));
         this.shopper = response;
         if (this.shopper.u_id != 0) {
+          this.nav.show();
           this.router.navigate(['/home']);
+
+
         }else {
           console.log("incorrect log in info");
         }
