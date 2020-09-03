@@ -71,7 +71,7 @@ export class PantryComponent implements OnInit {
     this.slgService.deletePantryItem(this.selectedPantryItem.p_id).subscribe();
     for (let i = 0; i < this.pantryList.length; i++) {
       if (this.selectedPantryItem.p_id == this.pantryList[i].p_id) {
-        this.pantryList.splice(i);
+        this.pantryList.splice(i, 1);
       }
     } 
     this.isSelected = false;
