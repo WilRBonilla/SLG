@@ -43,8 +43,8 @@ public class RecipeIngredientServiceImpl implements RecipeIngredientService {
 	}
 
 	@Override
-	public List<RecipeIngredient> findAllByRecipe(Recipe recipe) {
-		return recipeIngredientRepository.findAllByRecipe(recipe);
+	public List<RecipeIngredient> findAllByRecipe(Recipe r) {
+		return recipeIngredientRepository.findAllByRecipe(r);
 	}
 
 }
