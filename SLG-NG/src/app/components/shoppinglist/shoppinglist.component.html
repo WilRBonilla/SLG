@@ -10,8 +10,16 @@
           <td>{{ s.ingredient.name }}</td>
           <td>{{ s.amount }}</td>
         </tr>
+        <tr>
+          <td colspan="2">Custom Item: 
+          <input type="text" [(ngModel)]="notes" style="width: max-content;"/>
+          <button class = "btn btn-primary" (click) = "addCustom()">Add Custom Item</button>
+        </td>
+        </tr>
+
       </tbody>
     </table>
-    <button class="btn btn-primary">Purchase Slected Items</button>
+    <button class="btn btn-primary" (click) = "selectAll()">Select All</button>
+    <button class="btn btn-primary" (click) = "purchase()">Purchase Slected Items</button>
   </div>
 </div>

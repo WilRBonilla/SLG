@@ -7,13 +7,12 @@ export class ShoppingListEntry {
     ingredient: Ingredient;
     shopper: Shopper;
     amount: number;
-    note: Note;
 
-    constructor(entry_id: number, ingredient: Ingredient, shopper: Shopper, amount: number, note: Note) {
+
+    constructor(entry_id: number, ingredient: Ingredient, shopper: Shopper, amount: number) {
         this.entry_id = entry_id;
         this.ingredient = ingredient;
         this.shopper = shopper;
         this.amount = amount;
-        this.note = note
     }
 }
