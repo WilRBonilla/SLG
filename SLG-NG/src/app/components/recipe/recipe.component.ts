@@ -34,19 +34,13 @@ recipeResults(){
   console.log(this.separate);
   console.log(this.separate[0]);
   console.log(this.separate[2]);
-  if(this.cuisine != '' && this.tag1 != '' && this.tag2 != '') {
+  if(this.cuisine != undefined && this.tag1 != undefined && this.tag2 != undefined) {
     this.search='?cuisine='+this.cuisine+'&tag1='+this.tag1+'&tag2='+this.tag2;
-  } else if(this.cuisine !='' && this.tag1 != '' && this.tag2 == undefined) {
+  } else if(this.cuisine !=undefined && this.tag1 != undefined && this.tag2 == undefined) {
     this.search='?cuisine='+this.cuisine+'&tag1='+this.tag1;
-  } else if(this.cuisine !='' && this.tag2 != '' && this.tag1 == '') {
+  } else if(this.cuisine !=undefined && this.tag2 != undefined && this.tag1 == undefined) {
     this.search='?cuisine='+this.cuisine+'&tag2='+this.tag2;
-  } else if(this.tag1 !='' && this.tag2 !='' && this.cuisine == ''){
-    this.search='?tag1='+this.tag1+'&tag2='+this.tag2;
-  } else if(this.tag1 != '' && this.cuisine == '' && this.tag2== '') {
-    this.search='?tag1='+this.tag1;
-  } else if (this.tag2 != '' && this.cuisine == '' && this.tag1== '') {
-    this.search='?tag2='+this.tag2;
-  } else if (this.cuisine != '' && this.tag1 == '' && this.tag2 == '') {
+  } else if (this.cuisine != undefined && this.tag1 == undefined && this.tag2 == undefined) {
     this.search='?cuisine='+this.cuisine;
   } else {
     this.search= undefined;
@@ -70,7 +64,8 @@ nameResults(){
   )
 
 }
-tagSearch(){
+
+getRecipeIngredients(){
 
 }
 }
