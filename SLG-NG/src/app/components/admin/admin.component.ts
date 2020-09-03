@@ -14,10 +14,13 @@ export class AdminComponent implements OnInit {
   constructor(private slgService: SlgService) { }
 
   ngOnInit( ): void {
-    this.getAllIngredients()
+    this.getAllIngredients(),
+    this.getAllRecipes()
   }
 
   allIngredients: Array<Ingredient> = [];
+  allRecipes: Array<Recipe>=[];
+  rId: number = null;
   id: number = null;
   name: string = "";
   units: string = "";
@@ -38,6 +41,7 @@ export class AdminComponent implements OnInit {
   recipeIngredientId4: number = null;
   recipeIngredientId5: number = null;
   newRecipeId: number = null;
+  addedRecipe: Recipe = null;
 
 
   
@@ -51,6 +55,19 @@ export class AdminComponent implements OnInit {
       },
       (response) => {
         console.log("Failed to get ingredients list")
+      }
+    )
+  }
+
+  getAllRecipes() {
+    this.slgService.getAllRecipes().subscribe(
+      (response) => {
+        console.log(response);
+        this.allRecipes = response
+        this.rId = this.allRecipes.length + 1
+      },
+      (response) => {
+        console.log("Failed to get recipes list")
       }
     )
   }
@@ -93,7 +110,8 @@ export class AdminComponent implements OnInit {
 
   addRecipe(){
     console.log("inside add recipe");
-    this.slgService.addRecipe(new Recipe(this.recipeId, this.title, this.cuisine, this.tag1, this.tag2)).subscribe(
+    let addedRecipe = new Recipe(this.recipeId, this.title, this.cuisine, this.tag1, this.tag2)
+    this.slgService.addRecipe(addedRecipe).subscribe(
       (response) => {
         console.log("1",this.recipeIngredientId1);
         console.log("2",this.recipeIngredientId2);
@@ -122,7 +140,13 @@ export class AdminComponent implements OnInit {
   }
   
   addRecipeIngredient1(){
-    this.slgService.addRecipeIngredient(new RecipeIngredient(1, this.recipeIngredientId1, this.newRecipeId, this.ing1amount)).subscribe(
+    let specificIngredient = this.allIngredients[this.recipeIngredientId1]
+    let newIngredient = new Ingredient(specificIngredient.ing_id, specificIngredient.name, specificIngredient.units)
+
+    this.getAllRecipes();
+    let specificRecipe = this.allRecipes[this.newRecipeId]
+
+    this.slgService.addRecipeIngredient(new RecipeIngredient(77, newIngredient, this.addedRecipe, this.ing1amount)).subscribe(
       (response) => {
         console.log("RecipeIngredient1 successfully added");
       },
@@ -134,7 +158,13 @@ export class AdminComponent implements OnInit {
   }
 
   addRecipeIngredient2() {
-    this.slgService.addRecipeIngredient(new RecipeIngredient(2, this.recipeIngredientId2, this.newRecipeId, this.ing2amount)).subscribe(
+    let specificIngredient = this.allIngredients[this.recipeIngredientId2]
+    let newIngredient = new Ingredient(specificIngredient.ing_id, specificIngredient.name, specificIngredient.units)
+
+    this.getAllRecipes();
+    let specificRecipe = this.allRecipes[this.newRecipeId]
+
+    this.slgService.addRecipeIngredient(new RecipeIngredient(78, newIngredient, this.addedRecipe, this.ing2amount)).subscribe(
       (response) => {
         console.log("RecipeIngredient2 successfully added");
       },
@@ -146,7 +176,13 @@ export class AdminComponent implements OnInit {
   }
 
   addRecipeIngredient3() {
-    this.slgService.addRecipeIngredient(new RecipeIngredient(3, this.recipeIngredientId3, this.newRecipeId, this.ing3amount)).subscribe(
+    let specificIngredient = this.allIngredients[this.recipeIngredientId3]
+    let newIngredient = new Ingredient(specificIngredient.ing_id, specificIngredient.name, specificIngredient.units)
+
+    this.getAllRecipes();
+    let specificRecipe = this.allRecipes[this.newRecipeId]
+
+    this.slgService.addRecipeIngredient(new RecipeIngredient(79, newIngredient, this.addedRecipe, this.ing3amount)).subscribe(
       (response) => {
         console.log("RecipeIngredient3 successfully added");
       },
@@ -159,7 +195,13 @@ export class AdminComponent implements OnInit {
 
 
   addRecipeIngredient4() {
-    this.slgService.addRecipeIngredient(new RecipeIngredient(4, this.recipeIngredientId4, this.newRecipeId, this.ing4amount)).subscribe(
+    let specificIngredient = this.allIngredients[this.recipeIngredientId4]
+    let newIngredient = new Ingredient(specificIngredient.ing_id, specificIngredient.name, specificIngredient.units)
+
+    this.getAllRecipes();
+    let specificRecipe = this.allRecipes[this.newRecipeId]
+
+    this.slgService.addRecipeIngredient(new RecipeIngredient(80, newIngredient, this.addedRecipe, this.ing4amount)).subscribe(
       (response) => {
         console.log("RecipeIngredient4 successfully added");
       },
@@ -171,7 +213,13 @@ export class AdminComponent implements OnInit {
   }
 
   addRecipeIngredient5() {
-    this.slgService.addRecipeIngredient(new RecipeIngredient(5, this.recipeIngredientId5, this.newRecipeId, this.ing5amount)).subscribe(
+    let specificIngredient = this.allIngredients[this.recipeIngredientId5]
+    let newIngredient = new Ingredient(specificIngredient.ing_id, specificIngredient.name, specificIngredient.units)
+
+    this.getAllRecipes();
+    let specificRecipe = this.allRecipes[this.newRecipeId]
+
+    this.slgService.addRecipeIngredient(new RecipeIngredient(81, newIngredient, this.addedRecipe, this.ing5amount)).subscribe(
       (response) => {
         console.log("RecipeIngredient5 successfully added");
       },
