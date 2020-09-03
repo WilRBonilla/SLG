@@ -11,16 +11,6 @@
     margin: auto;
 }
 
-
-.selectingredient {
-    border: 2px solid lightblue;
-    border-radius: 10px;
-    margin-left: 10px; 
-    height: 20px;
-    width: 100px;
-}
-
-
 #selecteditemdiv {
     margin-top: 20px;
 }
@@ -29,17 +19,6 @@
     border: 2px solid lightblue;
     border-radius: 10px;
 }
-
-
-#additemdiv {
-    margin-top: 20px;
-}
-
-#addinput {
-    border: 2px solid lightblue;
-    border-radius: 10px;
-}
-
 
 #buttoncontainer {
     animation: expand 1s;
