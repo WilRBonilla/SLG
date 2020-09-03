@@ -54,7 +54,12 @@
           <th>Description</th>
         </tr>
         <tbody id="RecipeResults">
-        <tr></tr>
+          <tr *ngFor="let r of resultList">
+            <td>{{ r.title }}</td>
+            <td>{{ r.cuisine }}</td>
+            <td>#{{ r.tag1 }}  &nbsp;&nbsp;  #{{ r.tag2 }}</td>
+
+          </tr>
         </tbody>
           </table><br>
        <h3>My Selections</h3>

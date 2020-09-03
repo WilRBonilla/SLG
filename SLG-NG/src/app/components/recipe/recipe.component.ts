@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SlgService } from 'src/app/services/slg.service';
+import { Recipe } from 'src/app/models/Recipe';
 
 @Component({
   selector: 'app-recipe',
@@ -18,6 +19,7 @@ export class RecipeComponent implements OnInit {
   tag1 : string = '';
   tag2 : string = '';
   search : string = '';
+  resultList :Array<Recipe>=[];
 
 
 recipeResults(){
@@ -41,14 +43,18 @@ recipeResults(){
   this.rservice.getRecipeResults(this.search).subscribe(
     (response)=> {
       console.log(response);
+      this.resultList = response;
 
     }
-  )
+  );
+
 }
 nameResults(){
   this.rservice.getResultsByName(this.name).subscribe(
     (response)=> {
       console.log(response);
+      this.resultList=[];
+      this.resultList.push(response);
     }
   )
 
