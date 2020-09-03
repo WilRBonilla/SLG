@@ -10,7 +10,7 @@ export class RecipeIngredient {
     constructor(ring_id: number, ingredient: Ingredient, recipe: Recipe, amount: number) {
         this.ring_id = ring_id;
         this.ingredient = ingredient;
-        this. recipe = recipe;
+        this.recipe = recipe;
         this.amount = amount;
     }
 }

@@ -15,29 +15,30 @@ import { Stock } from '../models/Stock';
 @Injectable({
   providedIn: 'root'
 })
+
 export class SlgService {
 
   constructor(private http: HttpClient) { }
 
   private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-  getLoginInfo(shopper: Shopper): Observable<Shopper> {
-    return this.http.post<Shopper>('http://localhost:8080/login', shopper, {headers: this.headers});
-  }
 
-  addShopper(shopper: Shopper): Observable<Shopper> {
-    console.log(shopper);
-    return this.http.post<Shopper>('http://localhost:8080/shopper', shopper, {headers: this.headers});
-  } 
 
-  getAllRecipes() :Observable<Recipe[]> {
-    return this.http.get<Recipe[]>('http://localhost:8080/');
-  }
-
+// -------------------------INGREDIENT SERVICES--------------------------------------------------------------------
   getAllIngredients(): Observable<Ingredient[]> {
     return this.http.get<Ingredient[]>('http://localhost:8080/ingredient');
   }
 
+
+  addIngredient(ingredient: Ingredient): Observable<Ingredient> {
+    return this.http.post<Ingredient>('http://localhost:8080/ingredient', ingredient, { headers: this.headers });
+  }
+
+  deleteIngredient(ingId: number): Observable<Ingredient> {
+    return this.http.delete<Ingredient>('http://localhost:8080/ingredient/' + ingId)
+  }
+  
+  
   getIngredient(ing_id: number):Observable<Ingredient> {
     return this.http.get<Ingredient>('http://localhost:8080/ingredient/' + ing_id);
   }
@@ -62,11 +63,6 @@ export class SlgService {
 
   addPantryList(pantryList: Pantry[]): Observable<Pantry[]> {
     return this.http.post<Pantry[]>('http://localhost:8080/pantry', pantryList, {headers: this.headers});
-
-  }
-  addIngredient(ingredient :Ingredient): Observable<Ingredient> {
-    return this.http.post<Ingredient>('http://localhost:8080/ingredient', ingredient, {headers: this.headers});
-
   }
 
   addPantryItem(pantry: Pantry): Observable<Pantry> {
@@ -76,6 +72,7 @@ export class SlgService {
   deleteIngredient(ingId: number): Observable<Ingredient>{
     return this.http.delete<Ingredient>('http://localhost:8080/ingredient/' + ingId)
   }
+
 
   // -------------------------SHOPPING LIST ENTRY SERVICES ------------------------------------------------------
   // This function gets the shopping list by userid.
@@ -107,16 +104,20 @@ export class SlgService {
     return this.http.delete('http://localhost:8080/shoppingListEntry/' + eid)
   }
 
-  // -----------------------------END SHOPPING LIST ENTRY SERVICES-----------------------------------------------------
 
-  // -----------------------------SHOPPER SERVICES --------------------------------------------------------------------
+  // -------------------------SHOPPER/USER SERVICES--------------------------------------------------------------------
+  getLoginInfo(shopper: Shopper): Observable<Shopper> {
+    return this.http.post<Shopper>('http://localhost:8080/login', shopper, { headers: this.headers });
+  }
+
+  addShopper(shopper: Shopper): Observable<Shopper> {
+    console.log(shopper);
+    return this.http.post<Shopper>('http://localhost:8080/shopper', shopper, { headers: this.headers });
+  } 
 
   getShopper(uid: number): Observable<Shopper> {
     return this.http.get<Shopper>('http://localhost:8080/shopper/' + uid);
   }
-
-  // -----------------------------END SHOPPER SERVICES ----------------------------------------------------------------
-
 
   // -----------------------------RECIPE SERVICES ---------------------------------------------------------------------
 
@@ -130,8 +131,16 @@ export class SlgService {
   getResultsByName(name): Observable <Recipe>{
     return this.http.get<Recipe>('http://localhost:8080/recipe/'+name);
   }
-  
+
+  getAllRecipes(): Observable<Recipe[]> {
+    return this.http.get<Recipe[]>('http://localhost:8080/recipe');
+  }
+
+   // -----------------------------RECIPE INGREDIENT SERVICES ---------------------------------------------------------------------
 
 
-  // -----------------------------END RECIPE SERVICES -----------------------------------------------------------------
+  addRecipeIngredient(recipeIngredient: RecipeIngredient): Observable<RecipeIngredient> {
+    return this.http.post<RecipeIngredient>('http://localhost:8080/recipeingredient', recipeIngredient, { headers: this.headers });
+  }
+
 }
