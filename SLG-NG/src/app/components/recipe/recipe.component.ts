@@ -22,6 +22,9 @@ export class RecipeComponent implements OnInit {
   tag2 : string = '';
   search : string = '';
   resultList :Array<Recipe>=[];
+  r_id: number;
+  rid : number;
+  added :string="	&#43; Add to Shopping List";
 
 
   recipeResults(){
@@ -63,10 +66,18 @@ export class RecipeComponent implements OnInit {
         this.resultList.push(response);
       }
     )
+  }
 
+  addToSelections=()=>{
+
+    this.added="✔️ Added"
+    console.log(this.rid);
   }
 
   getRecipeIngredients(){
-
-  }
+    this.rservice.getRecipeIngredients(this.r_id);
+      (response)=>{
+        console.log(response);
+      }
+    }
 }

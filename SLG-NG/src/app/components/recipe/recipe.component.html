@@ -43,7 +43,9 @@
         </div>
         <div class="card-body">
           <p class="card-text">{{ r.cuisine }}</p>
+          <p style="visibility: hidden;" [(ngModel)]="rid" >{{r.r_id}}</p>
           <p class="card-text"><small class="text-muted">#{{ r.tag1 }}  &nbsp;&nbsp;  #{{ r.tag2 }}</small></p>
+          <button id="{{r.r_id}}"(click)="addToSelections()" [innerHTML]="added" class="card-link" style="background:none;border:none"></button>
         </div>
       </div>
     </div><br>

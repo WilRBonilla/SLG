@@ -15,8 +15,10 @@ export class PantryComponent implements OnInit {
 
   
   ngOnInit(): void {
+    this.getShopper();
     this.displayPantry();
     this.getIngredients();
+    
   } 
   isAdding: boolean = false;
   isSelected: boolean = false;
@@ -27,10 +29,12 @@ export class PantryComponent implements OnInit {
   ingredients: Array<Ingredient> = [];
   addPantryList: Array<Pantry> = [];
   newItem: Pantry;
-  selectedItemId: number;
-  addItem: Ingredient;
+  selectedIngredient: Ingredient;
+  addItem: Ingredient = new Ingredient(0, "N/A", "N/A");
   addItemAmount: number;
   shopper: Shopper;
+  ingredientId: number;
+  newIngredient: Ingredient;
 
 
   getIngredients() {
@@ -42,7 +46,7 @@ export class PantryComponent implements OnInit {
   }
 
   displayPantry() {
-    this.slgService.getPantryByUser(15).subscribe(
+    this.slgService.getPantryByUser(this.shopper.u_id).subscribe(
       (response) => {
         this.pantryList = response;        
       }
@@ -59,48 +63,73 @@ export class PantryComponent implements OnInit {
     this.selectedPantryItem.amount = this.foodAmount;
     console.log(this.selectedPantryItem);
     this.slgService.updatePantry(this.selectedPantryItem.p_id, this.selectedPantryItem).subscribe();
+    this.isSelected = false;
   }
 
   removeFoodItem() {
     console.log(this.selectedPantryItem.p_id);
     this.slgService.deletePantryItem(this.selectedPantryItem.p_id).subscribe();
-    this.displayPantry();
+    for (let i = 0; i < this.pantryList.length; i++) {
+      if (this.selectedPantryItem.p_id == this.pantryList[i].p_id) {
+        this.pantryList.splice(i, 1);
+      }
+    } 
+    this.isSelected = false;
+  }
+
+  displayIngredient() {
+    console.log(this.ingredientId);
+    if (this.ingredientId != undefined) {
+    this.getIngredient();
+    console.log("this is the ingredient after getIngredient(): ");
+    console.log(JSON.stringify(this.addItem));
+    }
+    
   }
 
   addFoodItem() {
-      let addNewItem = this.getIngredient();
-      this.getShopper();
-      // for(let i = 0; i < this.ingredients.length; i++) {
-      //   if (this.ingredients[i].ing_id == this.selectedItemId) {
-      //     this.addItem = this.ingredients[i] as Ingredient;
-      //   }
-      // }
-      
+    console.log(this.addItem); 
+    
+    if (this.pantryList.length == 0) {
       this.newItem = new Pantry(0, this.shopper, this.addItem, this.addItemAmount);
       console.log(this.newItem);
-      this.slgService.addPantryItem(this.newItem).subscribe();
+      this.slgService.addPantryItem(this.newItem).subscribe(
+        (response) => {
+          this.pantryList.push(response);
+        }
+      );
+      this.isAdding = false;
+    }
+
+    for (let i = 0; i < this.pantryList.length; i++) {
+      if (i == this.pantryList.length - 1) {   
+        if (this.pantryList[i].ingredient.ing_id != this.addItem.ing_id) {
+          this.newItem = new Pantry(0, this.shopper, this.addItem, this.addItemAmount);
+          console.log(this.newItem);
+          this.slgService.addPantryItem(this.newItem).subscribe(
+            (response) => {
+              this.pantryList.push(response);
+            }
+          );
+          this.isAdding = false;
+        }
+      }
   }
+}
 
   getIngredient() {
-    this.slgService.getIngredient(this.selectedItemId).subscribe(
+    this.slgService.getIngredient(this.ingredientId).subscribe(
       (response) => {
-        console.log(response);
-        this.addItem = response;
-        console.log(this.addItem);
-        return this.addItem;
+        console.log("this is the response: " + JSON.stringify(response));
+        this.addItem.ing_id = response.ing_id;
+        this.addItem.name = response.name;
+        this.addItem.units = response.units;
       }
     )
   }
 
   getShopper() {
-    this.slgService.getShopper(15).subscribe (
-      (response) => {
-        console.log(response);
-        this.shopper = response;
-        console.log(this.shopper);
-      }
-
-    )
+    this.shopper = JSON.parse(localStorage.getItem("user"));
   }
 
   displayadd() {
