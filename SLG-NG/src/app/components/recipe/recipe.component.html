@@ -2,7 +2,7 @@
 <div class="div">
   <div class=container-fluid 
   style=" text-align:left; color:white; border: 2px solid; background-color:  #45c3cc">
-  <h1 style="font-size:72px;font-style:bold; padding: 40px 70px">Recipes</h1>
+  <h1 style="font-size:65px;font-style:bold; padding: 40px 70px">Recipes</h1>
   </div>
   
   
@@ -21,7 +21,7 @@
           Enter Description:
         </div>
         <div class="card-body">
-          <input class="form-control mr-2" [(ngModel)]="cuisine" name="cuis" type = "text" id="recipecuisine" placeholder="eg. Spicy, Italian"  style="margin:30px">
+          <input class="form-control mr-2" [(ngModel)]="searched" name="cuis" type = "text" id="recipecuisine" placeholder="eg. Spicy, Italian"  style="margin:30px">
           <button class="btn btn-primary mr-2" (click)="recipeResults()" id="searchCuisine" type="submit" style="width:200px">Search ⮞</button>
         </div>
       </div>
@@ -35,7 +35,7 @@
         
     </div></div>
     </div>
-    <h3>Results</h3>
+    <!-- <h3>Results</h3> -->
     <div class="card-deck" >
       <div class="card" *ngFor="let r of resultList">
         <div class="card-header">
