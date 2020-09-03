@@ -14,6 +14,15 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  
+  isAlfred :boolean = false
 
+  
+  isYouAlfred(){
+    let currentUser = JSON.parse(localStorage.getItem("user"));
+    let name = currentUser.f_name
+    if(name == "Alfred"){
+      this.isAlfred = true
+    }
+  }
+  
 }

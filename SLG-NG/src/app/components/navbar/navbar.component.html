@@ -4,6 +4,7 @@
     <button routerLink="/recipe">Recipe</button>
     <button routerLink="/pantry">Pantry</button>
     <select name="Account" id="account" (change)="option($event.target.value)">
+        <option *ngIf="isAlfred" onclick="" value="admin">Admin</option>
         <option value="accountInfo">Account Info</option>
         <option onclick="logout()" value="logout">Logout</option>
     </select>
