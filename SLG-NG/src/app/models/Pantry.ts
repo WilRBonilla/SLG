@@ -7,8 +7,7 @@ export class Pantry {
     ingredient: Ingredient;
     amount: number;
 
-    constructor(p_id: number, shopper: Shopper, ingredient: Ingredient, amount: number) {
-        this.p_id = p_id;
+    constructor(shopper: Shopper, ingredient: Ingredient, amount: number) {
         this.shopper = shopper;
         this.ingredient = ingredient;
         this.amount = amount;
