@@ -1,119 +1,124 @@
-<h1>Admin Page</h1>
-
-<form (submit)="addIngredient()">
-    <div>
-        <h5>Add an ingredient to the database</h5>
-        <div class="form-group">
-            <label for="idValue">ID:</label>
-            <input class="form-control" type="number" [(ngModel)]="id" id="idValue" name="id" readonly>
+<div class="container">
+    <h1>Admin Page</h1>
+    <div class="row">
+        <div class="col">
+            <form (submit)="addIngredient()">
+                <div>
+                    <h5>Add an ingredient to the database</h5>
+                    <div class="form-group">
+                        <label for="idValue">ID:</label>
+                        <input class="form-control" type="number" [(ngModel)]="id" id="idValue" name="id" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="nameValue">Name:</label>
+                        <input class="form-control" type="text" [(ngModel)]="name" id="nameValue" name="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="unitsValue">Units:</label>
+                        <select class="form-control" type="text" [(ngModel)]="units" id="unitsValue" name="units">
+                            <option> </option>
+                            <option value="number">Number</option>
+                            <option value="ounces">Ounces</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Ingredient</button>
+                </div>
+            </form>
         </div>
-        <div class="form-group">
-            <label for="nameValue">Name:</label>
-            <input class="form-control" type="text" [(ngModel)]="name" id="nameValue" name="name">
-        </div>
-        <div class="form-group">
-            <label for="unitsValue">Units:</label>
-            <select class="form-control" type="text" [(ngModel)]="units" id="unitsValue" name="units">
-                <option> </option>
-                <option value="number">Number</option>
-                <option value="ounces">Ounces</option>
-            </select>
-        </div>
-        <button type="submit" class="btn btn-primary">Add Ingredient</button>
-    </div>
-</form>
-<br>
-<form (submit)="deleteIngredient()">
-    <div>
-        <h5>Delete an ingredient from the database</h5>
-        <div class="form-group">
-            <label for="ingredients">Ingredients:</label>
-            <select class="form-control" type="text" [(ngModel)]="selectedIngredientId" id="ingredients" name="ingredients">
-                <option></option>
-                <option *ngFor="let i of allIngredients" value="{{i.ing_id}}">{{i.name}}</option>
-            </select>
-        </div>
-        <button type="submit" class="btn btn-danger">Delete Ingredient</button>
-    </div>
-</form>
-<br>
-<form (submit)="addRecipe()">
-    <div>
-        <h5>Add a new recipe to the database</h5>
-        <!-- <table class="table table-hover">
-            <tr>
-                <th>Name</th>
-                <th>Units</th>
-            </tr>
-            <tr *ngFor="let i of allIngredients">
-                <td>{{i.name}}</td>
-                <td>{{i.units}}</td>
-            </tr>
-        </table> -->
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <label class="input-group-text" for="ingredient1">Ingredient 1</label>
-            </div>
-            <input type="text" aria-label="Amount" class="form-control" placeholder="Amount" [(ngModel)]="ing1amount" id="ing1amount" name="ing1amount">
-            <select class="form-control" type="text" [(ngModel)]="recipeIngredientId1" id="ingredient1" name="ingredient1">
-                <option *ngFor="let i of allIngredients" value="{{i.ing_id}}">{{i.units}} of {{i.name}}</option>
-            </select>
-        </div>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <label class="input-group-text" for="ingredient2">Ingredient 2</label>
-            </div>
-            <input type="text" aria-label="Amount" class="form-control" placeholder="Amount" [(ngModel)]="ing2amount" id="ing2amount" name="ing2amount">
-            <select class="form-control" type="text" [(ngModel)]="recipeIngredientId2" id="ingredient2" name="ingredient2">
-                <option *ngFor="let i of allIngredients" value="{{i.ing_id}}">{{i.units}} of {{i.name}}</option>
-            </select>
-        </div>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <label class="input-group-text" for="ingredient3">Ingredient 3</label>
-            </div>
-            <input type="text" aria-label="Amount" class="form-control" placeholder="Amount" [(ngModel)]="ing3amount"
-                id="ing3amount" name="ing3amount">
-            <select class="form-control" type="text" [(ngModel)]="recipeIngredientId3" id="ingredient3" name="ingredient3">
-                <option *ngFor="let i of allIngredients" value="{{i.ing_id}}">{{i.units}} of {{i.name}}</option>
-            </select>
-        </div>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <label class="input-group-text" for="ingredient4">Ingredient 4</label>
-            </div>
-            <input type="text" aria-label="Amount" class="form-control" placeholder="Amount" [(ngModel)]="ing4amount"
-                id="ing4amount" name="ing4amount">
-            <select class="form-control" type="text" [(ngModel)]="recipeIngredientId4" id="ingredient4" name="ingredient4">
-                <option *ngFor="let i of allIngredients" value="{{i.ing_id}}">{{i.units}} of {{i.name}}</option>
-            </select>
-        </div>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <label class="input-group-text" for="ingredient5">Ingredient 5</label>
-            </div>
-            <input type="text" aria-label="Amount" class="form-control" placeholder="Amount" [(ngModel)]="ing5amount"
-                id="ing5amount" name="ing5amount">
-            <select class="form-control" type="text" [(ngModel)]="recipeIngredientId5" id="ingredient5" name="ingredient5">
-                <option *ngFor="let i of allIngredients" value="{{i.ing_id}}">{{i.units}} of {{i.name}}</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="titleValue">Title:</label>
-            <input class="form-control" type="text" [(ngModel)]="title" id="titleValue" name="title">
-        </div>
-        <div class="form-group">
-            <label for="cuisineValue">Cuisine:</label>
-            <input class="form-control" type="text" [(ngModel)]="cuisine" id="cuisineValue" name="cuisine">
-        </div>
-        <div class="form-group">
-            <label for="tag1Value">Tag 1:</label>
-            <input class="form-control" type="text" [(ngModel)]="tag1" id="tag1Value" name="tag1">
-        </div>
-        <div class="form-group">
-            <label for="tag2Value">Tag 2:</label>
-            <input class="form-control" type="text" [(ngModel)]="tag2" id="tag2Value" name="tag2">
+        <div class="col">
+            <form (submit)="deleteIngredient()">
+                <div>
+                    <h5>Delete an ingredient from the database</h5>
+                    <div class="form-group">
+                        <label for="ingredients">Ingredient:</label>
+                        <select class="form-control" type="text" [(ngModel)]="selectedIngredientId" id="ingredients"
+                            name="ingredients">
+                            <option></option>
+                            <option *ngFor="let i of allIngredients" value="{{i.ing_id}}">{{i.name}}</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-danger">Delete Ingredient</button>
+                </div>
+            </form>
         </div>
     </div>
-    <button type="submit" class="btn btn-primary">Add Recipe</button>
-</form>
+    
+    <div class="row">
+        <div class="col">
+            <form (submit)="addRecipe()">
+                <div>
+                    <h5>Add a new recipe to the database</h5>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="ingredient1">Ingredient 1</label>
+                        </div>
+                        <input type="text" aria-label="Amount" class="form-control" placeholder="Amount" [(ngModel)]="ing1amount" id="ing1amount" name="ing1amount">
+                        <select class="form-control" type="text" [(ngModel)]="recipeIngredientId1" id="ingredient1" name="ingredient1">
+                            <option *ngFor="let i of allIngredients" value="{{i.ing_id}}">{{i.units}} of {{i.name}}</option>
+                        </select>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="ingredient2">Ingredient 2</label>
+                        </div>
+                        <input type="text" aria-label="Amount" class="form-control" placeholder="Amount" [(ngModel)]="ing2amount" id="ing2amount" name="ing2amount">
+                        <select class="form-control" type="text" [(ngModel)]="recipeIngredientId2" id="ingredient2" name="ingredient2">
+                            <option *ngFor="let i of allIngredients" value="{{i.ing_id}}">{{i.units}} of {{i.name}}</option>
+                        </select>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="ingredient3">Ingredient 3</label>
+                        </div>
+                        <input type="text" aria-label="Amount" class="form-control" placeholder="Amount" [(ngModel)]="ing3amount"
+                            id="ing3amount" name="ing3amount">
+                        <select class="form-control" type="text" [(ngModel)]="recipeIngredientId3" id="ingredient3" name="ingredient3">
+                            <option *ngFor="let i of allIngredients" value="{{i.ing_id}}">{{i.units}} of {{i.name}}</option>
+                        </select>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="ingredient4">Ingredient 4</label>
+                        </div>
+                        <input type="text" aria-label="Amount" class="form-control" placeholder="Amount" [(ngModel)]="ing4amount"
+                            id="ing4amount" name="ing4amount">
+                        <select class="form-control" type="text" [(ngModel)]="recipeIngredientId4" id="ingredient4" name="ingredient4">
+                            <option *ngFor="let i of allIngredients" value="{{i.ing_id}}">{{i.units}} of {{i.name}}</option>
+                        </select>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="ingredient5">Ingredient 5</label>
+                        </div>
+                        <input type="text" aria-label="Amount" class="form-control" placeholder="Amount" [(ngModel)]="ing5amount"
+                            id="ing5amount" name="ing5amount">
+                        <select class="form-control" type="text" [(ngModel)]="recipeIngredientId5" id="ingredient5" name="ingredient5">
+                            <option *ngFor="let i of allIngredients" value="{{i.ing_id}}">{{i.units}} of {{i.name}}</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col">
+            <!-- end of ingredients -->
+                <div class="form-group">
+                    <label for="titleValue">Title:</label>
+                    <input class="form-control" type="text" [(ngModel)]="title" id="titleValue" name="title">
+                </div>
+                <div class="form-group">
+                    <label for="cuisineValue">Cuisine:</label>
+                    <input class="form-control" type="text" [(ngModel)]="cuisine" id="cuisineValue" name="cuisine">
+                </div>
+                <div class="form-group">
+                    <label for="tag1Value">Tag 1:</label>
+                    <input class="form-control" type="text" [(ngModel)]="tag1" id="tag1Value" name="tag1">
+                </div>
+                <div class="form-group">
+                    <label for="tag2Value">Tag 2:</label>
+                    <input class="form-control" type="text" [(ngModel)]="tag2" id="tag2Value" name="tag2">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Recipe</button>
+        </form>
+        </div>
+</div>

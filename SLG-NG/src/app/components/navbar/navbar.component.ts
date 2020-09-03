@@ -12,9 +12,11 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isYouAlfred();
   }
 
   isAlfred :boolean = false
+  url :string = "http://localhost:4200/admin"
 
   
   isYouAlfred(){
@@ -24,5 +26,10 @@ export class NavbarComponent implements OnInit {
       this.isAlfred = true
     }
   }
-  
+
+  directToAdmin(){
+    console.log("admin clicked");
+    
+  }
+
 }
