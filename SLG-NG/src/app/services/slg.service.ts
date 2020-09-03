@@ -58,6 +58,7 @@ export class SlgService {
 
   addPantryList(pantryList: Pantry[]): Observable<Pantry[]> {
     return this.http.post<Pantry[]>('http://localhost:8080/pantry', pantryList, {headers: this.headers});
+
   }
   addIngredient(ingredient :Ingredient): Observable<Ingredient> {
     return this.http.post<Ingredient>('http://localhost:8080/ingredient', ingredient, {headers: this.headers});
