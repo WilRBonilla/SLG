@@ -13,6 +13,8 @@ import { ShoppinglistComponent } from './components/shoppinglist/shoppinglist.co
 import { HomeComponent } from './components/home/home.component';
 import { PantryComponent } from './components/pantry/pantry.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { NavbarService} from './services/navbar.service';
+import { NavbarComponent } from "./components/navbar/navbar.component";
 
 import { SlgService } from './services/slg.service';
 
@@ -26,7 +28,8 @@ import { SlgService } from './services/slg.service';
     ShoppinglistComponent,
     HomeComponent,
     PantryComponent,
-    AdminComponent
+    AdminComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +37,7 @@ import { SlgService } from './services/slg.service';
     FormsModule,
     HttpClientModule
   ],
-  providers: [SlgService],
+  providers: [SlgService, NavbarService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
