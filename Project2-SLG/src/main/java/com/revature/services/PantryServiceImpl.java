@@ -18,6 +18,7 @@ public class PantryServiceImpl implements PantryService{
 	public List<Pantry> addPantry(List<Pantry> pantries) {
 		return (List<Pantry>) pr.saveAll(pantries);
 	}
+	
 	public Pantry findByP_id(int p_id) {
 		return pr.findById(p_id).get();
 	}
@@ -39,5 +40,9 @@ public class PantryServiceImpl implements PantryService{
 		Shopper user = new Shopper(); //is this a big no-no in spring? idk.
 		user.setU_id(u_id);
 		return (List<Pantry>) pr.findAllByShopper(user);
+	}
+	@Override
+	public Pantry addPantry(Pantry p) {
+		return pr.save(p);
 	}
 }

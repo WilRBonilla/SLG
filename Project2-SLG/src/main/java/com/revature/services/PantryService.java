@@ -11,5 +11,6 @@ public interface PantryService {
 	public List<Pantry> findAllByShopper(int u_id);
 	public Pantry updatePantry(Pantry p);
 	public boolean deletePantry(Pantry p);
+	public Pantry addPantry(Pantry p);
 
 }
