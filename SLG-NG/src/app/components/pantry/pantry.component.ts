@@ -22,9 +22,12 @@ export class PantryComponent implements OnInit {
   pantryList: Array<Pantry> = [];
   foodName: string;
   foodAmount: number;
+  user : Shopper;
 
   displayPantry() {
-    this.slgService.getPantryByUser(15).subscribe(
+    this.user = JSON.parse(localStorage.getItem("user"));
+
+    this.slgService.getPantryByUser(this.user.u_id).subscribe(
       (response) => {
         this.pantryList = response;
       }
@@ -39,7 +42,7 @@ export class PantryComponent implements OnInit {
   updateFoodItem() {
     this.selectedPantryItem.amount = this.foodAmount;
     console.log(this.selectedPantryItem);
-    this.slgService.updatePantry(this.selectedPantryItem.p_id, this.selectedPantryItem);
+    this.slgService.updatePantry(this.selectedPantryItem.p_id, this.selectedPantryItem).subscribe();
   }
 
   removeFoodItem() {

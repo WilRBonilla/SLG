@@ -1,73 +1,93 @@
 <div class="div">
-  <div class=container-fluid
-  style="color:white; border: 2px solid; background-color:  #39b7c0">
-  <h1 style="font-size:48px;font-style:bold; padding: 40px 70px">Recipes</h1>
-  </div>
-  
-  
-  <div class="container" id="myGroup">
-    <p>
-        <a class="btn btn-primary" data-toggle="collapse" href="#collapser" role="button" aria-expanded="false" aria-controls="collapseExample" style="margin:30px; width:220px">
-            Search By Description 
-        </a>
-        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2" style="margin:30px; width:220px">
-            Search By Name 
-        </button>
-    </p>
-  
-    <div class="collapse" id="collapser" data-parent="#myGroup" text-center>
-     <div class="card-body">
-              <div class="container-fluid mb-3">
-            <div class="row">
-              <div class="row mb-3 mt-3 ml-3">
-                <div id="search">
-                <form class="form-inline">
-                  <label class="form-control-label mr-2" for="recipecuisine">Enter Description:</label>
-                    <input class="form-control mr-2" [(ngModel)]="cuisine" name="cuis" type = "text" id="recipecuisine" placeholder="eg. Spicy, Italian">
-                    <button class="btn btn-primary mr-2" (click)="recipeResults()" id="searchCuisine" type="submit" style="width:200px">Search ⮞</button>
-                </form>
-            </div></div>
-            </div></div>
-            </div></div>
-    <div class="collapse" id="collapseExample2" data-parent="#myGroup">
-      <div class="card-body">
-        <div class="container-fluid mb-3">
-      <div class="row">
-        <div class="row mb-3 mt-3 ml-3">
-          <div id="search">
-          <form class="form-inline">
-            <label class="form-control-label mr-2" for="recipename">Desired Recipe:</label>
-              <input class="form-control mr-2" [(ngModel)]="name" name="searchname" type = "text" id="recipename" >
-              <button class="btn btn-primary mr-2" (click)="nameResults()" id="searchName" type="submit" style="width:200px">Search ⮞</button>
-          </form>
-      </div></div>
-      </div></div>
-      </div></div>
-    </div>
-   
-      <h3>Results</h3>
-     <div class="container-fluid">
-          <table class="table table-striped table-hover">
-        <tr>
-          <th>Recipe</th>
-          <th>Cuisine</th>
-          <th>Description</th>
-        </tr>
-        <tbody id="RecipeResults">
-        <tr></tr>
-        </tbody>
-          </table><br>
-       <h3>My Selections</h3>
-          <div class="container-fluid">
-          <table class="table table-striped table-hover">
-                 <tr>
-                     <th>Recipe</th>
-                     <th>Cuisine</th>
-                     <th>Description</th>
-                 </tr>
-                 <tbody id="RecipeSeletions">
-                 <tr></tr>
-                 </tbody>
-             </table><br>
-             <button class="btn btn-primary mr-2" id="addList" type="submit" style="width:200px">Add all to Shopping List</button>
-            </div></div></div>
+<div class=container-fluid
+style="color:white; border: 2px solid; background-color:  #39b7c0">
+<h1 style="font-size:48px;font-style:bold; padding: 40px 70px">Recipes</h1>
+</div>
+
+    <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0">
+            <a class="text-dark" href="#namesearch" style="padding: 10px 60px" data-toggle="collapse">Search By Recipe Name ➜</a></h5>
+        </div>
+        <div id="namesearch"class="collapse">
+          <div class="card-body">
+            <div class="container-fluid mb-3">
+          <div class="row">
+            <div class="row mb-3 mt-3 ml-3">
+              <div id="search">
+              <form class="form-inline">
+                <label class="form-control-label mr-2" for="recipename">Desired Recipe:</label>
+                  <input class="form-control mr-2" [(ngModel)]="name" name="searchname" type = "text" id="recipename" >
+                  <button class="btn btn-primary mr-2" (click)="recipeResults()" id="searchName" type="submit" style="width:200px">Search</button>
+              </form>
+          </div></div>
+          </div></div>
+          </div></div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0">
+            <a class="text-dark" href="#cuisinesearch" style="padding: 10px 60px" data-toggle="collapse">Search By Cuisine ➜</a></h5>
+        </div>
+        <div id="cuisinesearch"class="collapse">
+          <div class="card-body">
+            <div class="container-fluid mb-3">
+          <div class="row">
+            <div class="row mb-3 mt-3 ml-3">
+              <div id="search">
+              <form class="form-inline">
+                <label class="form-control-label mr-2" for="recipecuisine">Cuisine:</label>
+                  <input class="form-control mr-2" [(ngModel)]="cuisine" name="cuis" type = "text" id="recipecuisine" >
+                  <button class="btn btn-primary mr-2" (click)="recipeResults()" id="searchCuisine" type="submit" style="width:200px">Search</button>
+              </form>
+          </div></div>
+          </div></div>
+          </div></div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0">
+            <a class="text-dark" href="#tagsearch" style="padding: 10px 60px" data-toggle="collapse">Search By Tag ➜</a></h5>
+        </div>
+        <div id="tagsearch"class="collapse">
+          <div class="card-body">
+            <div class="container-fluid mb-3">
+          <div class="row">
+            <div class="row mb-3 mt-3 ml-3">
+              <div id="search">
+              <form class="form-inline">
+                <label class="form-control-label mr-2" for="tag1">Tags:</label>
+                  <input class="form-control mr-2" [(ngModel)]="tag1" name="first" type = "text" id="tag1" placeholder="e.g. Spicy" >
+                  <input class="form-control mr-2" [(ngModel)]="tag2" name="second" type = "text" id="tag2">
+                  <button class="btn btn-primary mr-2" (click)="recipeResults()" id="searchTags" type="submit" style="width:200px">Search</button>
+              </form>
+          </div></div>
+          </div></div>
+          </div></div>
+      </div>
+  	<h3>Results</h3>
+	 <div class="container-fluid">
+        <table class="table table-striped table-hover">
+			<tr>
+				<th>Recipe</th>
+				<th>Cuisine</th>
+				<th>Description</th>
+			</tr>
+			<tbody id="RecipeResults">
+			<tr></tr>
+			</tbody>
+        </table><br>
+     <h3>My Selections</h3>
+        <div class="container-fluid">
+        <table class="table table-striped table-hover">
+               <tr>
+                   <th>Recipe</th>
+                   <th>Cuisine</th>
+                   <th>Description</th>
+               </tr>
+               <tbody id="RecipeSeletions">
+               <tr></tr>
+               </tbody>
+           </table><br>
+           <button class="btn btn-primary mr-2" id="addList" type="submit" style="width:200px">Add all to Shopping List</button>
+          </div></div></div>

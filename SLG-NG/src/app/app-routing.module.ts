@@ -6,7 +6,8 @@ import { ShoppinglistComponent } from './components/shoppinglist/shoppinglist.co
 import { HomeComponent } from './components/home/home.component';
 import { PantryComponent} from './components/pantry/pantry.component';
 import { AdminComponent } from './components/admin/admin.component';
-import { LoginComponent } from './components/login/login.component'
+import { LoginComponent } from './components/login/login.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 const routes: Routes = [
   {path: 'stock', component: StockComponent},
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path: 'pantry', component: PantryComponent},
   {path: 'admin', component: AdminComponent},
   {path: 'login', component: LoginComponent},
+  {path: 'navbar', component: NavbarComponent},
   {path : '', redirectTo: '/login', pathMatch :'full'}
 ];
 

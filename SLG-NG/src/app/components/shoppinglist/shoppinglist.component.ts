@@ -24,6 +24,7 @@ export class ShoppinglistComponent implements OnInit {
   shoppingList: Array<ShoppingListEntry>;
   purchaseList: Array<Pantry> = [];
   selected: boolean;
+  notes: string;
 
   // Example fake data for funzies
   // sl: ShoppingListEntry = new ShoppingListEntry(

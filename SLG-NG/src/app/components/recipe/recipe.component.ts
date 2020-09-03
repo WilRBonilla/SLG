@@ -38,19 +38,12 @@ recipeResults(){
   } else {
     this.search= undefined;
   }
+  console.log(this.search);
   this.rservice.getRecipeResults(this.search).subscribe(
     (response)=> {
       console.log(response);
 
     }
   )
-}
-nameResults(){
-  this.rservice.getResultsByName(this.name).subscribe(
-    (response)=> {
-      console.log(response);
-    }
-  )
-
 }
 }

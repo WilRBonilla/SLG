@@ -10,16 +10,9 @@ export class HomeComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.onHomepageLoad()
+    
   }
 
-  username :String= ""
-
-  onHomepageLoad(){
-    let  currentUser = JSON.parse(localStorage.getItem("user"));
-    console.log(currentUser);
-    this.username = currentUser.f_name
-    console.log(this.username);
-  }
+  username :String= "USERNAME HERE"
 
 }
