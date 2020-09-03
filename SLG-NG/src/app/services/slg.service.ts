@@ -38,6 +38,10 @@ export class SlgService {
     return this.http.get<Ingredient[]>('http://localhost:8080/ingredient');
   }
 
+  getIngredient(ing_id: number):Observable<Ingredient> {
+    return this.http.get<Ingredient>('http://localhost:8080/ingredient/' + ing_id);
+  }
+
 
   // -------------------------PANTRY SERVICES--------------------------------------------------------------------
   getPantryByUser(uid: number): Observable<Pantry[]>{
@@ -63,6 +67,10 @@ export class SlgService {
   addIngredient(ingredient :Ingredient): Observable<Ingredient> {
     return this.http.post<Ingredient>('http://localhost:8080/ingredient', ingredient, {headers: this.headers});
 
+  }
+
+  addPantryItem(pantry: Pantry): Observable<Pantry> {
+    return this.http.post<Pantry>('http://localhost:8080/singlepantry', pantry, {headers: this.headers});
   }
 
   deleteIngredient(ingId: number): Observable<Ingredient>{
@@ -102,6 +110,10 @@ export class SlgService {
   // -----------------------------END SHOPPING LIST ENTRY SERVICES-----------------------------------------------------
 
   // -----------------------------SHOPPER SERVICES --------------------------------------------------------------------
+
+  getShopper(uid: number): Observable<Shopper> {
+    return this.http.get<Shopper>('http://localhost:8080/shopper/' + uid);
+  }
 
   // -----------------------------END SHOPPER SERVICES ----------------------------------------------------------------
 
