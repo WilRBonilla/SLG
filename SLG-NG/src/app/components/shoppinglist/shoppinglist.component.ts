@@ -16,21 +16,28 @@ export class ShoppinglistComponent implements OnInit {
 
   ngOnInit(): void {
     this.customItems = JSON.parse(localStorage.getItem('customItems'));
+    this.pantryListLoad();
     if(this.customItems == null){
       this.shoppingListLoad();
+    } else {
+      this.shoppingListLoad(this.customItems);
     }
-    this.shoppingListLoad(this.customItems);
   }
 
   ing: Ingredient;
 
   note: Note = new Note(1, 'TEST NOTES');
-  shoppingList: Array<ShoppingListEntry>;
+  // Necessary Arrays
+  pantryList: Array<Pantry> = [];
+  shoppingList: Array<ShoppingListEntry> = [];
   purchaseList: Array<Pantry> = [];
   customItems: Array<ShoppingListEntry> = [];
+  outPantry: Array<Pantry> = [];
+
+
   selected: boolean;
   notes: string = "";
-  globalUser = JSON.parse(localStorage.getItem('user'));
+  globalUser: Shopper = JSON.parse(localStorage.getItem('user'));
 
   // Example fake data for funzies
   // sl: ShoppingListEntry = new ShoppingListEntry(
@@ -41,14 +48,15 @@ export class ShoppinglistComponent implements OnInit {
   //   this.note
   // );
   
+  
 
+// Working
   shoppingListLoad(custom?: Array<ShoppingListEntry>) {
     let saveduser = JSON.parse(localStorage.getItem('user'));
 
     this.slservice
       .getUserShoppingListEntries(saveduser.u_id)
       .subscribe((response) => {
-        console.log(response);
         this.shoppingList = response;
         if(custom != null){
           this.shoppingList = this.shoppingList.concat(custom);
@@ -56,9 +64,11 @@ export class ShoppinglistComponent implements OnInit {
         
       });
   }
+  // When an item is clicked, we add it to a list of items we intend to purchase.
   purchaseItem(entry :ShoppingListEntry){
     let ingred = entry.ingredient;
-    let pantryEntry = new Pantry(9000000, JSON.parse(localStorage.getItem('user')), ingred, entry.amount)
+
+    let pantryEntry = new Pantry(9000000, this.globalUser, ingred, entry.amount)
 
     if(this.purchaseList.length == 0){
       this.purchaseList.push(pantryEntry)
@@ -72,14 +82,12 @@ export class ShoppinglistComponent implements OnInit {
         }
         
       }
+      console.log("SELECTED ITEM");
+      console.log(this.purchaseList);
+      console.log(this.pantryList);
     }
-
-    
-    
-    
-    
-    console.log(this.purchaseList);
   }
+  // Adds custom item.
   addCustom(){
     if(this.notes != ""){
       this.customItems = JSON.parse(localStorage.getItem("customItems"));
@@ -102,10 +110,73 @@ export class ShoppinglistComponent implements OnInit {
     });
   }
 
+  
+
+// Functions dealing with the pantrylist
+  pantryListLoad(){
+    this.slservice.getPantryByUser(this.globalUser.u_id)
+    .subscribe(
+      (response) => {
+        this.pantryList = response;
+        // this.outPantry = response;
+        console.log("PANTRY LIST FROM DB: ");
+        console.log(this.pantryList);
+      }
+
+
+    )
+  }
+
+
   purchase(){
     localStorage.removeItem("customItems");
+    // Pantrylist shouldn't be changing, but it is.
+    console.log("Pantry List");
+    console.log(this.pantryList);
+    console.log("Output Pantry");
+    // this.outPantry = this.pantryList.slice();
+    
+    // console.log(this.outPantry);
+   for (let index = 0; index < this.pantryList.length; index++) {
+      this.outPantry.push(this.pantryList[index]);
+     
+   }
+   console.log(this.outPantry);
+    
+    
 
+    // For every item we intend to purchase,
+    for (let j = 0; j < this.purchaseList.length; j++) {
+
+      // Search every item in the pantry
+      for (let i = 0; i < this.pantryList.length; i++) {
+        
+
+        if(this.pantryList[i].ingredient.name == this.purchaseList[j].ingredient.name){
+              console.log("If ING FOUND, ADD AMT: ")
+              console.log(this.pantryList[i].ingredient.name)
+              this.outPantry[i].amount = (this.pantryList[i].amount + this.purchaseList[j].amount);
+              console.log(this.pantryList[i].amount);
+              break; // stops searching pantry the rest of the pantry if item is found.
+            } 
+        else if(this.pantryList[i].ingredient.name != this.purchaseList[j].ingredient.name && i == (this.pantryList.length-1)){
+          console.log("ING NOT FOUND, CREATING PANTRY ENTRY")
+          // console.log(this.pantryList[i].ingredient.name)
+          this.outPantry.push(this.purchaseList[j]);
+          break;
+        }
+
+      }
+      
+    
+    }
+    console.log("AFTER FORLOOPS PANTRY LIST FROM DB");
+    console.log(this.pantryList);
+    console.log("SENDING PANTRYLIST TO DB: ")
+    console.log(this.outPantry);
   }
+
+
 
 
 
