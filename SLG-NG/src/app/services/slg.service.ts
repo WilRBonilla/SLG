@@ -122,10 +122,6 @@ export class SlgService {
    // -----------------------------RECIPE INGREDIENT SERVICES ---------------------------------------------------------------------
 
 
-  // addRecipe(recipe: Recipe): Observable<Recipe> {
-  //   return this.http.post<Recipe>('http://localhost:8080/recipe', recipe, { headers: this.headers });
-  // }
-
   addRecipeIngredient(recipeIngredient: RecipeIngredient): Observable<RecipeIngredient> {
     return this.http.post<RecipeIngredient>('http://localhost:8080/recipeingredient', recipeIngredient, { headers: this.headers });
   }

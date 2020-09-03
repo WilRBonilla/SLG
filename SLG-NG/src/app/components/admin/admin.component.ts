@@ -43,9 +43,6 @@ export class AdminComponent implements OnInit {
   newRecipeId: number = null;
   addedRecipe: Recipe = null;
 
-
-  
-
   getAllIngredients(){
     this.slgService.getAllIngredients().subscribe(
       (response) => {
@@ -110,14 +107,13 @@ export class AdminComponent implements OnInit {
 
   addRecipe(){
     console.log("inside add recipe");
-    let addedRecipe = new Recipe(this.recipeId, this.title, this.cuisine, this.tag1, this.tag2)
-    this.slgService.addRecipe(addedRecipe).subscribe(
+    let newRecipe = new Recipe(this.recipeId, this.title, this.cuisine, this.tag1, this.tag2)
+    this.addedRecipe = newRecipe
+    this.slgService.addRecipe(this.addedRecipe).subscribe(
       (response) => {
-        console.log("1",this.recipeIngredientId1);
-        console.log("2",this.recipeIngredientId2);
-        console.log("3",this.recipeIngredientId3);
         console.log("Recipe successfully added");
         console.log(response);
+        this.addedRecipe = response
         this.newRecipeId = response.r_id
       }, 
       (response) => {
@@ -138,13 +134,14 @@ export class AdminComponent implements OnInit {
     this.addRecipeIngredient4();
     this.addRecipeIngredient5();
   }
+
+  findIngredientFromArray(ingId){
+    return this.allIngredients.find(i => i.ing_id == ingId)
+  }
   
   addRecipeIngredient1(){
-    let specificIngredient = this.allIngredients[this.recipeIngredientId1]
+    let specificIngredient = this.findIngredientFromArray(this.recipeIngredientId1)
     let newIngredient = new Ingredient(specificIngredient.ing_id, specificIngredient.name, specificIngredient.units)
-
-    this.getAllRecipes();
-    let specificRecipe = this.allRecipes[this.newRecipeId]
 
     this.slgService.addRecipeIngredient(new RecipeIngredient(77, newIngredient, this.addedRecipe, this.ing1amount)).subscribe(
       (response) => {
@@ -158,11 +155,8 @@ export class AdminComponent implements OnInit {
   }
 
   addRecipeIngredient2() {
-    let specificIngredient = this.allIngredients[this.recipeIngredientId2]
+    let specificIngredient = this.findIngredientFromArray(this.recipeIngredientId2)
     let newIngredient = new Ingredient(specificIngredient.ing_id, specificIngredient.name, specificIngredient.units)
-
-    this.getAllRecipes();
-    let specificRecipe = this.allRecipes[this.newRecipeId]
 
     this.slgService.addRecipeIngredient(new RecipeIngredient(78, newIngredient, this.addedRecipe, this.ing2amount)).subscribe(
       (response) => {
@@ -176,11 +170,8 @@ export class AdminComponent implements OnInit {
   }
 
   addRecipeIngredient3() {
-    let specificIngredient = this.allIngredients[this.recipeIngredientId3]
+    let specificIngredient = this.findIngredientFromArray(this.recipeIngredientId3)
     let newIngredient = new Ingredient(specificIngredient.ing_id, specificIngredient.name, specificIngredient.units)
-
-    this.getAllRecipes();
-    let specificRecipe = this.allRecipes[this.newRecipeId]
 
     this.slgService.addRecipeIngredient(new RecipeIngredient(79, newIngredient, this.addedRecipe, this.ing3amount)).subscribe(
       (response) => {
@@ -195,11 +186,9 @@ export class AdminComponent implements OnInit {
 
 
   addRecipeIngredient4() {
-    let specificIngredient = this.allIngredients[this.recipeIngredientId4]
+    let specificIngredient = this.findIngredientFromArray(this.recipeIngredientId4)
     let newIngredient = new Ingredient(specificIngredient.ing_id, specificIngredient.name, specificIngredient.units)
 
-    this.getAllRecipes();
-    let specificRecipe = this.allRecipes[this.newRecipeId]
 
     this.slgService.addRecipeIngredient(new RecipeIngredient(80, newIngredient, this.addedRecipe, this.ing4amount)).subscribe(
       (response) => {
@@ -213,11 +202,8 @@ export class AdminComponent implements OnInit {
   }
 
   addRecipeIngredient5() {
-    let specificIngredient = this.allIngredients[this.recipeIngredientId5]
+    let specificIngredient = this.findIngredientFromArray(this.recipeIngredientId5)
     let newIngredient = new Ingredient(specificIngredient.ing_id, specificIngredient.name, specificIngredient.units)
-
-    this.getAllRecipes();
-    let specificRecipe = this.allRecipes[this.newRecipeId]
 
     this.slgService.addRecipeIngredient(new RecipeIngredient(81, newIngredient, this.addedRecipe, this.ing5amount)).subscribe(
       (response) => {
