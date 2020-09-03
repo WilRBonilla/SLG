@@ -15,7 +15,11 @@ export class ShoppinglistComponent implements OnInit {
   constructor(private slservice: SlgService) {}
 
   ngOnInit(): void {
-    this.shoppingListLoad();
+    this.customItems = JSON.parse(localStorage.getItem('customItems'));
+    if(this.customItems == null){
+      this.shoppingListLoad();
+    }
+    this.shoppingListLoad(this.customItems);
   }
 
   ing: Ingredient;
@@ -23,7 +27,10 @@ export class ShoppinglistComponent implements OnInit {
   note: Note = new Note(1, 'TEST NOTES');
   shoppingList: Array<ShoppingListEntry>;
   purchaseList: Array<Pantry> = [];
+  customItems: Array<ShoppingListEntry> = [];
   selected: boolean;
+  notes: string = "";
+  globalUser = JSON.parse(localStorage.getItem('user'));
 
   // Example fake data for funzies
   // sl: ShoppingListEntry = new ShoppingListEntry(
@@ -35,16 +42,18 @@ export class ShoppinglistComponent implements OnInit {
   // );
   
 
-  shoppingListLoad() {
+  shoppingListLoad(custom?: Array<ShoppingListEntry>) {
     let saveduser = JSON.parse(localStorage.getItem('user'));
-    console.log('SHOPPING LIST COMPONENT');
-    console.log(saveduser);
 
     this.slservice
       .getUserShoppingListEntries(saveduser.u_id)
       .subscribe((response) => {
         console.log(response);
         this.shoppingList = response;
+        if(custom != null){
+          this.shoppingList = this.shoppingList.concat(custom);
+        }
+        
       });
   }
   purchaseItem(entry :ShoppingListEntry){
@@ -56,7 +65,7 @@ export class ShoppinglistComponent implements OnInit {
     } else {
       for (let index = 0; index < this.purchaseList.length; index++) {
 
-        if(entry.ingredient.ing_id == this.purchaseList[index].ingredient.ing_id){
+        if(entry.ingredient.name == this.purchaseList[index].ingredient.name){
           break;
         } else if ( index == this.purchaseList.length-1){
           this.purchaseList.push(pantryEntry);
@@ -64,10 +73,38 @@ export class ShoppinglistComponent implements OnInit {
         
       }
     }
+
+    
     
     
     
     console.log(this.purchaseList);
+  }
+  addCustom(){
+    if(this.notes != ""){
+      this.customItems = JSON.parse(localStorage.getItem("customItems"));
+      if(this.customItems == null){
+        this.customItems = [];
+      }
+      let customIngredient = new Ingredient(90000, this.notes, "number");
+      let customEntry = new ShoppingListEntry(9000, customIngredient, this.globalUser, 1);
+      this.customItems.push(customEntry);
+      localStorage.setItem("customItems", JSON.stringify(this.customItems));
+      this.shoppingList.push(customEntry);
+      console.log(this.shoppingList)
+    }
+      
+  }
+
+  selectAll(){
+    this.shoppingList.forEach(e => { 
+      this.purchaseItem(e);
+    });
+  }
+
+  purchase(){
+    localStorage.removeItem("customItems");
+
   }
 
 
