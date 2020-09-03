@@ -133,8 +133,8 @@ getShopper(uid: number): Observable<Shopper> {
   addRecipe(recipe: Recipe): Observable<Recipe> {
     return this.http.post<Recipe>('http://localhost:8080/recipe', recipe, { headers: this.headers });
   }
-  getResultsByName(name): Observable <Recipe[]>{
-    return this.http.get<Recipe[]>('http://localhost:8080/recipe/'+name);
+  getResultsByName(name): Observable <Recipe>{
+    return this.http.get<Recipe>('http://localhost:8080/recipe/'+name);
   }
   
 
