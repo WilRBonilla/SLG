@@ -106,7 +106,7 @@ INSERT INTO RECIPE VALUES(15, 'Veggie Risotto', 'italian', 'vegan', 'easy');
 
 /*Chicken Parmesan*/
 INSERT INTO ingredient VALUES (1, 'Chicken Breast', 'number');
-INSERT INTO ingredient VALUES (2, 'Eggs', 'number');
+INSERT INTO ingredient VALUES (2, 'Eggs', '');
 INSERT INTO ingredient VALUES (3, 'Breadcrumbs', 'ounces');
 INSERT INTO ingredient VALUES (4, 'Flour', 'cups');
 INSERT INTO ingredient VALUES (5, 'Tomato Sauce', 'ounces');
@@ -114,45 +114,45 @@ INSERT INTO ingredient VALUES (6, 'Parmesan', 'ounces');
 /* Enchiladas*/
 INSERT INTO ingredient VALUES (7, 'Ground Beef', 'ounces');
 INSERT INTO ingredient VALUES (8, 'Salsa', 'ounces');
-INSERT INTO ingredient VALUES (9, 'Tortillas', 'number');
+INSERT INTO ingredient VALUES (9, 'Tortillas', '');
 INSERT INTO ingredient VALUES (10, 'Cheese', 'ounces');
 /* Tomato Sauce */
 /* Cheese Steak*/ 
-INSERT INTO ingredient VALUES (11, 'Onion', 'number');
-INSERT INTO ingredient VALUES (12, 'Bell Pepper', 'number');
+INSERT INTO ingredient VALUES (11, 'Onion', '');
+INSERT INTO ingredient VALUES (12, 'Bell Pepper', '');
 INSERT INTO ingredient VALUES (13, 'Steak', 'ounces');
-INSERT INTO ingredient VALUES (14, 'Long Roll', 'number');
+INSERT INTO ingredient VALUES (14, 'Hoagie Roll', '');
 /* Cheese */
 /* Moussaka */
 INSERT INTO ingredient VALUES (15, 'Eggplant', 'ounces');
 INSERT INTO ingredient VALUES (16, 'Lamb', 'ounces');
-INSERT INTO ingredient VALUES (17, 'Red Wine', 'ounces');
-INSERT INTO ingredient VALUES (18, 'Potatoes', 'number');
+INSERT INTO ingredient VALUES (17, 'Red Wine', 'tbsp');
+INSERT INTO ingredient VALUES (18, 'Potatoes', '');
 /* Onion */
 /* Vegetable Biryani  */
-INSERT INTO ingredient VALUES (19, 'Garlic', 'ounces');
-INSERT INTO ingredient VALUES (20, 'Rice', 'ounces');
+INSERT INTO ingredient VALUES (19, 'Garlic', 'cloves');
+INSERT INTO ingredient VALUES (20, 'Rice', 'cups');
 INSERT INTO ingredient VALUES (21, 'Chickpeas', 'ounces');
-INSERT INTO ingredient VALUES (22, 'Veggie Stock', 'ounces');
+INSERT INTO ingredient VALUES (22, 'Veggie Stock', 'cups');
 /* Onion
 /* Fettuccine Alfredo*/
-INSERT INTO ingredient VALUES (23, 'Butter', 'ounces');
+INSERT INTO ingredient VALUES (23, 'Butter', 'tbsp');
 INSERT INTO ingredient VALUES (24, 'Cream', 'ounces');
 INSERT INTO ingredient VALUES (25, 'Pasta', 'ounces');
-INSERT INTO ingredient VALUES (26, 'Parsley', 'ounces');
+INSERT INTO ingredient VALUES (26, 'Parsley', 'tbsp');
 /* Parmesan Cheese */ 
 
 /*Shrimp Scampi*/
 
 INSERT INTO ingredient VALUES (27, 'Shrimp', 'ounces');
-INSERT INTO ingredient VALUES (28, 'White Wine', 'ounces');
-INSERT INTO ingredient VALUES (29, 'Lemon', 'ounces');
+INSERT INTO ingredient VALUES (28, 'White Wine', 'tbsp');
+INSERT INTO ingredient VALUES (29, 'Lemon', '');
 /*Butter, Garlic*/
 
 /*Apple Pie*/
-INSERT INTO ingredient VALUES (30, 'Brown Sugar', 'ounces');
-INSERT INTO ingredient VALUES (31, 'Apples', 'number');
-INSERT INTO ingredient VALUES (32, 'Cinnamon', 'ounces');
+INSERT INTO ingredient VALUES (30, 'Brown Sugar', 'tbsp');
+INSERT INTO ingredient VALUES (31, 'Apples', '');
+INSERT INTO ingredient VALUES (32, 'Cinnamon', 'tbsp');
 
 /*Flour, Butter*/
 
@@ -166,26 +166,26 @@ INSERT INTO ingredient VALUES (33, 'Lettuce', 'ounces');
 
 /*Tres Leches
 Flour, Butter, Cream*/
-INSERT INTO ingredient VALUES (34, 'Sugar', 'ounces');
-INSERT INTO ingredient VALUES (35, 'Milk', 'ounces');
+INSERT INTO ingredient VALUES (34, 'Sugar', 'tbsp');
+INSERT INTO ingredient VALUES (35, 'Milk', 'cups');
 
 /*Lobster Roll
 Long Roll, Butter, Lettuce*/
 INSERT INTO ingredient VALUES (36, 'Lobster', 'ounces');
-INSERT INTO ingredient VALUES (37, 'Mayonnaise', 'ounces');
+INSERT INTO ingredient VALUES (37, 'Mayonnaise', 'tbsp');
 
 /*Shrimp Gumbo
   Onion, Shrimp, Rice,*/
 INSERT INTO ingredient VALUES (38, 'Okra', 'ounces');
-INSERT INTO ingredient VALUES (39, 'Chicken Stock', 'ounces'); 
+INSERT INTO ingredient VALUES (39, 'Chicken Stock', 'cups'); 
 
 /*Szechuan Chicken
 Chicken Breast, onion, bell pepper, garlic*/
-INSERT INTO ingredient VALUES (40, 'Red Chilies', 'number');
+INSERT INTO ingredient VALUES (40, 'Red Chilies', '');
 
 /*Veggie Risotto
 Veggie Stock,Bell Pepper, Rice, White Wine */
-INSERT INTO ingredient VALUES (41, 'Asparagus', 'number');
+INSERT INTO ingredient VALUES (41, 'Asparagus', '');
 
 ----------------------RECIPE_INGREDIENT-------------------------
 --Chicken Parm
@@ -222,9 +222,9 @@ INSERT INTO recipe_ingredient VALUES (21, 11, 4, 1);
 -- Vegetable Biryani 
 --Garlic, Rice, ChickPeas, Veggie Stock, Onion
 INSERT INTO recipe_ingredient VALUES (22, 19, 5, 2);
-INSERT INTO recipe_ingredient VALUES (23, 20, 5, 8);
+INSERT INTO recipe_ingredient VALUES (23, 20, 5, 4);
 INSERT INTO recipe_ingredient VALUES (24, 21, 5, 6);
-INSERT INTO recipe_ingredient VALUES (25, 22, 5, 12);
+INSERT INTO recipe_ingredient VALUES (25, 22, 5, 2);
 INSERT INTO recipe_ingredient VALUES (26, 11, 5, 1);
 
 --Fettuccine Alfredo
@@ -249,13 +249,13 @@ INSERT INTO recipe_ingredient VALUES (37, 30, 8, 5);
 INSERT INTO recipe_ingredient VALUES (38, 31, 8, 6);
 INSERT INTO recipe_ingredient VALUES (39, 32, 8, 1);
 INSERT INTO recipe_ingredient VALUES (40, 23, 8, 4);
-INSERT INTO recipe_ingredient VALUES (41, 19, 8, 3);
+INSERT INTO recipe_ingredient VALUES (41, 4, 8, 2);
 
 --Burritos
 --Lettuce, Steak, Rice, Cheese, Salsa
 INSERT INTO recipe_ingredient VALUES (42, 33, 9, 3);
 INSERT INTO recipe_ingredient VALUES (43, 13, 9, 6);
-INSERT INTO recipe_ingredient VALUES (44, 20, 9, 6);
+INSERT INTO recipe_ingredient VALUES (44, 20, 9, 2);
 INSERT INTO recipe_ingredient VALUES (45, 10, 9, 2);
 INSERT INTO recipe_ingredient VALUES (46, 8, 9, 3);
 
@@ -281,16 +281,16 @@ INSERT INTO recipe_ingredient VALUES (56, 24, 11, 4);
 INSERT INTO recipe_ingredient VALUES (57, 36, 12, 8);
 INSERT INTO recipe_ingredient VALUES (58, 37, 12, 2);
 INSERT INTO recipe_ingredient VALUES (59, 14, 12, 2);
-INSERT INTO recipe_ingredient VALUES (60, 23, 12, 4);
+INSERT INTO recipe_ingredient VALUES (60, 23, 12, 2);
 INSERT INTO recipe_ingredient VALUES (61, 33, 12, 3);
 
 --Shrimp Gumbo
 --Okra, Chicken Stock, Onion, Shrimp, Rice,
 INSERT INTO recipe_ingredient VALUES (62, 38, 13, 4);
-INSERT INTO recipe_ingredient VALUES (63, 39, 13, 12);
+INSERT INTO recipe_ingredient VALUES (63, 39, 13, 2);
 INSERT INTO recipe_ingredient VALUES (64, 11, 13, 2);
 INSERT INTO recipe_ingredient VALUES (65, 27, 13, 5);
-INSERT INTO recipe_ingredient VALUES (66, 20, 13, 6);
+INSERT INTO recipe_ingredient VALUES (66, 20, 13, 3);
 
 --Szechuan Chicken
 -- Red Chilies, Chicken Breast, Onion, Bell Pepper, Garlic
@@ -303,9 +303,9 @@ INSERT INTO recipe_ingredient VALUES (71, 19, 14, 3);
 --Veggie Risotto
 --Asparagus, Veggie Stock, Bell Pepper, Rice, White Wine
 INSERT INTO recipe_ingredient VALUES (72, 41, 15, 5);
-INSERT INTO recipe_ingredient VALUES (73, 22, 15, 12);
+INSERT INTO recipe_ingredient VALUES (73, 22, 15, 2);
 INSERT INTO recipe_ingredient VALUES (74, 12, 15, 3);
-INSERT INTO recipe_ingredient VALUES (75, 20, 15, 8);
+INSERT INTO recipe_ingredient VALUES (75, 20, 15, 4);
 INSERT INTO recipe_ingredient VALUES (76, 28, 15, 5);
 
 -------------------------------Shoppers----------------------------------
