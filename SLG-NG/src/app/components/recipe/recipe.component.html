@@ -4,8 +4,7 @@
   style=" text-align:left; color:white; border: 2px solid; background-color:  #45c3cc">
   <h1 style="font-size:65px;font-style:bold; padding: 40px 70px">Recipes</h1>
   </div>
-  
-  
+
   <div class="container" id="myGroup">
     <p>
         <a class="btn btn-info" data-toggle="collapse" href="#collapser" role="button" aria-expanded="false" aria-controls="collapseExample" style="margin:30px; padding:15px 40px; width:250px">
@@ -35,7 +34,8 @@
         
     </div></div>
     </div>
-    <!-- <h3>Results</h3> -->
+
+    <h3 [innerHTML]="sTitle"></h3>
     <div class="card-deck" >
       <div class="card" *ngFor="let r of resultList">
         <div class="card-header">
@@ -43,25 +43,24 @@
         </div>
         <div class="card-body">
           <p class="card-text">{{ r.cuisine }}</p>
-          <p style="visibility: hidden;" [(ngModel)]="rid" >{{r.r_id}}</p>
           <p class="card-text"><small class="text-muted">#{{ r.tag1 }}  &nbsp;&nbsp;  #{{ r.tag2 }}</small></p>
-          <button id="{{r.r_id}}"(click)="addToSelections()" [innerHTML]="added" class="card-link" style="background:none;border:none"></button>
+
+          <button (click)="addToSelections(r)" class="card-link" style="color:darkblue; background:none;border:none">&#43; Add to Shopping List"</button>
+          <button (click)="getRecipeIngredients(r)" class="card-link" style="color:darkblue; background:none;border:none">Show Ingredients</button>
         </div>
       </div>
     </div><br>
-     
-   
-       <h3>My Selections</h3>
-          <div class="container-fluid">
-          <table class="table table-striped table-hover">
-                 <tr>
-                     <th>Recipe</th>
-                     <th>Cuisine</th>
-                     <th>Description</th>
-                 </tr>
-                 <tbody id="RecipeSeletions">
-                 <tr></tr>
-                 </tbody>
-             </table><br>
+    <div class="card-deck" >
+      <div class="card" *ngFor="let r of selectList">
+        <div class="card-header">
+          {{ r.title }}
+        </div>
+        <div class="card-body">
+          <button (click)="addToShoppingList(r)"class="card-link" style=" background:none;border:none">✔️ Added</button>
+          <button (click)="addToSelections(r)" class="card-link" style="color:darkblue; background:none;border:none">Double this Recipe</button>
+
+        </div>
+      </div>
+    </div><br>
              <button class="btn btn-primary mr-2" id="addList" type="submit" style="width:200px">Add all to Shopping List</button>
-            </div></div>
+            </div>

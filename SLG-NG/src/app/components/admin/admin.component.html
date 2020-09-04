@@ -43,9 +43,9 @@
         </div>
     </div>
     
-    <div class="row">
-        <div class="col">
-            <form (submit)="addRecipe()">
+    <form (submit)="addRecipe()">
+        <div class="row">
+            <div class="col">
                 <div>
                     <h5>Add a new recipe to the database</h5>
                     <div class="input-group mb-3">
@@ -96,11 +96,10 @@
                             <option *ngFor="let i of allIngredients" value="{{i.ing_id}}">{{i.units}} of {{i.name}}</option>
                         </select>
                     </div>
+                    <button type="submit" class="btn btn-primary">Add Recipe</button>
                 </div>
-            </form>
-        </div>
-        <div class="col">
-            <!-- end of ingredients -->
+            </div>
+            <div class="col">
                 <div class="form-group">
                     <label for="titleValue">Title:</label>
                     <input class="form-control" type="text" [(ngModel)]="title" id="titleValue" name="title">
@@ -118,7 +117,6 @@
                     <input class="form-control" type="text" [(ngModel)]="tag2" id="tag2Value" name="tag2">
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary">Add Recipe</button>
-        </form>
         </div>
+    </form>
 </div>
