@@ -106,7 +106,7 @@ export class AdminComponent implements OnInit {
     console.log(this.selectedIngredientId);
     this.slgService.deleteIngredient(this.selectedIngredientId).subscribe(
       (response) => {
-        this.deletedAlert = true
+        this.deletedAlert = true;
         console.log("Ingredient Successfully deleted");
         console.log(response);
         this.getAllIngredients();
