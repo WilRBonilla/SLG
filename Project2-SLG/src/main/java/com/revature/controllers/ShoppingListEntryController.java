@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.beans.Shopper;
 import com.revature.beans.ShoppingListEntry;
+import com.revature.services.ShopperService;
 import com.revature.services.ShoppingListService;
 
 @RestController
@@ -20,10 +21,18 @@ public class ShoppingListEntryController {
 
 	@Autowired
 	ShoppingListService sle;
+	@Autowired
+	ShopperService ss;
 	
 	@PostMapping(value ="/addShoppingList", consumes ="application/json", produces ="application/json")
 	public List<ShoppingListEntry> addShoppingList(@RequestBody List<ShoppingListEntry> sl){
 		return sle.addShoppingList(sl);
+		
+	}
+	@PostMapping(value ="/addShoppingList/{id}", consumes ="application/json", produces ="application/json")
+	public ShoppingListEntry addToListbyU_id(@PathVariable("id") int id, @RequestBody ShoppingListEntry sl){
+			sl.setUser(ss.getShopper(id));
+		return sle.addListEntry(sl);
 	}
 	
 	@GetMapping(value = "/getShoppingListEntry/{id}")
