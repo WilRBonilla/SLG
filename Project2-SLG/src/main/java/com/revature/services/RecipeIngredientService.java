@@ -10,7 +10,7 @@ public interface RecipeIngredientService {
 	
 	public RecipeIngredient addRecipeIngredient(RecipeIngredient recipeIngredient);
 	public RecipeIngredient getRecipeIngredient(int ring_id);
-	public List<RecipeIngredient> findAllByRecipe(Recipe recipe);
+	public List<RecipeIngredient> findAllByRecipe(Recipe r);
 	public RecipeIngredient updateRecipeIngredient(RecipeIngredient recipeIngredient);
 	public boolean deleteRecipeIngredient(RecipeIngredient recipeIngredient);
 

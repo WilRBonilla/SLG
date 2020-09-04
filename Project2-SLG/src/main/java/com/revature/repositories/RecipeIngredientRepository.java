@@ -11,6 +11,6 @@ import com.revature.beans.RecipeIngredient;
 @Repository
 public interface RecipeIngredientRepository extends CrudRepository<RecipeIngredient, Integer>{
 	
-	public List<RecipeIngredient> findAllByRecipe(Recipe recipe);
+	public List<RecipeIngredient> findAllByRecipe(Recipe r);
 
 }

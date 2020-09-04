@@ -10,18 +10,20 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.beans.Recipe;
 import com.revature.beans.RecipeIngredient;
 import com.revature.services.RecipeIngredientService;
+import com.revature.services.RecipeService;
 
 @RestController
 public class RecipeIngredientController {
 	
 	@Autowired
 	RecipeIngredientService recipeIngredientService;
+	@Autowired
+	RecipeService rs;
 	
 	@RequestMapping(value = "/recipeingredient", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
 	public RecipeIngredient addRecipeIngredient(@RequestBody RecipeIngredient recipeIngredient) {
@@ -29,10 +31,10 @@ public class RecipeIngredientController {
 		return recipeIngredientService.addRecipeIngredient(recipeIngredient);
 	}
 	
-	@GetMapping(value = "/recipeingredient/{recipe}", produces = "application/json")
-	public List<RecipeIngredient> getRecipeIngredients(@PathVariable("recipe") Recipe recipe) {
-		
-		return recipeIngredientService.findAllByRecipe(recipe);
+	@GetMapping(value = "/recipeingredient/{r_id}", produces = "application/json")
+	public List<RecipeIngredient> getRecipeIngredients(@PathVariable("r_id") int r_id) {
+		Recipe r=rs.getRecipe(r_id);
+		return recipeIngredientService.findAllByRecipe(r);
 		
 	}
 	
