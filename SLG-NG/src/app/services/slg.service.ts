@@ -21,9 +21,7 @@ export class SlgService {
 
   private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-
   url : string ='http://localhost:8080/'
-
 
   // -------------------------INGREDIENT SERVICES--------------------------------------------------------------------
 
@@ -140,8 +138,9 @@ export class SlgService {
     return this.http.get<Recipe[]>(this.url+'recipe');
   }
 
-
-
+  deleteRecipe(recipeId: number): Observable<Recipe> {
+    return this.http.delete<Recipe>(this.url + 'recipe/' + recipeId)
+  }
 
  // -----------------------------RECIPE INGREDIENT SERVICES ---------------------------------------------------------------------
 
