@@ -88,6 +88,7 @@ getRecipeIngredients(r){
   this.rservice.getRecipeIngredients(r.r_id).subscribe(
   (response)=>{
     this.riList=response;
+    localStorage.setItem("ingredList"+this.user.u_id, JSON.stringify(response));
     let id = 600;
   for(let i=0; i<this.riList.length; i++){
  let entry = new ShoppingListEntry(id++,this.riList[i].ingredient,this.user,this.riList[i].amount);
