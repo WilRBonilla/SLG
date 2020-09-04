@@ -67,7 +67,7 @@ recipeResults(){
     } else {
       this.search= undefined;
     }
-  );
+  })
 }
 nameResults(){
   this.rservice.getResultsByName(this.name).subscribe(
