@@ -1,10 +1,10 @@
 
-<div id="divcontainer">
+<div class="div" >
     <div class=container-fluid
-style="color:white; border: 2px solid; background-color:  #39b7c0">
-<h1 style="font-size:48px;font-style:bold; padding: 40px 70px;">Pantry</h1>
+    style=" text-align:left; color:white; border: 2px solid; background-color:  #45c3cc">
+    <h1 style="font-size:48px;font-style:bold; padding: 40px 70px;">Pantry</h1>
 
-</div>
+    </div>
     <button  (click)="displayadd()" onmouseover="style='background: linear-gradient(to right, lightblue, rgb(235, 239, 241), lightblue)'" onmousedown="style='background: linear-gradient(to right, rgb(235, 239, 241), lightblue, rgb(235, 239, 241))'" onmouseup="style='background: linear-gradient(to right, lightblue, rgb(235, 239, 241), lightblue)'" onmouseout="style='background: none'">Add Food Item</button>
 
     <button *ngIf="isSelected" (click)="removeFoodItem()" onmouseover="style='background: linear-gradient(to right, lightblue, rgb(235, 239, 241), lightblue)'" onmousedown="style='background: linear-gradient(to right, rgb(235, 239, 241), lightblue, rgb(235, 239, 241))'" onmouseup="style='background: linear-gradient(to right, lightblue, rgb(235, 239, 241), lightblue)'" onmouseout="style='background: none'">Remove Food Item</button>
