@@ -35,7 +35,7 @@
     </div></div>
     </div>
 
-    <h3 [innerHTML]="sTitle"></h3>
+    
     <div class="card-deck" >
       <div class="card" *ngFor="let r of resultList">
         <div class="card-header">
@@ -45,22 +45,46 @@
           <p class="card-text">{{ r.cuisine }}</p>
           <p class="card-text"><small class="text-muted">#{{ r.tag1 }}  &nbsp;&nbsp;  #{{ r.tag2 }}</small></p>
 
-          <button (click)="addToSelections(r)" class="card-link" style="color:darkblue; background:none;border:none">&#43; Add to Shopping List"</button>
-          <button (click)="getRecipeIngredients(r)" class="card-link" style="color:darkblue; background:none;border:none">Show Ingredients</button>
+          <button type="button" (click)="addToSelections(r)" class="btn btn-info" >&#43; Add to List"</button>
+  
+          <button (click)="showRecipeIngredients(r)"type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal">Show Ingredients</button>
+        
+
+
+          <!-- Modal -->
+          <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document" >
+              <div class="modal-content"  >
+                <div class="modal-header" >
+                  <h5  class="modal-title" id="exampleModalLabel">Ingredients</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body"*ngFor ="let i of riList2">
+                  {{i.amount}} {{i.ingredient.units}}  {{i.ingredient.name}} 
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Add to List</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div><br>
+    <h3 [innerHTML]="sTitle"></h3>
     <div class="card-deck" >
       <div class="card" *ngFor="let r of selectList">
         <div class="card-header">
           {{ r.title }}
         </div>
         <div class="card-body">
-          <button (click)="addToShoppingList(r)"class="card-link" style=" background:none;border:none">✔️ Added</button>
-          <button (click)="addToSelections(r)" class="card-link" style="color:darkblue; background:none;border:none">Double this Recipe</button>
-
+          <button class="btn btn-primary" (click)="addToShoppingList()" >Add all to Shopping List</button>
+          <button type="button" (click)="addToSelections(r)" class="btn btn-info" > Double this Recipe</button>
         </div>
       </div>
     </div><br>
-             <button class="btn btn-primary mr-2" id="addList" type="submit" style="width:200px">Add all to Shopping List</button>
+             <!-- <button  class="btn btn-primary mr-2" id="addList" type="submit" style="width:200px">Add all to Shopping List</button> -->
             </div>

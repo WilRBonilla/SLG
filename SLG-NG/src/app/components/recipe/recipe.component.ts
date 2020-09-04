@@ -2,6 +2,9 @@ import { Component, OnInit, Directive, Input, ViewChild, ElementRef } from '@ang
 import { SlgService } from 'src/app/services/slg.service';
 import { Recipe } from 'src/app/models/Recipe';
 import { RecipeIngredient } from 'src/app/models/RecipeIngredient';
+import { ShoppingListEntry } from 'src/app/models/ShoppingListEntry';
+import { Shopper } from 'src/app/models/Shopper';
+
 
 @Component({
   selector: 'app-recipe',
@@ -26,10 +29,12 @@ export class RecipeComponent implements OnInit {
   sTitle: string;
   resultList :Array<Recipe>=[];
   r :Recipe;
+  i :RecipeIngredient;
   selectList :Array<Recipe>=[];
   riList : Array<RecipeIngredient>=[];
   riList2 : Array<RecipeIngredient>=[];
   sendList : Array<RecipeIngredient>=[];
+  user: Shopper; 
 
 
 recipeResults(){
@@ -57,49 +62,91 @@ recipeResults(){
 nameResults(){
   this.rservice.getResultsByName(this.name).subscribe(
     (response)=> {
-      console.log(response);
       this.resultList=[];
       this.resultList.push(response);
-
-      console.log(this.resultList);
-
     }
   )
 }
 addToSelections=(r)=>{
   this.sTitle="My Selections"
   for(let i=0; i<this.resultList.length; i++){
-    
     if (r.r_id==this.resultList[i].r_id){
       let tRec: Recipe= this.resultList[i] 
     this.selectList.push(tRec);
-    console.log("My selections");
-    console.log(this.selectList);
-
+  
   }
 }
 }
-getRecipeIngredients(r):Array<RecipeIngredient>{
-  console.log(r.r_id);
+showRecipeIngredients(r){
+  this.rservice.getRecipeIngredients(r.r_id).subscribe(
+  (response)=>{
+    this.riList2=response;
+     }
+  )
+}
+getRecipeIngredients(r){
   this.rservice.getRecipeIngredients(r.r_id).subscribe(
   (response)=>{
     this.riList=response;
-    console.log("Recipe Ingredient LIST")
-    console.log(this.riList);
-     }
-  )
-  return this.riList;
-
-}
-addToShoppingList(r){
-  this.rservice.getRecipeIngredients(r.r_id).subscribe(
+    let id = 600;
+  for(let i=0; i<this.riList.length; i++){
+ let entry = new ShoppingListEntry(id++,this.riList[i].ingredient,this.user,this.riList[i].amount);
+ this.rservice.addToMyList(this.user.u_id,entry).subscribe(
   (response)=>{
-    this.sendList=response;
-    for(let i=0; i<this.sendList.length; i++){
-    this.riList2.push(this.sendList[i]);
-    console.log(this.riList2);
+  }
+    )
+      }
      }
-    }
   )
 }
+addToShoppingList=()=>{
+  this.user= JSON.parse(localStorage.getItem('user'));
+  for(let p=0; p<this.selectList.length; p++){
+    console.log(this.selectList[p]);
+    this.getRecipeIngredients(this.selectList[p]);
+  } 
+}
+
+
+
+// addToShopping=(r)=>{
+//   this.user= JSON.parse(localStorage.getItem('user'));
+//   console.log(this.user);
+//   this.rservice.getRecipeIngredients(r.r_id).subscribe(
+//     (response)=>{
+//       this.riList=response;
+//   let id = 600;
+//   for(let i=0; i<this.riList.length; i++){
+//  let entry = new ShoppingListEntry(id++,this.riList[i].ingredient,this.user,this.riList[i].amount);
+//  console.log(entry);
+//  this.myList.push(entry);
+//  this.rservice.addToIdList(this.user.u_id,this.myList).subscribe(
+//      (response)=>{
+//        console.log("success");
+//        console.log(response);
+//      }
+//        )
+  
+//   }
+// }
+//   )
+// }
+//  this.rservice.addToShoppingList(this.myList).subscribe(
+//    (response)=>{
+//      console.log("success");
+//      console.log(response);
+//  )
+// }
+//     }
+// addToShoppingList(r){
+//   this.rservice.getRecipeIngredients(r.r_id).subscribe(
+//   (response)=>{
+//     this.sendList=response;
+//     for(let i=0; i<this.sendList.length; i++){
+//     this.riList2.push(this.sendList[i]);
+//     console.log(this.riList2);
+    
+//      )
+//     }
+//   }
 }
