@@ -59,12 +59,12 @@ class Project2SlgApplicationTests {
 		Assertions.assertEquals(i, t);
 	}
 	
-	@Test
-	void getIngredientNameController() {
-		Mockito.when(ir.findByName(i.getName())).thenReturn(i);
-		Ingredient t = ic.findByName(i.getName());
-		Assertions.assertEquals(i, t);
-	}
+// 	@Test
+// 	void getIngredientNameController() {
+// 		Mockito.when(ir.findByName(i.getName())).thenReturn(i);
+// 		Ingredient t = ic.findByName(i.getName());
+// 		Assertions.assertEquals(i, t);
+// 	}
 
 	@Test
 	void FindIngredientByIDController() {
