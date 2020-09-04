@@ -17,5 +17,6 @@ public interface ShoppingListService {
 	public List<ShoppingListEntry> findByUser(Shopper shopper);
 	public List<ShoppingListEntry> updateShoppingList(List<ShoppingListEntry> change);
 	public boolean deleteShoppingList(int id);
+	public ShoppingListEntry addListEntry(ShoppingListEntry sl);
 
 }

@@ -49,4 +49,11 @@ public class ShoppingListServiceImpl implements ShoppingListService {
 		return false;
 	}
 
+
+	@Override
+	public ShoppingListEntry addListEntry(ShoppingListEntry sl) {
+		return slr.save(sl);
+		
+	}
+
 }
