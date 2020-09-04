@@ -16,8 +16,7 @@ export class HomeComponent implements OnInit {
   username :String= ""
 
   onHomepageLoad(){
-    let  currentUser = JSON.parse(localStorage.getItem("user"));
-    console.log(currentUser);
+    let currentUser = JSON.parse(localStorage.getItem("user"));
     this.username = currentUser.f_name
     console.log(this.username);
   }

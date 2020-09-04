@@ -52,9 +52,7 @@ recipeResults(){
   this.rservice.getRecipeResults(this.search).subscribe(
     (response)=> {
       this.resultList = response;
-
-    }
-  );
+  });
 }
 nameResults(){
   this.rservice.getResultsByName(this.name).subscribe(
