@@ -52,22 +52,7 @@ recipeResults(){
   this.rservice.getRecipeResults(this.search).subscribe(
     (response)=> {
       this.resultList = response;
-
-    console.log(this.separate);
-    console.log(this.separate[0]);
-    console.log(this.separate[2]);
-    if(this.cuisine != undefined && this.tag1 != undefined && this.tag2 != undefined) {
-      this.search='?cuisine='+this.cuisine+'&tag1='+this.tag1+'&tag2='+this.tag2;
-    } else if(this.cuisine !=undefined && this.tag1 != undefined && this.tag2 == undefined) {
-      this.search='?cuisine='+this.cuisine+'&tag1='+this.tag1;
-    } else if(this.cuisine !=undefined && this.tag2 != undefined && this.tag1 == undefined) {
-      this.search='?cuisine='+this.cuisine+'&tag2='+this.tag2;
-    } else if (this.cuisine != undefined && this.tag1 == undefined && this.tag2 == undefined) {
-      this.search='?cuisine='+this.cuisine;
-    } else {
-      this.search= undefined;
-    }
-  })
+  });
 }
 nameResults(){
   this.rservice.getResultsByName(this.name).subscribe(
