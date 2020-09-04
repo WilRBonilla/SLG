@@ -6,7 +6,7 @@
       <th>Ingredient</th>
       <th>Quantity</th>
       <tbody>
-        <tr *ngFor="let s of shoppingList" (click) = "purchaseItem(s)">
+        <tr *ngFor="let s of shoppingList"  [style.background-color] = "s.rowClicked ? 'lightblue' : 'white' " (click) = "purchaseItem(s) " (click) = "s.rowClicked = !s.rowClicked">
           <td>{{ s.ingredient.name }}</td>
           <td>{{ s.amount }}</td>
         </tr>
@@ -20,6 +20,7 @@
       </tbody>
     </table>
     <button class="btn btn-primary" (click) = "selectAll()">Select All</button>
+    <button class="btn btn-primary" (click) = "deselectAll()">Deselect All</button>
     <button class="btn btn-primary" (click) = "purchase()">Purchase Slected Items</button>
   </div>
 </div>
