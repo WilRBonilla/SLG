@@ -5,6 +5,7 @@ import { Shopper } from 'src/app/models/Shopper';
 import { Note } from 'src/app/models/Note';
 import { SlgService } from 'src/app/services/slg.service';
 import { Pantry } from 'src/app/models/Pantry';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-shoppinglist',
@@ -12,7 +13,7 @@ import { Pantry } from 'src/app/models/Pantry';
   styleUrls: ['./shoppinglist.component.css'],
 })
 export class ShoppinglistComponent implements OnInit {
-  constructor(private slservice: SlgService) {}
+  constructor(private slservice: SlgService, public router: Router) {}
 
   ngOnInit(): void {
     this.customItems = JSON.parse(localStorage.getItem('customItems'));
@@ -84,8 +85,8 @@ export class ShoppinglistComponent implements OnInit {
       }
       console.log("SELECTED ITEM");
       console.log(this.purchaseList);
-      console.log(this.pantryList);
     }
+    
   }
   // Adds custom item.
   addCustom(){
@@ -109,6 +110,10 @@ export class ShoppinglistComponent implements OnInit {
       this.purchaseItem(e);
     });
   }
+  deselectAll(){
+    this.purchaseList = [];
+    
+  }
 
   
 
@@ -118,51 +123,48 @@ export class ShoppinglistComponent implements OnInit {
     .subscribe(
       (response) => {
         this.pantryList = response;
-        // this.outPantry = response;
+        this.outPantry = JSON.parse(JSON.stringify(this.pantryList));
+        
         console.log("PANTRY LIST FROM DB: ");
         console.log(this.pantryList);
       }
 
 
     )
+
+    this.slservice.getPantryByUser(this.globalUser.u_id)
+    .subscribe(
+      (response) => {
+        // this.outPantry = response;
+      }
+    )
   }
 
 
   purchase(){
     localStorage.removeItem("customItems");
-    // Pantrylist shouldn't be changing, but it is.
-    console.log("Pantry List");
-    console.log(this.pantryList);
-    console.log("Output Pantry");
-    // this.outPantry = this.pantryList.slice();
-    
-    // console.log(this.outPantry);
-   for (let index = 0; index < this.pantryList.length; index++) {
-      this.outPantry.push(this.pantryList[index]);
-     
-   }
-   console.log(this.outPantry);
-    
-    
-
+   
     // For every item we intend to purchase,
     for (let j = 0; j < this.purchaseList.length; j++) {
 
       // Search every item in the pantry
-      for (let i = 0; i < this.pantryList.length; i++) {
-        
+      for (let i = 0; i < this.outPantry.length; i++) {
+      
+        if(this.outPantry[i].ingredient.name == this.purchaseList[j].ingredient.name){
+              console.log("ING FOUND, ADDING AMT")
+              let selected: Pantry = JSON.parse(JSON.stringify(this.purchaseList[j]));
 
-        if(this.pantryList[i].ingredient.name == this.purchaseList[j].ingredient.name){
-              console.log("If ING FOUND, ADD AMT: ")
-              console.log(this.pantryList[i].ingredient.name)
-              this.outPantry[i].amount = (this.pantryList[i].amount + this.purchaseList[j].amount);
-              console.log(this.pantryList[i].amount);
+              this.outPantry[i].amount += selected.amount;
+              // this.outPantry[i].amount = pantryAMT + purchaseAMT;
+
+              console.log(this.outPantry[i].amount);
+              console.log(this.purchaseList[j].amount)
               break; // stops searching pantry the rest of the pantry if item is found.
             } 
-        else if(this.pantryList[i].ingredient.name != this.purchaseList[j].ingredient.name && i == (this.pantryList.length-1)){
+        else if(this.outPantry[i].ingredient.name != this.purchaseList[j].ingredient.name && i == (this.outPantry.length-1)){
           console.log("ING NOT FOUND, CREATING PANTRY ENTRY")
-          // console.log(this.pantryList[i].ingredient.name)
-          this.outPantry.push(this.purchaseList[j]);
+
+          this.outPantry.push(JSON.parse(JSON.stringify(this.purchaseList[j])));
           break;
         }
 
@@ -170,10 +172,35 @@ export class ShoppinglistComponent implements OnInit {
       
     
     }
-    console.log("AFTER FORLOOPS PANTRY LIST FROM DB");
-    console.log(this.pantryList);
     console.log("SENDING PANTRYLIST TO DB: ")
     console.log(this.outPantry);
+
+    
+    this.slservice.addPantryList(this.outPantry).subscribe(
+      (response) => {
+        console.log("success");
+        this.router.navigate(['/pantry']);
+        
+        // THIS CURRENTLY DELETES EVERYTHING IN USER'S LIST LOL
+    //     this.shoppingList.forEach(sl => {
+
+    //       this.slservice.deleteShoppingListEntry(sl.entry_id).subscribe(
+    //         (response) => {
+    //           console.log("delete from DB success");
+    //         }
+
+    //       );
+    //     }
+
+
+    //     )
+          
+        
+        
+      }
+
+
+    )
   }
 
 
