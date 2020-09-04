@@ -142,6 +142,17 @@ export class ShoppinglistComponent implements OnInit {
       this.outPantry = this.outPantry.concat(copyList);
     } else {
 
+
+  purchase(){
+    localStorage.removeItem("customItems");
+    // Check if pantry is empty
+    if (this.outPantry.length == 0) {
+      console.log("Empty pantry, ADDING item(s)")
+      var copyList = JSON.parse(JSON.stringify(this.purchaseList)); 
+      this.outPantry = this.outPantry.concat(copyList);
+    } else {
+   
+
     // For every item we intend to purchase,
     for (let j = 0; j < this.purchaseList.length; j++) {
       // Search every item in the pantry
@@ -173,6 +184,7 @@ export class ShoppinglistComponent implements OnInit {
         }
       }
     }
+
   }
     console.log('SENDING PANTRYLIST TO DB: ');
     this.outPantry.forEach(p => {console.log(p.ingredient.name)});
