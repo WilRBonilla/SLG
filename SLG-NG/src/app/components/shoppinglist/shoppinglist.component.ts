@@ -143,6 +143,12 @@ export class ShoppinglistComponent implements OnInit {
 
   purchase(){
     localStorage.removeItem("customItems");
+    // Check if pantry is empty
+    if (this.outPantry.length == 0) {
+      console.log("Empty pantry, ADDING item(s)")
+      var copyList = JSON.parse(JSON.stringify(this.purchaseList)); 
+      this.outPantry = this.outPantry.concat(copyList);
+    } else {
    
     // For every item we intend to purchase,
     for (let j = 0; j < this.purchaseList.length; j++) {
@@ -172,6 +178,7 @@ export class ShoppinglistComponent implements OnInit {
       
     
     }
+  }
     console.log("SENDING PANTRYLIST TO DB: ")
     console.log(this.outPantry);
 
