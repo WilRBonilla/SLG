@@ -9,7 +9,14 @@
       <tbody>
         <tr *ngFor="let s of shoppingList"  [style.background-color] = "s.rowClicked ? 'lightblue' : 'white' " (click) = "purchaseItem(s) " (click) = "s.rowClicked = !s.rowClicked">
           <td>{{ s.ingredient.name }}</td>
-          <td>{{ s.amount }}<span style="margin-left: 5px;">{{s.ingredient.units}}</span></td>
+          <td >
+            <input type="number" [(ngModel)] = "s.amount">
+            <span style="margin-left: 5px;">{{s.ingredient.units}}</span> 
+          </td>
+            <td>
+              
+              <button class = "btn btn-primary"(click) = "updateQuantity(s)" style="padding: 1px 20px;"> Update </button>
+            </td>
         </tr>
         <tr *ngFor="let c of customItems"  [style.background-color] = "c.rowClicked ? 'lightblue' : 'white' "  (click) = "c.rowClicked = !c.rowClicked">
           <td>{{ c.ingredient.name }}</td>

@@ -19,6 +19,7 @@ export class RecipeComponent implements OnInit {
   constructor(private rservice : SlgService) { }
 
   ngOnInit(): void {
+    this.getShopper();
   }
 
   searched :string = '';
@@ -35,13 +36,13 @@ export class RecipeComponent implements OnInit {
   selectList :Array<Recipe>=[];
   riList : Array<RecipeIngredient>=[];
   riList2 : Array<RecipeIngredient>=[];
-  sendList : Array<RecipeIngredient>=[];
+  riList : Array<RecipeIngredient>=[];
 
   sleList : Array<ShoppingListEntry>=[];
   updateList : Array<ShoppingListEntry>=[];
   user: Shopper; 
   hide: string= "visibility: hidden; width:50"
-amt: number;
+  amt: number;
 
 
 recipeResults(){
@@ -101,34 +102,42 @@ addToMyShoppingList(){
   this.rservice.getUserShoppingListEntries(this.user.u_id).subscribe(
     (response)=>{
       this.sleList=response;
-      console.log(this.sendList);
+      console.log(this.riList);
       console.log(this.sleList);
       
-for(let i=0; i<this.sleList.length; i++){
+for(let i=0; i<this.riList.length; i++){
   // console.log(this.sleList[i].ingredient);
-  // console.log(this.sendList[i].ingredient);
-  if(this.sleList[i].ingredient.name==this.sendList[i].ingredient.name){
-    console.log(this.sleList[i].amount)
-    this.amt= this.sleList[i].amount;
+  // console.log(this.riList[i].ingredient);
+  let ri : Ingredient= JSON.parse(JSON.stringify(this.riList[i].ingredient));
+  for(let p=0; p<this.sleList.length; p++){
+  let asle : Ingredient= JSON.parse(JSON.stringify(this.sleList[p].ingredient));
+  console.log(asle.name+ri.name);
+ 
+  if(ri.name==asle.name){
+    console.log(this.sleList[p].amount)
+    this.amt= this.sleList[p].amount;
     console.log("duplicate")
     console.log(this.amt);
     let newamt= (this.amt*2);
     console.log(newamt);
     console.log
-    let upEntry= new ShoppingListEntry(this.sleList[i].entry_id,this.sleList[i].ingredient,this.user,newamt);
+    let upEntry= new ShoppingListEntry(this.sleList[p].entry_id,this.sleList[p].ingredient,this.user,newamt);
     console.log(upEntry);
+      this.updateList.push(upEntry);
+      console.log(this.updateList);
       this.rservice.updateMyList(this.user.u_id,upEntry).subscribe(
         (response)=>{
           console.log("updated amount");
         }
       )
   }else{
-    let entry = new ShoppingListEntry(id++,this.sleList[i].ingredient,this.user,this.sleList[i].amount);
-    this.rservice.addToMyList(this.user.u_id,entry).subscribe(
-     (response)=>{
-       console.log("added"+entry)
-  }
-    )
+    // let entry = new ShoppingListEntry(id++,this.sleList[i].ingredient,this.user,this.sleList[i].amount);
+    // this.rservice.addToMyList(this.user.u_id,entry).subscribe(
+    //  (response)=>{
+       console.log("added")
+  // }
+  //   )
+}
 }
 } 
 })
@@ -137,11 +146,14 @@ getIngredients(){
   for(let i=0; i<this.selectList.length; i++){
     this.rservice.getRecipeIngredients(this.selectList[i].r_id).subscribe(
       (response)=>{
-      this.sendList=this.sendList.concat(response);
+      this.riList=this.riList.concat(response);
       this.addToMyShoppingList();
   } 
     )
 }
+}
+getShopper() {
+  this.user = JSON.parse(localStorage.getItem("user"));
 }
 
    
@@ -178,9 +190,9 @@ getIngredients(){
 // addToShoppingList(r){
 //   this.rservice.getRecipeIngredients(r.r_id).subscribe(
 //   (response)=>{
-//     this.sendList=response;
-//     for(let i=0; i<this.sendList.length; i++){
-//     this.riList2.push(this.sendList[i]);
+//     this.riList=response;
+//     for(let i=0; i<this.riList.length; i++){
+//     this.riList2.push(this.riList[i]);
 //     console.log(this.riList2);
     
 //      )
