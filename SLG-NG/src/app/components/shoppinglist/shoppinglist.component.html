@@ -1,33 +1,26 @@
 <div class="myShoppingList div">
   <h1>My Shopping List</h1>
-  <h6>Simply click the items you want to select or 'Select All' at the bottomm.</h6>
 
   <div class="container">
-    <table class="table table-sm">
-      <th>Item</th>
+    <table class="table table-hover">
+      <th>Ingredient</th>
       <th>Quantity</th>
       <tbody>
         <tr *ngFor="let s of shoppingList"  [style.background-color] = "s.rowClicked ? 'lightblue' : 'white' " (click) = "purchaseItem(s) " (click) = "s.rowClicked = !s.rowClicked">
           <td>{{ s.ingredient.name }}</td>
-          <td>{{ s.amount }}<span style="margin-left: 5px;">{{s.ingredient.units}}</span></td>
-        </tr>
-        <tr *ngFor="let c of customItems"  [style.background-color] = "c.rowClicked ? 'lightblue' : 'white' "  (click) = "c.rowClicked = !c.rowClicked">
-          <td>{{ c.ingredient.name }}</td>
-          <td><span>{{ c.amount }}</span></td>
+          <td>{{ s.amount }}</td>
         </tr>
         <tr>
           <td colspan="2">Custom Item: 
           <input type="text" [(ngModel)]="notes" style="width: max-content;"/>
-          <button class = "btn btn-secondary" (click) = "addCustom()">Add Custom Item</button>
+          <button class = "btn btn-primary" (click) = "addCustom()">Add Custom Item</button>
         </td>
         </tr>
 
       </tbody>
     </table>
-   
-    <button class="btn btn-info" (click) = "selectAll()">Select All</button>
-    <button class="btn btn-info" (click) = "clearSelected()">Deselect All</button>
-    <button class="btn btn-info" (click) = "purchase()">Purchase Selected Items</button>
-    <button class="btn btn-danger" (click) = "clearList()">Delete all</button>
+    <button class="btn btn-primary" (click) = "selectAll()">Select All</button>
+    <button class="btn btn-primary" (click) = "deselectAll()">Deselect All</button>
+    <button class="btn btn-primary" (click) = "purchase()">Purchase Slected Items</button>
   </div>
 </div>
