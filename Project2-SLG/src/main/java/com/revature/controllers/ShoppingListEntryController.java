@@ -1,5 +1,6 @@
 package com.revature.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +56,13 @@ public class ShoppingListEntryController {
 		}
 		return sle.updateShoppingList(change);
 	}
+	@PutMapping(value = "/updateList/{uid}", consumes = "application/json", produces = "application/json")
+	public List<ShoppingListEntry> updateList(@PathVariable int uid, @RequestBody ShoppingListEntry change){
+			List<ShoppingListEntry> upList= new ArrayList<ShoppingListEntry>();
+			upList.add(change);
+			return sle.updateShoppingList(upList);
+	}
+	
 	@DeleteMapping(value = "/shoppingListEntry/{id}")
 	public boolean deleteEntry(@PathVariable("id") int id) {
 		return sle.deleteShoppingList(id);
