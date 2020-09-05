@@ -1,5 +1,6 @@
 package com.revature.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,10 @@ public class ShoppingListServiceImpl implements ShoppingListService {
 	public List<ShoppingListEntry> updateShoppingList(List<ShoppingListEntry> change) {		
 		return (List<ShoppingListEntry>) slr.saveAll(change);
 	}
-
+	@Override
+	public ShoppingListEntry updateListEntry(ShoppingListEntry change) {		
+		return (ShoppingListEntry) slr.save(change);
+	}
 	@Override
 	public boolean deleteShoppingList(int id) {
 		try {
@@ -53,17 +57,22 @@ public class ShoppingListServiceImpl implements ShoppingListService {
 
 	@Override
 	public ShoppingListEntry addListEntry(ShoppingListEntry sl) {
-		return slr.save(sl);
-//		ShoppingListEntry no=slr.findByUserAndIngredient(sl.getUser(),sl.getIngredient());
-//		System.out.println("this is the retrieved sle");
-//		System.out.println(no);
-//		if(no==null) {
-//		return slr.save(no);
-//		}else {
-//		return null;
-//		}
+		
+		System.out.println(sl);
+		ShoppingListEntry exists= new ShoppingListEntry();
+		try {
+		exists=slr.findByUserAndIngredient(sl.getUser(), sl.getIngredient());
+			System.out.println("update entry");
+			sl.setEntry_id(exists.getEntry_id());
+			sl.setAmount(exists.getAmount()+sl.getAmount());
+			return updateListEntry(sl);
+		}catch(Exception e) {
+			
+			System.out.println("new entry");
+			System.out.println(sl);
+			return slr.save(sl);
+		}
 	}
-
 
 	@Override
 	public ShoppingListEntry findByUserAndIngredient(Shopper s, Ingredient i) {

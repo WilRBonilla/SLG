@@ -20,5 +20,6 @@ public interface ShoppingListService {
 	public boolean deleteShoppingList(int id);
 	public ShoppingListEntry addListEntry(ShoppingListEntry sl);
 	public ShoppingListEntry findByUserAndIngredient(Shopper s, Ingredient i);
+	public ShoppingListEntry updateListEntry(ShoppingListEntry change);
 
 }
