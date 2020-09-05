@@ -55,10 +55,8 @@ export class ShoppinglistComponent implements OnInit {
     this.slservice
       .getUserShoppingListEntries(saveduser.u_id)
       .subscribe((response) => {
-        this.shoppingList = response;
-        // if(custom != null){
-        //   this.shoppingList = this.shoppingList.concat(custom);
-        // }
+        this.shoppingList = JSON.parse(JSON.stringify(response));
+        
       });
   }
   // When an item is clicked, we add it to a list of items we intend to purchase.
@@ -133,18 +131,34 @@ export class ShoppinglistComponent implements OnInit {
       });
   }
 
-  purchase() {
-    localStorage.removeItem('customItems');
-    console.log(this.purchaseList);
-    if (this.outPantry.length == 0) {
-      console.log("Empty pantry, ADDING item(s)")
-      var copyList = JSON.parse(JSON.stringify(this.purchaseList)); 
-      this.outPantry = this.outPantry.concat(copyList);
-    } else {
+  updateQuantity(q:ShoppingListEntry){
+    console.log(q);
+
+
+    this.shoppingList.forEach(l => {
+      console.log("to be checked: "+ q.entry_id);
+      console.log("shopping list amount: " + l.entry_id);
+      if(q.entry_id == l.entry_id){
+        console.log("YES");
+        l.amount == q.amount;
+      }
+
+      
+    })
+    console.log("ShoppingList Amounts:")
+    this.shoppingList.forEach(z => {console.log(z.amount)});
+    this.slservice.updateShoppingList(this.globalUser.u_id, this.shoppingList).subscribe();
+    this.router.navigate(['/shoppinglist']);
+  }
+
+
+ 
 
 
   purchase(){
     localStorage.removeItem("customItems");
+    console.log("PURCHASING ITEMS:");
+    console.log(this.purchaseList);
     // Check if pantry is empty
     if (this.outPantry.length == 0) {
       console.log("Empty pantry, ADDING item(s)")
@@ -167,10 +181,7 @@ export class ShoppinglistComponent implements OnInit {
           );
 
           this.outPantry[i].amount += selected.amount;
-          // this.outPantry[i].amount = pantryAMT + purchaseAMT;
 
-          console.log(this.outPantry[i].amount);
-          console.log(this.purchaseList[j].amount);
           break; // stops searching pantry the rest of the pantry if item is found.
         } else if (
           this.outPantry[i].ingredient.name !=
@@ -195,13 +206,15 @@ export class ShoppinglistComponent implements OnInit {
       let deleted: Array<ShoppingListEntry> = [];
       console.log('success');
       this.router.navigate(['/pantry']);
+
       this.purchaseList.forEach((p) => {
+        console.log("Pantry item we want to delete")
+        console.log(p.ingredient.name)
         this.shoppingList.forEach((sl) => {
+          console.log("shpping list item to delete")
           if( p.ingredient.ing_id == sl.ingredient.ing_id){
             this.slservice.deleteShoppingListEntry(sl.entry_id).subscribe();
-            deleted.push(sl);
-            var index = this.shoppingList.indexOf(sl);
-            this.shoppingList.splice(index);
+            
           }
 
         });
@@ -210,6 +223,7 @@ export class ShoppinglistComponent implements OnInit {
       deleted.forEach(d => {console.log(d.ingredient.name)})
     });
   }
+
   clearSelected(selected?: Array<Pantry>) {
     this.purchaseList = [];
     console.log('CLEARING SELECTIONS');
@@ -218,13 +232,16 @@ export class ShoppinglistComponent implements OnInit {
   clearList() {
     localStorage.removeItem('customItems');
     this.customItems = [];
-    this.shoppingList = [];
+    
     this.shoppingList.forEach((sl) => {
       this.slservice
         .deleteShoppingListEntry(sl.entry_id)
         .subscribe((response) => {
+          
           console.log('delete from DB success');
         });
+        
     });
+    this.shoppingList = [];
   }
 }
