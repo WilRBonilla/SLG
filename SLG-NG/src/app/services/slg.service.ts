@@ -96,7 +96,9 @@ export class SlgService {
   addToMyList(id,listEntry: ShoppingListEntry): Observable<ShoppingListEntry>{
     return this.http.post<ShoppingListEntry>(this.url+'addShoppingList/'+id, listEntry, {headers: this.headers});
   }
-
+  updateMyList(id,listEntry: ShoppingListEntry): Observable<ShoppingListEntry>{
+    return this.http.put<ShoppingListEntry>(this.url+'updateList/'+id, listEntry, {headers: this.headers});
+  }
   // This function appends UID to url and adds (or updates current entries) to the DB.
   updateShoppingList(uid:number, shopList: ShoppingListEntry[]): Observable<ShoppingListEntry[]>{
     // Returns only the updated entities in the shopping list.
