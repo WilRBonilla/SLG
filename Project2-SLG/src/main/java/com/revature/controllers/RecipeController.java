@@ -59,11 +59,3 @@ public class RecipeController {
 	
 }
 
-//} else if(cuisine !=null && tag2 != null && tag1 == null) {
-//	return rs.findByCuisineAndTag2(cuisine,tag2);
-//} else if(tag1 !=null && tag2 !=null && cuisine == null){
-//	return rs.findByTag1AndTag2(tag1, tag2);
-//} else if(tag1 != null && cuisine == null && tag2== null) {
-//	return rs.findByTag1(tag1);
-//} else if (tag2 != null && cuisine == null && tag1== null) {
-//	return rs.findByTag2(tag2);

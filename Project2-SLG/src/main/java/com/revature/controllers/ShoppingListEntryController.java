@@ -58,6 +58,8 @@ public class ShoppingListEntryController {
 	}
 	@PutMapping(value = "/updateList/{uid}", consumes = "application/json", produces = "application/json")
 	public List<ShoppingListEntry> updateList(@PathVariable int uid, @RequestBody ShoppingListEntry change){
+			ShoppingListEntry changeLE= sle.getShoppingList(change.getEntry_id());
+			change.setUser(changeLE.getUser());
 			List<ShoppingListEntry> upList= new ArrayList<ShoppingListEntry>();
 			upList.add(change);
 			return sle.updateShoppingList(upList);

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.revature.beans.Ingredient;
 import com.revature.beans.Shopper;
 import com.revature.beans.ShoppingListEntry;
 import com.revature.repositories.ShoppingListRepository;
@@ -48,12 +49,28 @@ public class ShoppingListServiceImpl implements ShoppingListService {
 		}
 		return false;
 	}
-
+	
 
 	@Override
 	public ShoppingListEntry addListEntry(ShoppingListEntry sl) {
 		return slr.save(sl);
-		
+//		ShoppingListEntry no=slr.findByUserAndIngredient(sl.getUser(),sl.getIngredient());
+//		System.out.println("this is the retrieved sle");
+//		System.out.println(no);
+//		if(no==null) {
+//		return slr.save(no);
+//		}else {
+//		return null;
+//		}
 	}
+
+
+	@Override
+	public ShoppingListEntry findByUserAndIngredient(Shopper s, Ingredient i) {
+		return slr.findByUserAndIngredient(s, i);
+	}
+
+
+
 
 }
