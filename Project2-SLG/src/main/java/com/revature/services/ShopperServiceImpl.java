@@ -16,8 +16,7 @@ public class ShopperServiceImpl implements ShopperService{
 	
 	@Override
 	public Shopper addShopper(Shopper s) {
-		sr.save(s);
-		return null;
+	return sr.save(s);
 	}
 
 	@Override
