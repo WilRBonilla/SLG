@@ -27,5 +27,6 @@ button {
 }
 
 input{
-    width: 6%;
+    width: 10%;
+    text-align: right;
 }
