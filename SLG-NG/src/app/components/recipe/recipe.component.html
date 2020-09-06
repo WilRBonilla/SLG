@@ -64,8 +64,10 @@
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-                <div class="modal-body"*ngFor ="let i of riList2">
-                  {{i.amount}} {{i.ingredient.units}}  {{i.ingredient.name}} 
+                <div class="modal-body">
+                  <ul class="list-group" *ngFor ="let i of riList2">
+                    <li class="list-group-item list-group-item">{{i.amount}} {{i.ingredient.units}}  {{i.ingredient.name}} </li>
+                </ul>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
