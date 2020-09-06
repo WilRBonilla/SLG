@@ -34,6 +34,7 @@ export class ShoppinglistComponent implements OnInit {
   purchaseList: Array<Pantry> = [];
   customItems: Array<ShoppingListEntry> = [];
   outPantry: Array<Pantry> = [];
+  color:string;
 
   selected: boolean;
   notes: string = '';
@@ -131,6 +132,21 @@ export class ShoppinglistComponent implements OnInit {
         // this.outPantry = response;
       });
   }
+
+  // updateQuantity(q:ShoppingListEntry){
+  //   console.log(q);
+
+
+  //   this.shoppingList.forEach(l => {
+  //     console.log("to be checked: "+ q.entry_id);
+  //     console.log("shopping list amount: " + l.entry_id);
+  //     if(q.entry_id == l.entry_id){
+  //       console.log("YES");
+  //       l.amount == q.amount;
+  //     }
+
+      
+  //   })
 
 
   addQuantity(q:ShoppingListEntry){
