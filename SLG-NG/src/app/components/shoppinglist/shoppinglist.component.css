@@ -6,7 +6,9 @@
 table{
 
     margin: auto;
+    cursor: pointer 
 }
+
 
 .div {
     animation: expand 1s;

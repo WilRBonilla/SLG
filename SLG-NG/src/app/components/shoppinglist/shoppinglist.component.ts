@@ -34,6 +34,7 @@ export class ShoppinglistComponent implements OnInit {
   purchaseList: Array<Pantry> = [];
   customItems: Array<ShoppingListEntry> = [];
   outPantry: Array<Pantry> = [];
+  color:string;
 
   selected: boolean;
   notes: string = '';
@@ -61,6 +62,7 @@ export class ShoppinglistComponent implements OnInit {
   }
   // When an item is clicked, we add it to a list of items we intend to purchase.
   purchaseItem(entry: ShoppingListEntry) {
+    this.color="table-primary"
     let ingred = entry.ingredient;
 
     let pantryEntry = new Pantry(
@@ -131,25 +133,35 @@ export class ShoppinglistComponent implements OnInit {
       });
   }
 
-  updateQuantity(q:ShoppingListEntry){
-    console.log(q);
+  // updateQuantity(q:ShoppingListEntry){
+  //   console.log(q);
 
 
-    this.shoppingList.forEach(l => {
-      console.log("to be checked: "+ q.entry_id);
-      console.log("shopping list amount: " + l.entry_id);
-      if(q.entry_id == l.entry_id){
-        console.log("YES");
-        l.amount == q.amount;
-      }
+  //   this.shoppingList.forEach(l => {
+  //     console.log("to be checked: "+ q.entry_id);
+  //     console.log("shopping list amount: " + l.entry_id);
+  //     if(q.entry_id == l.entry_id){
+  //       console.log("YES");
+  //       l.amount == q.amount;
+  //     }
 
       
-    })
-    console.log("ShoppingList Amounts:")
+  //   })
+
+
+  addQuantity(q:ShoppingListEntry){
+    q.amount=q.amount+1;
     this.shoppingList.forEach(z => {console.log(z.amount)});
     this.slservice.updateShoppingList(this.globalUser.u_id, this.shoppingList).subscribe();
     this.router.navigate(['/shoppinglist']);
   }
+  subtractQuantity(q:ShoppingListEntry){
+    q.amount=(q.amount-1);
+    this.shoppingList.forEach(z => {console.log(z.amount)});
+    this.slservice.updateShoppingList(this.globalUser.u_id, this.shoppingList).subscribe();
+    this.router.navigate(['/shoppinglist']);
+  }
+
 
 
  

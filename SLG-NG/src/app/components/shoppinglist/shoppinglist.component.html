@@ -3,19 +3,22 @@
   <h6>Simply click the items you want to select or 'Select All' at the bottomm.</h6>
 
   <div class="container">
-    <table class="table table-sm">
+    <table class="table table-sm table-striped table-hover">
+      <tr>
       <th>Item</th>
-      <th>Quantity</th>
+      <th style="text-align:left">Quantity</th>
+      <th>Update</th>
+      </tr>
       <tbody>
-        <tr *ngFor="let s of shoppingList"  [style.background-color] = "s.rowClicked ? 'lightblue' : 'white' " (click) = "purchaseItem(s) " (click) = "s.rowClicked = !s.rowClicked">
-          <td>{{ s.ingredient.name }}</td>
-          <td >
-            <input type="number" [(ngModel)] = "s.amount">
-            <span style="margin-left: 5px;">{{s.ingredient.units}}</span> 
+        <!--  -->
+        <tr *ngFor="let s of shoppingList" [class] ="s.rowClicked ? 'table-primary' : '' "  (click) = "purchaseItem(s) ">
+          <td (click) = "s.rowClicked = !s.rowClicked">{{ s.ingredient.name }}</td>
+            <td (click) = "s.rowClicked = !s.rowClicked" style="text-align:left">{{s.amount}}
+            <span style="margin-left: 12px;">{{s.ingredient.units}}</span>
+            </td>
+          <td> <button class = "btn btn-primary"(click) = "subtractQuantity(s)" style="border:none;background:none;color:rgb(199, 21, 21)"><b> &#8722; </b></button>
           </td>
-            <td>
-              
-              <button class = "btn btn-primary"(click) = "updateQuantity(s)" style="padding: 1px 20px;"> Update </button>
+          <td><button (click) = "addQuantity(s)" style="border:none;background:none;color:rgb(35, 187, 35)"><b> &#43; </b></button>
             </td>
         </tr>
         <tr *ngFor="let c of customItems"  [style.background-color] = "c.rowClicked ? 'lightblue' : 'white' "  (click) = "c.rowClicked = !c.rowClicked">
