@@ -6,7 +6,9 @@
 table{
 
     margin: auto;
+    cursor: pointer 
 }
+
 
 .div {
     animation: expand 1s;
@@ -24,4 +26,9 @@ table{
 button {
     margin: 2px;
     
+}
+
+input{
+    width: 10%;
+    text-align: right;
 }

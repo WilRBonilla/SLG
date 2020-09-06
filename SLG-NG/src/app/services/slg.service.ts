@@ -21,7 +21,14 @@ export class SlgService {
 
   private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-  url : string ='http://localhost:8080/'
+
+  // EC2
+  // url:String = 'http://ec2-18-216-48-96.us-east-2.compute.amazonaws.com:8081/';
+  // Localhost
+  // Localhost
+  url : string ='http://localhost:8081/'
+  // url : string ='http://localhost:8080/'
+
 
   // -------------------------INGREDIENT SERVICES--------------------------------------------------------------------
 
@@ -89,7 +96,9 @@ export class SlgService {
   addToMyList(id,listEntry: ShoppingListEntry): Observable<ShoppingListEntry>{
     return this.http.post<ShoppingListEntry>(this.url+'addShoppingList/'+id, listEntry, {headers: this.headers});
   }
-
+  updateMyList(id,listEntry: ShoppingListEntry): Observable<ShoppingListEntry>{
+    return this.http.put<ShoppingListEntry>(this.url+'updateList/'+id, listEntry, {headers: this.headers});
+  }
   // This function appends UID to url and adds (or updates current entries) to the DB.
   updateShoppingList(uid:number, shopList: ShoppingListEntry[]): Observable<ShoppingListEntry[]>{
     // Returns only the updated entities in the shopping list.

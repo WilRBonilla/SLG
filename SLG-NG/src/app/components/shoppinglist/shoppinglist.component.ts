@@ -18,7 +18,7 @@ export class ShoppinglistComponent implements OnInit {
   ngOnInit(): void {
     this.customItems = JSON.parse(localStorage.getItem('customItems'));
     this.pantryListLoad();
-    if(this.customItems == null){
+    if (this.customItems == null) {
       this.shoppingListLoad();
     } else {
       this.shoppingListLoad(this.customItems);
@@ -35,9 +35,8 @@ export class ShoppinglistComponent implements OnInit {
   customItems: Array<ShoppingListEntry> = [];
   outPantry: Array<Pantry> = [];
 
-
   selected: boolean;
-  notes: string = "";
+  notes: string = '';
   globalUser: Shopper = JSON.parse(localStorage.getItem('user'));
 
   // Example fake data for funzies
@@ -48,165 +47,195 @@ export class ShoppinglistComponent implements OnInit {
   //   2,
   //   this.note
   // );
-  
-  
 
-// Working
+  // Working
   shoppingListLoad(custom?: Array<ShoppingListEntry>) {
     let saveduser = JSON.parse(localStorage.getItem('user'));
 
     this.slservice
       .getUserShoppingListEntries(saveduser.u_id)
       .subscribe((response) => {
-        this.shoppingList = response;
-        if(custom != null){
-          this.shoppingList = this.shoppingList.concat(custom);
-        }
+        this.shoppingList = JSON.parse(JSON.stringify(response));
         
       });
   }
   // When an item is clicked, we add it to a list of items we intend to purchase.
-  purchaseItem(entry :ShoppingListEntry){
+  purchaseItem(entry: ShoppingListEntry) {
     let ingred = entry.ingredient;
 
-    let pantryEntry = new Pantry(9000000, this.globalUser, ingred, entry.amount)
+    let pantryEntry = new Pantry(
+      9000000,
+      this.globalUser,
+      ingred,
+      entry.amount
+    );
 
-    if(this.purchaseList.length == 0){
-      this.purchaseList.push(pantryEntry)
+    if (this.purchaseList.length == 0) {
+      this.purchaseList.push(pantryEntry);
     } else {
       for (let index = 0; index < this.purchaseList.length; index++) {
-
-        if(entry.ingredient.name == this.purchaseList[index].ingredient.name){
+        if (entry.ingredient.name == this.purchaseList[index].ingredient.name) {
           break;
-        } else if ( index == this.purchaseList.length-1){
+        } else if (index == this.purchaseList.length - 1) {
           this.purchaseList.push(pantryEntry);
         }
-        
       }
-      console.log("SELECTED ITEM");
+      console.log('SELECTED ITEM');
       console.log(this.purchaseList);
     }
-    
   }
   // Adds custom item.
-  addCustom(){
-    if(this.notes != ""){
-      this.customItems = JSON.parse(localStorage.getItem("customItems"));
-      if(this.customItems == null){
+  addCustom() {
+    if (this.notes != '') {
+      this.customItems = JSON.parse(localStorage.getItem('customItems'));
+      if (this.customItems == null) {
         this.customItems = [];
       }
-      let customIngredient = new Ingredient(90000, this.notes, "number");
-      let customEntry = new ShoppingListEntry(9000, customIngredient, this.globalUser, 1);
+      let customIngredient = new Ingredient(null, this.notes, 'number');
+      let customEntry = new ShoppingListEntry(
+        null,
+        customIngredient,
+        this.globalUser,
+        1
+      );
       this.customItems.push(customEntry);
-      localStorage.setItem("customItems", JSON.stringify(this.customItems));
-      this.shoppingList.push(customEntry);
-      console.log(this.shoppingList)
+      localStorage.setItem('customItems', JSON.stringify(this.customItems));
     }
-      
   }
 
-  selectAll(){
-    this.shoppingList.forEach(e => { 
+  selectAll() {
+    this.shoppingList.forEach((e) => {
       this.purchaseItem(e);
     });
   }
-  deselectAll(){
+  deselectAll() {
     this.purchaseList = [];
-    
   }
 
-  
-
-// Functions dealing with the pantrylist
-  pantryListLoad(){
-    this.slservice.getPantryByUser(this.globalUser.u_id)
-    .subscribe(
-      (response) => {
+  // Functions dealing with the pantrylist
+  pantryListLoad() {
+    this.slservice
+      .getPantryByUser(this.globalUser.u_id)
+      .subscribe((response) => {
         this.pantryList = response;
         this.outPantry = JSON.parse(JSON.stringify(this.pantryList));
-        
-        console.log("PANTRY LIST FROM DB: ");
+
+        console.log('PANTRY LIST FROM DB: ');
         console.log(this.pantryList);
-      }
+      });
 
-
-    )
-
-    this.slservice.getPantryByUser(this.globalUser.u_id)
-    .subscribe(
-      (response) => {
+    this.slservice
+      .getPantryByUser(this.globalUser.u_id)
+      .subscribe((response) => {
         // this.outPantry = response;
-      }
-    )
+      });
   }
+
+  addQuantity(q:ShoppingListEntry){
+    q.amount=q.amount+1;
+    this.shoppingList.forEach(z => {console.log(z.amount)});
+    this.slservice.updateShoppingList(this.globalUser.u_id, this.shoppingList).subscribe();
+    this.router.navigate(['/shoppinglist']);
+  }
+  subtractQuantity(q:ShoppingListEntry){
+    q.amount=(q.amount-1);
+    this.shoppingList.forEach(z => {console.log(z.amount)});
+    this.slservice.updateShoppingList(this.globalUser.u_id, this.shoppingList).subscribe();
+    this.router.navigate(['/shoppinglist']);
+  }
+
+
+
+ 
 
 
   purchase(){
     localStorage.removeItem("customItems");
+    console.log("PURCHASING ITEMS:");
+    console.log(this.purchaseList);
+    // Check if pantry is empty
+    if (this.outPantry.length == 0) {
+      console.log("Empty pantry, ADDING item(s)")
+      var copyList = JSON.parse(JSON.stringify(this.purchaseList)); 
+      this.outPantry = this.outPantry.concat(copyList);
+    } else {
    
+
     // For every item we intend to purchase,
     for (let j = 0; j < this.purchaseList.length; j++) {
-
       // Search every item in the pantry
       for (let i = 0; i < this.outPantry.length; i++) {
-      
-        if(this.outPantry[i].ingredient.name == this.purchaseList[j].ingredient.name){
-              console.log("ING FOUND, ADDING AMT")
-              let selected: Pantry = JSON.parse(JSON.stringify(this.purchaseList[j]));
+        if (
+          this.outPantry[i].ingredient.name ==
+          this.purchaseList[j].ingredient.name
+        ) {
+          console.log('ING FOUND, ADDING AMT');
+          let selected: Pantry = JSON.parse(
+            JSON.stringify(this.purchaseList[j])
+          );
 
-              this.outPantry[i].amount += selected.amount;
-              // this.outPantry[i].amount = pantryAMT + purchaseAMT;
+          this.outPantry[i].amount += selected.amount;
 
-              console.log(this.outPantry[i].amount);
-              console.log(this.purchaseList[j].amount)
-              break; // stops searching pantry the rest of the pantry if item is found.
-            } 
-        else if(this.outPantry[i].ingredient.name != this.purchaseList[j].ingredient.name && i == (this.outPantry.length-1)){
-          console.log("ING NOT FOUND, CREATING PANTRY ENTRY")
+          break; // stops searching pantry the rest of the pantry if item is found.
+        } else if (
+          this.outPantry[i].ingredient.name !=
+            this.purchaseList[j].ingredient.name &&
+          i == this.outPantry.length - 1
+        ) {
+          console.log('ING NOT FOUND, CREATING PANTRY ENTRY');
 
           this.outPantry.push(JSON.parse(JSON.stringify(this.purchaseList[j])));
           break;
         }
-
       }
-      
-    
     }
-    console.log("SENDING PANTRYLIST TO DB: ")
-    console.log(this.outPantry);
 
-    
-    this.slservice.addPantryList(this.outPantry).subscribe(
-      (response) => {
-        console.log("success");
-        this.router.navigate(['/pantry']);
-        
-        // THIS CURRENTLY DELETES EVERYTHING IN USER'S LIST LOL
-    //     this.shoppingList.forEach(sl => {
+  }
+    console.log('SENDING PANTRYLIST TO DB: ');
+    this.outPantry.forEach(p => {console.log(p.ingredient.name)});
+  
 
-    //       this.slservice.deleteShoppingListEntry(sl.entry_id).subscribe(
-    //         (response) => {
-    //           console.log("delete from DB success");
-    //         }
+    // This will add to pantry and remove from shoppinglist. Probably abstract it to another function.
+    this.slservice.addPantryList(this.outPantry).subscribe((response) => {
+      let deleted: Array<ShoppingListEntry> = [];
+      console.log('success');
+      this.router.navigate(['/pantry']);
 
-    //       );
-    //     }
+      this.purchaseList.forEach((p) => {
+        console.log("Pantry item we want to delete")
+        console.log(p.ingredient.name)
+        this.shoppingList.forEach((sl) => {
+          console.log("shpping list item to delete")
+          if( p.ingredient.ing_id == sl.ingredient.ing_id){
+            this.slservice.deleteShoppingListEntry(sl.entry_id).subscribe();
+            
+          }
 
-
-    //     )
-          
-        
-        
-      }
-
-
-    )
+        });
+      });
+      console.log("DELETED FROM LIST");
+      deleted.forEach(d => {console.log(d.ingredient.name)})
+    });
   }
 
-
-
-
-
-
-
+  clearSelected(selected?: Array<Pantry>) {
+    this.purchaseList = [];
+    console.log('CLEARING SELECTIONS');
+    console.log(this.purchaseList);
+  }
+  clearList() {
+    localStorage.removeItem('customItems');
+    this.customItems = [];
+    
+    this.shoppingList.forEach((sl) => {
+      this.slservice
+        .deleteShoppingListEntry(sl.entry_id)
+        .subscribe((response) => {
+          
+          console.log('delete from DB success');
+        });
+        
+    });
+    this.shoppingList = [];
+  }
 }
