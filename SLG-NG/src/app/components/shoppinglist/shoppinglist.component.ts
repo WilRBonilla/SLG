@@ -134,12 +134,26 @@ export class ShoppinglistComponent implements OnInit {
   addQuantity(q:ShoppingListEntry){
     q.amount=q.amount+1;
     this.shoppingList.forEach(z => {console.log(z.amount)});
+    this.purchaseList.forEach(w => {
+      if(w.ingredient.ing_id == q.ingredient.ing_id){
+        console.log("ADDING TO ING:" + w.ingredient.ing_id);
+        console.log(++w.amount);
+        console.log(w.amount)
+      }
+    });
     this.slservice.updateShoppingList(this.globalUser.u_id, this.shoppingList).subscribe();
     this.router.navigate(['/shoppinglist']);
   }
   subtractQuantity(q:ShoppingListEntry){
     q.amount=(q.amount-1);
     this.shoppingList.forEach(z => {console.log(z.amount)});
+    this.purchaseList.forEach(w => {
+      if(w.ingredient.ing_id == q.ingredient.ing_id){
+        console.log("ADDING TO ING:" + w.ingredient.ing_id);
+        console.log(--w.amount);
+        console.log(w.amount)
+      }
+    });
     this.slservice.updateShoppingList(this.globalUser.u_id, this.shoppingList).subscribe();
     this.router.navigate(['/shoppinglist']);
   }
@@ -217,12 +231,13 @@ export class ShoppinglistComponent implements OnInit {
       deleted.forEach(d => {console.log(d.ingredient.name)})
     });
   }
-
+// Only clears selected items.
   clearSelected(selected?: Array<Pantry>) {
     this.purchaseList = [];
     console.log('CLEARING SELECTIONS');
     console.log(this.purchaseList);
   }
+  // DELETES ALL
   clearList() {
     localStorage.removeItem('customItems');
     this.customItems = [];
