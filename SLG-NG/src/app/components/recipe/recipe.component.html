@@ -45,8 +45,8 @@
         </div>
         <div class="card-body">
           <img class=img-fluid mx-auto src="assets/{{r.title}}.jpg" alt="Icon">
-          <p class="card-text">{{ r.cuisine }}</p>
-          <p class="card-text"><small class="text-muted">#{{ r.tag1 }}  &nbsp;&nbsp;  #{{ r.tag2 }}</small></p>
+          <p class="card-text text-muted">#{{ r.cuisine }}</p>
+          <p class="card-text text-muted">#{{ r.tag1 }}  &nbsp;&nbsp;  #{{ r.tag2 }}</p>
 
           <button type="button" (click)="addToSelections(r)" class="btn btn-info" > Add to List &#43;</button>
   
