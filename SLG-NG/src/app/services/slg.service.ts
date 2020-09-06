@@ -21,13 +21,13 @@ export class SlgService {
 
   private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
+
   // EC2
   // url:String = 'http://ec2-18-216-48-96.us-east-2.compute.amazonaws.com:8081/';
   // Localhost
   // Localhost
   url : string ='http://localhost:8081/'
   // url : string ='http://localhost:8080/'
-
 
 
   // -------------------------INGREDIENT SERVICES--------------------------------------------------------------------
@@ -147,8 +147,9 @@ export class SlgService {
     return this.http.get<Recipe[]>(this.url+'recipe');
   }
 
-
-
+  deleteRecipe(recipeId: number): Observable<Recipe> {
+    return this.http.delete<Recipe>(this.url + 'recipe/' + recipeId)
+  }
 
  // -----------------------------RECIPE INGREDIENT SERVICES ---------------------------------------------------------------------
 
@@ -160,5 +161,11 @@ export class SlgService {
   getRecipeIngredients(r_id): Observable <RecipeIngredient[]>{
     return this.http.get<RecipeIngredient[]>(this.url+'recipeingredient/'+r_id);
   }
+
+ // -----------------------------STOCK SERVICES ---------------------------------------------------------------------
+
+  getAllStock() :Observable<Stock[]> {
+    return this.http.get<Stock[]>(this.url+'stock')
+  } 
   
 }

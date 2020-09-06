@@ -1,4 +1,6 @@
 <div class="container">
+
+    
     <h1>Admin Page</h1>
     <div class="row">
         <div class="col">
@@ -17,9 +19,17 @@
                         <label for="unitsValue">Units:</label>
                         <select class="form-control" type="text" [(ngModel)]="units" id="unitsValue" name="units">
                             <option> </option>
-                            <option value="number">Number</option>
                             <option value="ounces">Ounces</option>
+                            <option value="cups">Cups</option>
+                            <option value="tbsp">Tablespoons</option>
+                            <option value="tsp">Teaspoons</option>
                         </select>
+                    </div>
+                    <div *ngIf="addedAlert" class="alert alert-info alert-dismissible fade show" role="alert">
+                        {{addedName}} has been added
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                     <button type="submit" class="btn btn-primary">Add Ingredient</button>
                 </div>
@@ -36,6 +46,12 @@
                             <option></option>
                             <option *ngFor="let i of allIngredients" value="{{i.ing_id}}">{{i.name}}</option>
                         </select>
+                    </div>
+                    <div *ngIf="deletedAlert" class="alert alert-info alert-dismissible fade show" role="alert">
+                         Ingredient has been deleted 
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                     <button type="submit" class="btn btn-danger">Delete Ingredient</button>
                 </div>
@@ -96,6 +112,12 @@
                             <option *ngFor="let i of allIngredients" value="{{i.ing_id}}">{{i.units}} of {{i.name}}</option>
                         </select>
                     </div>
+                    <div *ngIf="addedRecipeAlert" class="alert alert-info alert-dismissible fade show" role="alert">
+                        {{addedRecipeName}} has been added
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                     <button type="submit" class="btn btn-primary">Add Recipe</button>
                 </div>
             </div>
@@ -119,4 +141,32 @@
             </div>
         </div>
     </form>
+    <div class="row">
+        <div class="col">
+            <form (submit)="deleteRecipe()">
+                <div>
+                    <h5>Delete a recipe from the database</h5>
+                    <div class="form-group">
+                        <label for="recipe">Recipe:</label>
+                        <select class="form-control" type="text" [(ngModel)]="selectedRecipeId" id="recipe"
+                            name="recipe">
+                            <option></option>
+                            <option *ngFor="let i of allRecipes" value="{{i.r_id}}">{{i.title}}</option>
+                        </select>
+                    </div>
+                    <div *ngIf="deletedRecipeAlert" class="alert alert-info alert-dismissible fade show" role="alert">
+                        Recipe has been deleted
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <button type="submit" class="btn btn-danger">Delete Recipe</button>
+                </div>
+            </form>
+        </div>
+        <div class="col">
+          <h5>More admin functionality coming soon...</h5>  
+        </div>
+    </div>
+
 </div>
