@@ -36,8 +36,18 @@
     </table>
    
     <button class="btn btn-info" (click) = "selectAll()">Select All</button>
-    <button class="btn btn-info" (click) = "clearSelected()">Deselect All</button>
+    <button class="btn btn-info">Deselect All</button>
     <button class="btn btn-info" (click) = "purchase()">Purchase Selected Items</button>
-    <button class="btn btn-danger" (click) = "clearList()">Delete all</button>
+    <button class="btn btn-danger" (click) = "clearList()"
+    data-toggle="popover"
+    data-placement="Top"
+    data-trigger="hover"
+    title="Are You Sure?"
+    data-content="This will remove ALL of your items">Delete all</button>
   </div>
 </div>
+<script>
+$(function () {
+  $('[data-toggle="popover"]').popover();
+})
+</script>
