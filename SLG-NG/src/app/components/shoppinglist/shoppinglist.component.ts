@@ -132,21 +132,6 @@ export class ShoppinglistComponent implements OnInit {
       });
   }
 
-  // updateQuantity(q:ShoppingListEntry){
-  //   console.log(q);
-
-
-  //   this.shoppingList.forEach(l => {
-  //     console.log("to be checked: "+ q.entry_id);
-  //     console.log("shopping list amount: " + l.entry_id);
-  //     if(q.entry_id == l.entry_id){
-  //       console.log("YES");
-  //       l.amount == q.amount;
-  //     }
-
-      
-  //   })
-
 
   addQuantity(q:ShoppingListEntry){
     q.amount=q.amount+1;
