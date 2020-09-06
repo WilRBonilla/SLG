@@ -40,6 +40,7 @@ export class RecipeComponent implements OnInit {
   riList2: Array<RecipeIngredient> = [];
   user: Shopper;
   hide: string = 'visibility: hidden; width:50';
+  getButton: Boolean=false;
 
   recipeResults() {
     console.log(this.searched);
@@ -97,6 +98,7 @@ export class RecipeComponent implements OnInit {
       if (r.r_id == this.resultList[i].r_id) {
         let tRec: Recipe = this.resultList[i];
         this.selectList.push(tRec);
+        this.getButton=true;
       }
     }
   };

@@ -34,7 +34,7 @@ export class ShoppinglistComponent implements OnInit {
   purchaseList: Array<Pantry> = [];
   customItems: Array<ShoppingListEntry> = [];
   outPantry: Array<Pantry> = [];
-
+  color:string;
 
   selected: boolean;
   notes: string = '';
@@ -62,6 +62,7 @@ export class ShoppinglistComponent implements OnInit {
   }
   // When an item is clicked, we add it to a list of items we intend to purchase.
   purchaseItem(entry: ShoppingListEntry) {
+    this.color="table-primary"
     let ingred = entry.ingredient;
 
     let pantryEntry = new Pantry(
@@ -131,7 +132,6 @@ export class ShoppinglistComponent implements OnInit {
         // this.outPantry = response;
       });
   }
-
 
   addQuantity(q:ShoppingListEntry){
     q.amount=q.amount+1;
