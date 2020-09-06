@@ -35,21 +35,24 @@
     </div></div>
     </div>
 
-    
-    <div class="card-deck" >
-      <div class="card" *ngFor="let r of resultList">
+    <div class="container">
+      <div class="row">
+      <section class="col-6" *ngFor="let r of resultList">
+      <div class="card mt-3" >
         <div class="card-header">
-          {{ r.title }}
+          <h2 class="card-title">{{ r.title }}</h2>
+          
         </div>
         <div class="card-body">
-          <p class="card-text">{{ r.cuisine }}</p>
-          <p class="card-text"><small class="text-muted">#{{ r.tag1 }}  &nbsp;&nbsp;  #{{ r.tag2 }}</small></p>
+          <img class=img-fluid mx-auto src="assets/{{r.title}}.jpg" alt="Icon">
+          <p class="card-text text-muted">#{{ r.cuisine }}</p>
+          <p class="card-text text-muted">#{{ r.tag1 }}  &nbsp;&nbsp;  #{{ r.tag2 }}</p>
 
-          <button type="button" (click)="addToSelections(r)" class="btn btn-info" >&#43; Add to List"</button>
+          <button type="button" (click)="addToSelections(r)" class="btn btn-info" > Add to List &#43;</button>
   
-          <button (click)="showRecipeIngredients(r)"type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal">Show Ingredients</button>
+          <button (click)="showRecipeIngredients(r)"type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal">View</button>
         
-
+          
 
           <!-- Modal -->
           <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -61,31 +64,35 @@
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-                <div class="modal-body"*ngFor ="let i of riList2">
-                  {{i.amount}} {{i.ingredient.units}}  {{i.ingredient.name}} 
+                <div class="modal-body">
+                  <ul class="list-group" *ngFor ="let i of riList2">
+                    <li class="list-group-item list-group-item">{{i.amount}} {{i.ingredient.units}}  {{i.ingredient.name}} </li>
+                </ul>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Add to List</button>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div><br>
+    </section></div>
+  </div>
+   <br>
     <h3 [innerHTML]="sTitle"></h3>
-    <div class="card-deck" >
-      <div class="card" *ngFor="let r of selectList">
-        <div class="card-header">
-          {{ r.title }}
-        </div>
+    <div class="row">
+      <section class="col-4" *ngFor="let r of selectList">
+      <div class="card mt-2" >
+        <p id="recipeHead" class="card-title">
+         {{ r.title }}
+        </p>
         <div class="card-body">
           <button type="button" (click)="addToSelections(r)" class="btn btn-info" > Double this Recipe</button>
         </div>
       </div>
-      <button class="btn btn-primary" (click)="getIngredients()" >Add all to Shopping List</button>
-      
-    </div><br>
-             <!-- <button  class="btn btn-primary mr-2" id="addList" type="submit" style="width:200px">Add all to Shopping List</button> -->
-            </div>
+    </section>
+    <br>
+    </div><button *ngIf="getButton" class="btn btn-primary" (click)="getIngredients()" >Add all to Shopping List</button>
+
+   </div>

@@ -24,7 +24,6 @@ export class RecipeComponent implements OnInit {
   constructor(private rservice: SlgService) {}
 
   ngOnInit(): void {
-    this.getShopper();
   }
 
   searched: string = '';
@@ -36,22 +35,12 @@ export class RecipeComponent implements OnInit {
   search: string = '';
   sTitle: string;
   resultList: Array<Recipe> = [];
-  r: Recipe;
-  i: RecipeIngredient;
   selectList: Array<Recipe> = [];
   riList: Array<RecipeIngredient> = [];
-  iList: Array<RecipeIngredient> = [];
-
   riList2: Array<RecipeIngredient> = [];
-
-  sleList: Array<ShoppingListEntry> = [];
-  nonDupeList: Array<RecipeIngredient> = [];
-  nonDupe: Array<ShoppingListEntry> = [];
   user: Shopper;
   hide: string = 'visibility: hidden; width:50';
-  amt: number;
-  ria: Ingredient;
-  dri: Ingredient;
+  getButton: Boolean=false;
 
   recipeResults() {
     console.log(this.searched);
@@ -109,6 +98,7 @@ export class RecipeComponent implements OnInit {
       if (r.r_id == this.resultList[i].r_id) {
         let tRec: Recipe = this.resultList[i];
         this.selectList.push(tRec);
+        this.getButton=true;
       }
     }
   };
@@ -118,117 +108,21 @@ export class RecipeComponent implements OnInit {
     });
   }
   getIngredients() {
+    this.user = JSON.parse(localStorage.getItem('user'));
     for (let i = 0; i < this.selectList.length; i++) {
-      this.rservice
-        .getRecipeIngredients(this.selectList[i].r_id)
-        .subscribe((response) => {
-          localStorage.setItem(
-            'ingredList' + this.user.u_id,
-            JSON.stringify(response)
-          );
-          this.riList = this.riList.concat(response);
-
-          this.addToMyShoppingList();
-        });
+      this.rservice.getRecipeIngredients(this.selectList[i].r_id).subscribe(
+        (response) => {
+          localStorage.setItem('ingredList' + this.user.u_id,JSON.stringify(response));
+            this.riList =JSON.parse(JSON.stringify(response));
+              for(let p=0;p<this.riList.length;p++){
+                let entry= new ShoppingListEntry(600,this.riList[p].ingredient,this.user,this.riList[p].amount)
+                this.rservice.addToMyList(this.user.u_id, entry).subscribe(
+                  (response) => {
+                  console.log('added');
+                  console.log(entry)
+                });
+          }
+        }
+      )}
     }
   }
-  addToMyShoppingList() {
-    this.user = JSON.parse(localStorage.getItem('user'));
-    let id = 600;
-    // Gets the user's shoppinglist entries currently in DB.
-    this.rservice.getUserShoppingListEntries(this.user.u_id).subscribe(
-      (response) => {
-        // Making a copy of the response cause response objs are weird.
-        this.sleList = JSON.parse(JSON.stringify(response));
-        // For every RI (per recipe), search through the shopping list for a match.
-        if (this.sleList.length != 0) { // Let's first check if the shopping list is empty.
-
-          for (let i = 0; i < this.riList.length; i++) {
-            console.log(this.riList[i].ingredient);
-            let ri: Ingredient = JSON.parse(JSON.stringify(this.riList[i].ingredient));
-            let match: boolean = false;
-            for (let p = 0; p < this.sleList.length; p++) {
-              // Ingredient already in shopping list.
-              let asle: Ingredient = JSON.parse(JSON.stringify(this.sleList[p].ingredient));
-              console.log(asle.name + " " + ri.name);
-              // If a matching name is found (ID could be an alternative)
-              if (ri.name == asle.name) {
-                console.log(this.sleList[p].amount);
-                this.amt = this.sleList[p].amount;
-                console.log('duplicate');
-                let newamt = this.amt + this.riList[i].amount;
-                let upEntry = new ShoppingListEntry(
-                  this.sleList[p].entry_id,
-                  this.sleList[p].ingredient,
-                  this.user,
-                  newamt
-                );
-                // Added this log for debugging.
-                console.log("UPDATING AMOUNT FOR: " + upEntry.ingredient.name + " TO " + upEntry.amount);
-                // updateMyList works, but it might be slightly safer to send an entire array so Hibernate
-                // can batch update in DB. 
-                this.rservice.updateMyList(this.user.u_id, upEntry).subscribe(
-                  (response) => {
-                    console.log('updated amount');
-                  });
-                break;
-              } else if (p == this.sleList.length -1 ){  // Changed this to only happen after we reach the END of the shopping list.
-                let entry = new ShoppingListEntry(
-                  id++,
-                  this.riList[i].ingredient,
-                  this.user,
-                  this.riList[i].amount
-                );
-                console.log(entry);
-                this.rservice
-                  .addToMyList(this.user.u_id, entry)
-                  .subscribe((response) => {
-                    console.log('added' + entry);
-                  });
-              }
-            }
-
-            // for(let i=0; i<this.riList.length; i++){
-            //   this.ria= JSON.parse(JSON.stringify(this.riList[i].ingredient));
-            //   this.nonDupeList.push(this.riList[i]);
-            //   for(let p=0; p<this.nonDupeList.length;p++){
-            //     this.dri= JSON.parse(JSON.stringify(this.nonDupeList[p].ingredient));
-            // // for(let i=0; i<this.sleList.length; i++){
-            // //   this.ria= JSON.parse(JSON.stringify(this.sleList[i].ingredient));
-            // //   this.nonDupe.push(this.sleList[i]);
-            // //   for(let p=0; p<this.nonDupe.length;p++){
-            // //     this.dri= JSON.parse(JSON.stringify(this.nonDupe[p].ingredient))
-            // }
-            // if(this.ria.name==this.dri.name){
-
-            //     }else{
-            //       console.log("add")
-            //     let entry = new ShoppingListEntry(id++,this.nonDupe[i].ingredient,this.user,this.nonDupe[i].amount);
-            //   this.rservice.addToMyList(this.user.u_id,entry).subscribe(
-            //    (response)=>{
-            //      console.log("added");
-            //       }
-            // )
-            //     }
-            // }
-            // }
-            // }
-          }
-        } else {
-          // If it's empty, do this.
-          let outputArray: Array<ShoppingListEntry> = [];
-          // For every recipe ingredient, simply create a new entry and add it to the outputArray.
-          this.riList.forEach(ring => {
-            outputArray.push(new ShoppingListEntry(99999, ring.ingredient, this.user, ring.amount));
-          });
-          // Send all the entries at once.
-          this.rservice.updateShoppingList(this.user.u_id, outputArray).subscribe();
-
-        }
-      });
-  }
-
-  getShopper() {
-    this.user = JSON.parse(localStorage.getItem('user'));
-  }
-}
