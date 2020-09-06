@@ -34,7 +34,6 @@ export class ShoppinglistComponent implements OnInit {
   purchaseList: Array<Pantry> = [];
   customItems: Array<ShoppingListEntry> = [];
   outPantry: Array<Pantry> = [];
-  color:string;
 
   selected: boolean;
   notes: string = '';
