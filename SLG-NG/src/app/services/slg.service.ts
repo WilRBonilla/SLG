@@ -152,5 +152,11 @@ export class SlgService {
   getRecipeIngredients(r_id): Observable <RecipeIngredient[]>{
     return this.http.get<RecipeIngredient[]>(this.url+'recipeingredient/'+r_id);
   }
+
+ // -----------------------------STOCK SERVICES ---------------------------------------------------------------------
+
+  getAllStock() :Observable<Stock[]> {
+    return this.http.get<Stock[]>(this.url+'stock')
+  } 
   
 }
