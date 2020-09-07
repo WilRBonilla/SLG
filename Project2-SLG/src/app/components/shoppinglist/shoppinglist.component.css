@@ -1,0 +1,50 @@
+.myShoppingList{
+    margin: auto;
+    text-align: center;
+}
+
+table{
+
+    margin: auto;
+    cursor: pointer 
+}
+
+
+.div {
+    animation: expand 1s;
+    box-shadow: 5px 10px 18px lightslategray;
+    padding: 20px;
+    width: 70%;
+    height: fit-content;
+    font-family: sans-serif;
+    color: darkblue;  
+    border-radius: 35px;
+    text-align: center;
+    margin: auto;
+}
+
+h1 {
+    animation: expand 1.5s;
+}
+
+button {
+    margin: 2px;
+    
+}
+
+input{
+    width: 10%;
+    text-align: right;
+}
+
+@keyframes expand {
+    0% {
+      transform: scale(0.1);
+      opacity: 0;
+    }
+    
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }

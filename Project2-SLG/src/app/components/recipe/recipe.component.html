@@ -1,0 +1,107 @@
+
+<div class="div">
+  <div class=container-fluid 
+  style=" text-align:left; color:white; border: 2px solid; background-color:  #45c3cc">
+  <h1 style="font-size:65px; padding: 40px 70px">Recipes</h1>
+  </div>
+
+  <div class="container" id="myGroup">
+    <p>
+        <a id="searchD"class="btn btn-info" data-toggle="collapse" href="#collapser" role="button" aria-expanded="false" aria-controls="collapseExample" style="margin:30px; padding:15px 40px; width:250px">
+            Search By Description 
+        </a>
+        <button id="searchN" class="btn btn-info" type="button"  data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2" style="margin:30px; padding:15px 40px; width:250px">
+            Search By Name 
+        </button>
+    </p>
+  
+    <div class="collapse" id="collapser" data-parent="#myGroup" text-center>
+     <div class="card-header">
+          Enter Description:
+        </div>
+        <div class="card-body">
+          <input class="form-control mr-2" [(ngModel)]="searched" name="cuis" type = "text" id="recipecuisine" placeholder="eg. Spicy, Italian"  style="margin:30px">
+          <button class="btn btn-primary mr-2" (click)="recipeResults()" id="searchCuisine" type="submit" style="width:200px">Search ⮞</button>
+        </div>
+      </div>
+    <div class="collapse" id="collapseExample2" data-parent="#myGroup">
+      <div class="card-header">
+        Enter Recipe Name:
+      </div>
+      <div class="card-body">
+            <input class="form-control mr-2" [(ngModel)]="name" name="searchname" type = "text" id="recipename" placeholder="Desired Recipe" style="margin:30px">
+         
+            <button class="btn btn-primary mr-2" (click)="nameResults()" id="searchName" type="submit" style="width:200px">Search ⮞</button>
+        
+    </div></div>
+    </div>
+
+    <div class="row">
+    <section class="col-9">
+      <div class="row">
+      <section class="col-6" *ngFor="let r of resultList">
+      <div class="card mt-3" >
+        <div class="card-header">
+          <h2 class="card-title">{{ r.title }}</h2>
+          
+        </div>
+        <div class="card-body">
+          <img class=img-fluid mx-auto src="assets/{{r.title}}.jpg" alt="Icon">
+          <p class="card-text text-muted">#{{ r.cuisine }}</p>
+          <p class="card-text text-muted">#{{ r.tag1 }}  &nbsp;&nbsp;  #{{ r.tag2 }}</p>
+          <button id="show" (click)="showRecipeIngredients(r)"type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal">View</button>
+          <button id="add" type="button" (click)="addToSelections(r)"(click)="r.clicked = !r.clicked" [innerHTML]= "r.clicked ? 'Double this Recipe' : 'Add To List &#43;' "[class] ="r.clicked ? 'btn btn-success' : 'btn btn-info' "></button>
+
+          <!-- Modal -->
+          <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document" >
+              <div class="modal-content"  >
+                <div class="modal-header" >
+                  <h2  class="modal-title" id="exampleModalLabel">Ingredients</h2>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <ul class="list-group" *ngFor ="let i of riList2">
+                    <li class="list-group-item list-group-item">{{i.amount}} {{i.ingredient.units}}  {{i.ingredient.name}} </li>
+                </ul>
+                </div>
+                <div class="modal-footer">
+                  <button id ="close" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</section>
+<section class="col-3">
+  <div *ngIf="noSelect" class="container">
+    <h5 id="place">Popular Searches</h5>
+    <ul class="list-group list-group-flush">
+    <h4 class="list-group-item">#spicy</h4>
+    <h4 class="list-group-item">#classic</h4>
+    <h4 class="list-group-item">#vegan</h4>
+    <h4 class="list-group-item">#easy</h4>
+      </ul>
+      <br>
+  </div>
+  <div *ngIf="mySelect" class="container">
+    <h5>My Selections</h5>
+    <br>
+      <ul class="list-group list-group-flush">
+        <h4 class="list-group-item" *ngFor="let r of selectList">{{r.title}}</h4>
+      </ul>
+      <br>
+    <button id="send" *ngIf="getButton" class="btn btn-primary" (click)="getIngredients()" >Add all to Shopping List</button>
+    <br>
+    <button *ngIf="finish" id="add" type="button" class = "btn btn-success mt-4" (click)="viewmyList()">Go To Shopping List ⮞</button>
+
+
+  </div>
+  </section> 
+  </div>
+   </div>
