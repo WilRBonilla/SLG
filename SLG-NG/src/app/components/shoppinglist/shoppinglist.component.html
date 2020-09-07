@@ -1,6 +1,9 @@
 <div class="myShoppingList div">
-  <h1>My Shopping List</h1>
-  <h6>Simply click the items you want to select or 'Select All' at the bottomm.</h6>
+  <div class=container-fluid
+    style=" text-align:left; color:white; border: 2px solid; background-color:  #45c3cc">
+  <h1 style="font-size:48px;font-style:bold; padding: 40px 70px;">My Shopping List</h1>
+</div>
+<h6 style = "text-align: center;">Simply click the items you want to select or 'Select All' at the bottomm.</h6>
 
   <div class="container">
     <table class="table table-sm table-striped table-hover">
@@ -36,7 +39,7 @@
     </table>
    
     <button class="btn btn-info" (click) = "selectAll()">Select All</button>
-    <button class="btn btn-info">Deselect All</button>
+    <button class="btn btn-info" (click) = "clearSelected()">Deselect All</button>
     <button class="btn btn-info" (click) = "purchase()">Purchase Selected Items</button>
     <button class="btn btn-danger" (click) = "clearList()"
     data-toggle="popover"
