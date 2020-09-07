@@ -167,5 +167,12 @@ export class SlgService {
   getAllStock() :Observable<Stock[]> {
     return this.http.get<Stock[]>(this.url+'stock')
   } 
+
+  getSingleStock(s_id: number): Observable<Stock> {
+    return this.http.get<Stock>(this.url + 'stock/' + s_id);
+  }
+
+
+
   
 }

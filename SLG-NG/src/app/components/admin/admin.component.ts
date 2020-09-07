@@ -3,6 +3,7 @@ import { SlgService } from '../../services/slg.service';
 import { Ingredient } from '../../models/Ingredient';
 import { Recipe } from '../../models/Recipe';
 import { RecipeIngredient } from '../../models/RecipeIngredient';
+import { Stock } from 'src/app/models/Stock';
 
 @Component({
   selector: 'app-admin',
@@ -16,10 +17,12 @@ export class AdminComponent implements OnInit {
   ngOnInit( ): void {
     this.getAllIngredients(),
     this.getAllRecipes()
+    // this.getAllStock()
   }
 
   allIngredients: Array<Ingredient> = [];
-  allRecipes: Array<Recipe>=[];
+  allRecipes: Array<Recipe> = [];
+  allStock: Array<Stock> = [];
   rId: number = null;
   id: number = null;
   name: string = "";
@@ -50,6 +53,45 @@ export class AdminComponent implements OnInit {
   addedRecipeAlert: boolean = false;
   addedRecipeName: string = "";
   deletedRecipeAlert: boolean = false;
+  inventoryAmount: number = null;
+  inventoryPrice: number = null; 
+  updatedAlert: boolean = false; 
+  selectedInventoryId:number = 0;
+  
+  updateStock() {
+    console.log("update stock clicked");
+    console.log(this.selectedInventoryId);
+    
+
+  }
+
+  onStockChange(newValue){
+    console.log(newValue);
+    this.selectedInventoryId = newValue
+    this.slgService.getSingleStock(newValue).subscribe(
+      (response) => {
+        console.log(response);
+        this.inventoryAmount = response.amount
+        this.inventoryPrice = response.price
+      },
+      (response) => {
+        console.log("Failed to get ingredients list")
+      }
+
+    )
+  }
+
+  // getAllStock(){
+  //   this.slgService.getAllStock().subscribe(
+  //     (response) => {
+  //       console.log(response);
+  //       this.allStock = response;
+  //     },
+  //     (response => {
+  //       console.log("Failed to get stock list")
+  //     })
+  //   )
+  // }
 
 
   getAllIngredients(){
@@ -256,6 +298,7 @@ export class AdminComponent implements OnInit {
       }
     )
   }
+
 
   resetValues() {
     this.id = this.allIngredients.length + 1;
