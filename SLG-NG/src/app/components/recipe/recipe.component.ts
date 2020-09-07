@@ -5,6 +5,7 @@ import { RecipeIngredient } from 'src/app/models/RecipeIngredient';
 import { ShoppingListEntry } from 'src/app/models/ShoppingListEntry';
 import { Shopper } from 'src/app/models/Shopper';
 import { Router } from '@angular/router';
+import { Ingredient } from 'src/app/models/Ingredient';
 
 @Component({
   selector: 'app-recipe',
@@ -27,12 +28,18 @@ export class RecipeComponent implements OnInit {
   search: string = '';
   resultList: Array<Recipe> = [];
   selectList: Array<Recipe> = [];
+  dblList: Array<Recipe> = [];
+  allList: Array<Recipe> = [];
   riList: Array<RecipeIngredient> = [];
   riList2: Array<RecipeIngredient> = [];
   user: Shopper;
+  shoppingList: Array<ShoppingListEntry>;
   noSelect: Boolean= false;
   mySelect: Boolean= false;
   getButton: Boolean=false;
+  finish: Boolean = false;
+
+
 
   recipeResults() {
     this.noSelect=true;
@@ -84,14 +91,19 @@ export class RecipeComponent implements OnInit {
       this.resultList.push(response);
     });
   }
+
   addToSelections = (r) => {
    this.noSelect=false;
    this.mySelect=true;
     for (let i = 0; i < this.resultList.length; i++) {
       if (r.r_id == this.resultList[i].r_id) {
         let tRec: Recipe = this.resultList[i];
+        if(this.selectList.includes(tRec)){
+          this.dblList.push(tRec);
+        }else{
         this.selectList.push(tRec);
         this.getButton=true;
+        }
       }
     }
   };
@@ -101,9 +113,10 @@ export class RecipeComponent implements OnInit {
     });
   }
   getIngredients() {
+    this.allList=this.selectList.concat(this.dblList);
     this.user = JSON.parse(localStorage.getItem('user'));
-    for (let i = 0; i < this.selectList.length; i++) {
-      this.rservice.getRecipeIngredients(this.selectList[i].r_id).subscribe(
+    for (let i = 0; i < this.allList.length; i++) {
+      this.rservice.getRecipeIngredients(this.allList[i].r_id).subscribe(
         (response) => {
           localStorage.setItem('ingredList' + this.user.u_id,JSON.stringify(response));
             this.riList =JSON.parse(JSON.stringify(response));
@@ -112,6 +125,9 @@ export class RecipeComponent implements OnInit {
                 this.rservice.addToMyList(this.user.u_id, entry).subscribe();
           }
         });
-      }this.router.navigate(['/shoppinglist']);
+      }this.finish=true;
     }
+   viewmyList(){
+    this.router.navigate(['/shoppinglist']);
+   } 
   }

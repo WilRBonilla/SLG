@@ -30,6 +30,7 @@
       </div>
       <div class="card-body">
             <input class="form-control mr-2" [(ngModel)]="name" name="searchname" type = "text" id="recipename" placeholder="Desired Recipe" style="margin:30px">
+         
             <button class="btn btn-primary mr-2" (click)="nameResults()" id="searchName" type="submit" style="width:200px">Search ⮞</button>
         
     </div></div>
@@ -48,12 +49,8 @@
           <img class=img-fluid mx-auto src="assets/{{r.title}}.jpg" alt="Icon">
           <p class="card-text text-muted">#{{ r.cuisine }}</p>
           <p class="card-text text-muted">#{{ r.tag1 }}  &nbsp;&nbsp;  #{{ r.tag2 }}</p>
-
-          <button id="add" type="button" (click)="addToSelections(r)" class="btn btn-info" > Add to List &#43;</button>
-  
           <button id="show" (click)="showRecipeIngredients(r)"type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal">View</button>
-        
-          
+          <button id="add" type="button" (click)="addToSelections(r)"(click)="r.clicked = !r.clicked" [innerHTML]= "r.clicked ? 'Double this Recipe' : 'Add To List &#43;' "[class] ="r.clicked ? 'btn btn-success' : 'btn btn-info' "></button>
 
           <!-- Modal -->
           <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -100,6 +97,9 @@
       </ul>
       <br>
     <button id="send" *ngIf="getButton" class="btn btn-primary" (click)="getIngredients()" >Add all to Shopping List</button>
+    <br>
+    <button *ngIf="finish" id="add" type="button" class = "btn btn-success mt-4" (click)="viewmyList()">Go To Shopping List ⮞</button>
+
 
   </div>
   </section> 
