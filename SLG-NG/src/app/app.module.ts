@@ -18,6 +18,7 @@ import { AdminComponent } from './components/admin/admin.component';
 import { SlgService } from './services/slg.service';
 import { NavbarService } from './services/navbar.service';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +30,8 @@ import { NavbarService } from './services/navbar.service';
     HomeComponent,
     PantryComponent,
     AdminComponent,
-    NavbarComponent
+    NavbarComponent,
+
   ],
   imports: [
     BrowserModule,

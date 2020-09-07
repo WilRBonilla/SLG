@@ -5,11 +5,11 @@
     <h1 style="font-size:48px;font-style:bold; padding: 40px 70px;">Pantry</h1>
 
     </div>
-    <button  (click)="displayadd()" onmouseover="style='background: linear-gradient(to right, lightblue, rgb(235, 239, 241), lightblue)'" onmousedown="style='background: linear-gradient(to right, rgb(235, 239, 241), lightblue, rgb(235, 239, 241))'" onmouseup="style='background: linear-gradient(to right, lightblue, rgb(235, 239, 241), lightblue)'" onmouseout="style='background: none'">Add Food Item</button>
+    <button class="btn btn-info" style="margin-right: 10px; margin-top: 10px;" id="addFoodItemButton" (click)="displayadd()" >Add Food Item</button>
 
-    <button *ngIf="isSelected" (click)="removeFoodItem()" onmouseover="style='background: linear-gradient(to right, lightblue, rgb(235, 239, 241), lightblue)'" onmousedown="style='background: linear-gradient(to right, rgb(235, 239, 241), lightblue, rgb(235, 239, 241))'" onmouseup="style='background: linear-gradient(to right, lightblue, rgb(235, 239, 241), lightblue)'" onmouseout="style='background: none'">Remove Food Item</button>
+    <button class="btn btn-info" style="margin-right: 10px; margin-top: 10px;" id="removeFoodButton" *ngIf="isSelected" (click)="removeFoodItem()" >Remove Food Item</button>
 
-    <button *ngIf="isSelected" (click)= "updateFoodItem()" onmouseover="style='background: linear-gradient(to right, lightblue, rgb(235, 239, 241), lightblue)'" onmousedown="style='background: linear-gradient(to right, rgb(235, 239, 241), lightblue, rgb(235, 239, 241))'" onmouseup="style='background: linear-gradient(to right, lightblue, rgb(235, 239, 241), lightblue)'" onmouseout="style='background: none'">Update Food Item</button>
+    <button class="btn btn-info" style="margin-right: 10px; margin-top: 10px;" id="updateFoodButton" *ngIf="isSelected" (click)= "updateFoodItem()" >Update Food Item</button>
 
     <div id="selecteditemdiv" *ngIf="isSelected">
     <h4>Selected Item</h4>
@@ -28,7 +28,7 @@
         </option>
     </select>
     <input type="number" placeholder="Amount" id="addinput" [(ngModel)]="addItemAmount" >
-    <button (click)="addFoodItem()" >Add</button>
+    <button class="btn btn-info" style="margin-left: 10px;" id="addPantryButton" (click)="addFoodItem()" >Add</button>
     </div>
 
     <h3 style="margin-top: 50px;">My Pantry</h3>

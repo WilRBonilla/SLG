@@ -25,7 +25,6 @@ export class AdminComponent implements OnInit {
   name: string = "";
   units: string = "";
   selectedIngredientId: number = null;
-  selectedRecipeId: number = null;
   recipeId: number = 0;
   title: string = "";
   cuisine: string = "";
@@ -43,14 +42,6 @@ export class AdminComponent implements OnInit {
   recipeIngredientId5: number = null;
   newRecipeId: number = null;
   addedRecipe: Recipe = null;
-  addedAlert: boolean = false;
-  addedName: string = "";
-  deletedName :string = "";
-  deletedAlert :boolean = false;
-  addedRecipeAlert: boolean = false;
-  addedRecipeName: string = "";
-  deletedRecipeAlert: boolean = false;
-
 
   getAllIngredients(){
     this.slgService.getAllIngredients().subscribe(
@@ -83,8 +74,6 @@ export class AdminComponent implements OnInit {
 
       (response) => {
         console.log("Ingredient Successfully added");
-        this.addedAlert = true
-        this.addedName = this.name
         console.log(response);
         this.getAllIngredients();
       }, 
@@ -98,41 +87,14 @@ export class AdminComponent implements OnInit {
     )
   }
 
-  findIngName(){
-    this.allIngredients.find(i => i.ing_id == this.selectedIngredientId).name
-  }
-
   deleteIngredient(){
     console.log(this.selectedIngredientId);
     this.slgService.deleteIngredient(this.selectedIngredientId).subscribe(
       (response) => {
-        this.deletedAlert = true;
         console.log("Ingredient Successfully deleted");
         console.log(response);
         this.getAllIngredients();
       }, 
-      (response) => {
-        console.log("Failed to delete Ingredient");
-        console.log(response);
-      },
-      () => {
-        this.resetValues();
-      }
-    )
-  }
-
-  deleteRecipe() {
-    console.log("delete recipe clicked");
-    
-    console.log(this.selectedRecipeId);
-
-    this.slgService.deleteRecipe(this.selectedRecipeId).subscribe(
-      (response) => {
-        console.log("Recipe Successfully deleted");
-        console.log(response);
-        this.deletedRecipeAlert = true;
-        this.getAllRecipes();
-      },
       (response) => {
         console.log("Failed to delete Ingredient");
         console.log(response);
@@ -151,11 +113,8 @@ export class AdminComponent implements OnInit {
       (response) => {
         console.log("Recipe successfully added");
         console.log(response);
-        this.addedRecipeAlert = true;
-        this.addedRecipeName = this.title;
         this.addedRecipe = response
-        this.newRecipeId = response.r_id;
-        this.getAllRecipes();
+        this.newRecipeId = response.r_id
       }, 
       (response) => {
         console.log("Failed to add Recipe");
@@ -163,7 +122,7 @@ export class AdminComponent implements OnInit {
       },
       () => {
         this.addAllRecipeIngredients();
-        this.resetValues();
+        // this.resetValues();
       }
     )
   }
@@ -262,21 +221,6 @@ export class AdminComponent implements OnInit {
     this.name = "";
     this.units = "";
     this.selectedIngredientId = null;
-    this.title = "";
-    this.cuisine= "";
-    this.tag1= "";
-    this.tag2= "";
-    this.ing1amount= null;
-    this.ing2amount= null;
-    this.ing3amount= null;
-    this.ing4amount= null;
-    this.ing5amount= null;
-    this.recipeIngredientId1= null;
-    this.recipeIngredientId2= null;
-    this.recipeIngredientId3= null;
-    this.recipeIngredientId4= null;
-    this.recipeIngredientId5= null;
-
   }
 
 

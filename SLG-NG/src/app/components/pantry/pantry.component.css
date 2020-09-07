@@ -56,7 +56,7 @@ h1 {
 
 }
 
-div button:hover {
+/* div button:hover {
     background: linear-gradient(to right, lightblue, rgb(235, 239, 241), lightblue)
 }
 
@@ -72,7 +72,7 @@ div button {
     transition: 0.25s;
     outline: none;
     margin-top: 30px;
-}
+} */
 
 @keyframes expand {
     0% {

@@ -80,6 +80,7 @@ export class LoginComponent implements OnInit {
 
 
         }else {
+          alert("Incorrect username or password")
           console.log("incorrect log in info");
         }
       }
