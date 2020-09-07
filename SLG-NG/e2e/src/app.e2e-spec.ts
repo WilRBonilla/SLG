@@ -2,8 +2,10 @@ import { AppPage } from './app.po';
 import { browser, logging, by, element } from 'protractor';
 import { protractor } from 'protractor/built/ptor';
 
+
+let page = 'http://localhost:4200/';
 describe('SLG Login Component', () => {
-  let page = 'http://localhost:4200/';
+  // let page = 'http://localhost:4200/';
 
  
 
@@ -97,7 +99,11 @@ describe('SLG Login Component', () => {
     passwordInput.sendKeys("12");
     let loginButton = element(by.id("loginButton"));
     loginButton.click();
-    // WIP
+
+    let shoppingButton = element(by.xpath("/html/body/app-root/div[1]/app-navbar/nav/button[2]"));
+    shoppingButton.click();
+
+    expect(browser.getCurrentUrl()).toBe(page + 'shoppinglist');
   })
 
   it('should navigate to the pantry ', () => {
@@ -109,7 +115,11 @@ describe('SLG Login Component', () => {
     let loginButton = element(by.id("loginButton"));
     loginButton.click();
 
-    // WIP
+    let pantryButton = element(by.xpath("/html/body/app-root/div[1]/app-navbar/nav/button[4]"));
+    pantryButton.click();
+
+    expect(browser.getCurrentUrl()).toBe(page + 'pantry');
+
   
   });
   
@@ -123,8 +133,111 @@ describe('SLG Login Component', () => {
     let loginButton = element(by.id("loginButton"));
     loginButton.click();
 
-    // WIP
+    let recipeButton = element(by.xpath("/html/body/app-root/div[1]/app-navbar/nav/button[3]"));
+    recipeButton.click();
+    expect(browser.getCurrentUrl()).toBe(page + 'recipe')
+
+  
 
   })
 
+
 });
+
+describe('SLG Shopping List Component', ()=> {
+  
+  beforeAll(async () => {
+    browser.get(page);
+    let usernameInput = element(by.id("usernameText"));
+    usernameInput.sendKeys("wb");
+    let passwordInput = element(by.id("passwordText"));
+    passwordInput.sendKeys("12");
+    let loginButton = element(by.id("loginButton"));
+    loginButton.click();
+
+    let recipeButton = element(by.xpath("/html/body/app-root/div[1]/app-navbar/nav/button[3]"));
+    recipeButton.click();
+    element(by.xpath("/html/body/app-root/div[2]/app-recipe/div/div[2]/p/a")).click();
+    browser.sleep(1000);
+    element(by.xpath("/html/body/app-root/div[2]/app-recipe/div/div[2]/div[1]/div[2]/input")).sendKeys("italian");
+    element(by.xpath("/html/body/app-root/div[2]/app-recipe/div/div[2]/div[1]/div[2]/button")).click();
+    //lasagna add button
+    let lasagnaAdd = element(by.xpath("/html/body/app-root/div[2]/app-recipe/div/div[3]/div/section[3]/div/div[2]/button[1]"));
+    lasagnaAdd.click();
+    let listAdd = element(by.xpath("/html/body/app-root/div[2]/app-recipe/div/button"));
+    listAdd.click();
+  });
+  beforeEach(async () =>{
+    
+
+    let shoppingButton = element(by.xpath("/html/body/app-root/div[1]/app-navbar/nav/button[2]"));
+    shoppingButton.click();
+
+  });
+
+
+  it('should purchase a selected item', () => {
+  
+    let firstRow = element(by.xpath("/html/body/app-root/div[2]/app-shoppinglist/div/div[2]/table/tbody/tr[1]"));
+    firstRow.click();
+    let firstItemText = element(by.xpath("/html/body/app-root/div[2]/app-shoppinglist/div/div[2]/table/tbody/tr[1]/td[1]")).getText();
+    let purchaseSelectionButton = element(by.xpath("/html/body/app-root/div[2]/app-shoppinglist/div/div[2]/button[3]"));
+    purchaseSelectionButton.click();
+
+    let pantryItemText = element(by.xpath("/html/body/app-root/div[2]/app-pantry/div/div[2]/table/tbody/tr/td[1]")).getText();
+
+    expect(firstItemText).toBe(pantryItemText);
+
+  });
+
+  it('should increase and decrease item quantities', () =>{
+    
+    let qty =<number><unknown> element(by.xpath("/html/body/app-root/div[2]/app-shoppinglist/div/div[2]/table/tbody/tr[1]/td[2]/span[1]")).getText();
+    let add = element(by.xpath("/html/body/app-root/div[2]/app-shoppinglist/div/div[2]/table/tbody/tr[1]/td[4]/button"));
+    let sub = element(by.xpath("/html/body/app-root/div[2]/app-shoppinglist/div/div[2]/table/tbody/tr[1]/td[3]/button"));
+    add.click();
+    let modified = element(by.xpath("/html/body/app-root/div[2]/app-shoppinglist/div/div[2]/table/tbody/tr[1]/td[2]/span[1]")).getText();
+    expect(modified).toBeGreaterThan(qty);
+    sub.click();
+    modified = element(by.xpath("/html/body/app-root/div[2]/app-shoppinglist/div/div[2]/table/tbody/tr[1]/td[2]/span[1]")).getText();
+    expect(modified).toBeLessThanOrEqual(qty);
+
+
+
+  });
+
+  it('should be able to clear the cart', () => {
+    element(by.xpath("/html/body/app-root/div[2]/app-shoppinglist/div/div[2]/button[4]")).click();
+
+    let firstRow = element(by.xpath("/html/body/app-root/div[2]/app-shoppinglist/div/div[2]/table/tbody/tr[2]"));  
+
+    expect(browser.isElementPresent(firstRow)).toBeFalsy();
+
+  });
+
+  afterEach(async ()=>{
+
+  });
+
+  afterAll(async ()=> {
+    let shoppingButton = element(by.xpath("/html/body/app-root/div[1]/app-navbar/nav/button[2]"));
+    shoppingButton.click();
+
+    element(by.xpath("/html/body/app-root/div[2]/app-shoppinglist/div/div[2]/button[4]")).click();
+
+    let pantryButton = element(by.xpath("/html/body/app-root/div[1]/app-navbar/nav/button[4]"));
+    pantryButton.click();
+
+    let pantryRow = element(by.xpath("/html/body/app-root/div[2]/app-pantry/div/div[2]/table/tbody/tr"));
+      pantryRow.click();
+      browser.sleep(500);
+      element(by.xpath("/html/body/app-root/div[2]/app-pantry/div/button[2]")).click();
+    
+
+
+   
+
+
+  })
+
+})
