@@ -2,15 +2,15 @@
 <div class="div">
   <div class=container-fluid 
   style=" text-align:left; color:white; border: 2px solid; background-color:  #45c3cc">
-  <h1 style="font-size:65px;font-style:bold; padding: 40px 70px">Recipes</h1>
+  <h1 style="font-size:65px; padding: 40px 70px">Recipes</h1>
   </div>
 
   <div class="container" id="myGroup">
     <p>
-        <a class="btn btn-info" data-toggle="collapse" href="#collapser" role="button" aria-expanded="false" aria-controls="collapseExample" style="margin:30px; padding:15px 40px; width:250px">
+        <a id="searchD"class="btn btn-info" data-toggle="collapse" href="#collapser" role="button" aria-expanded="false" aria-controls="collapseExample" style="margin:30px; padding:15px 40px; width:250px">
             Search By Description 
         </a>
-        <button class="btn btn-info" type="button"  data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2" style="margin:30px; padding:15px 40px; width:250px">
+        <button id="searchN" class="btn btn-info" type="button"  data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2" style="margin:30px; padding:15px 40px; width:250px">
             Search By Name 
         </button>
     </p>
@@ -35,7 +35,8 @@
     </div></div>
     </div>
 
-    <div class="container">
+    <div class="row">
+    <section class="col-9">
       <div class="row">
       <section class="col-6" *ngFor="let r of resultList">
       <div class="card mt-3" >
@@ -48,9 +49,9 @@
           <p class="card-text text-muted">#{{ r.cuisine }}</p>
           <p class="card-text text-muted">#{{ r.tag1 }}  &nbsp;&nbsp;  #{{ r.tag2 }}</p>
 
-          <button type="button" (click)="addToSelections(r)" class="btn btn-info" > Add to List &#43;</button>
+          <button id="add" type="button" (click)="addToSelections(r)" class="btn btn-info" > Add to List &#43;</button>
   
-          <button (click)="showRecipeIngredients(r)"type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal">View</button>
+          <button id="show" (click)="showRecipeIngredients(r)"type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal">View</button>
         
           
 
@@ -59,7 +60,7 @@
             <div class="modal-dialog" role="document" >
               <div class="modal-content"  >
                 <div class="modal-header" >
-                  <h5  class="modal-title" id="exampleModalLabel">Ingredients</h5>
+                  <h2  class="modal-title" id="exampleModalLabel">Ingredients</h2>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -70,29 +71,37 @@
                 </ul>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button id ="close" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section></div>
-  </div>
-   <br>
-    <h3 [innerHTML]="sTitle"></h3>
-    <div class="row">
-      <section class="col-4" *ngFor="let r of selectList">
-      <div class="card mt-2" >
-        <p id="recipeHead" class="card-title">
-         {{ r.title }}
-        </p>
-        <div class="card-body">
-          <button type="button" (click)="addToSelections(r)" class="btn btn-info" > Double this Recipe</button>
-        </div>
-      </div>
     </section>
+  </div>
+</section>
+<section class="col-3">
+  <div *ngIf="noSelect" class="container">
+    <h5 id="place">Popular Searches</h5>
+    <ul class="list-group list-group-flush">
+    <h4 class="list-group-item">#spicy</h4>
+    <h4 class="list-group-item">#classic</h4>
+    <h4 class="list-group-item">#vegan</h4>
+    <h4 class="list-group-item">#easy</h4>
+      </ul>
+      <br>
+  </div>
+  <div *ngIf="mySelect" class="container">
+    <h5>My Selections</h5>
     <br>
-    </div><button *ngIf="getButton" class="btn btn-primary" (click)="getIngredients()" >Add all to Shopping List</button>
+      <ul class="list-group list-group-flush">
+        <h4 class="list-group-item" *ngFor="let r of selectList">{{r.title}}</h4>
+      </ul>
+      <br>
+    <button id="send" *ngIf="getButton" class="btn btn-primary" (click)="getIngredients()" >Add all to Shopping List</button>
 
+  </div>
+  </section> 
+  </div>
    </div>
