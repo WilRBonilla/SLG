@@ -21,11 +21,25 @@ body {
 
 h1 {
     animation: expand 1.5s;
+    font-weight: 500;
+}
+h4 {
+    font-weight:bold;
+    color:rgb(9, 9, 104);
+    margin:20px;
+}
+h2{
+    font-weight:600;
 }
 h3{
     padding:50px 80px;
 }
-
+h5{
+    margin-top:65%;
+    color: rgb(2, 109, 109);
+    font-weight: 600;
+    font-size:50px;
+}
 
 #register {
     animation: expand 1.5s;

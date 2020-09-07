@@ -1,17 +1,10 @@
-import {
-  Component,
-  OnInit,
-  Directive,
-  Input,
-  ViewChild,
-  ElementRef,
-} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { SlgService } from 'src/app/services/slg.service';
 import { Recipe } from 'src/app/models/Recipe';
 import { RecipeIngredient } from 'src/app/models/RecipeIngredient';
 import { ShoppingListEntry } from 'src/app/models/ShoppingListEntry';
 import { Shopper } from 'src/app/models/Shopper';
-import { Ingredient } from 'src/app/models/Ingredient';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-recipe',
@@ -19,9 +12,8 @@ import { Ingredient } from 'src/app/models/Ingredient';
   styleUrls: ['./recipe.component.css'],
 })
 export class RecipeComponent implements OnInit {
-  @ViewChild('t') t: ElementRef;
 
-  constructor(private rservice: SlgService) {}
+  constructor(private rservice: SlgService,public router:Router) {}
 
   ngOnInit(): void {
   }
@@ -33,16 +25,17 @@ export class RecipeComponent implements OnInit {
   tag1: string = '';
   tag2: string = '';
   search: string = '';
-  sTitle: string;
   resultList: Array<Recipe> = [];
   selectList: Array<Recipe> = [];
   riList: Array<RecipeIngredient> = [];
   riList2: Array<RecipeIngredient> = [];
   user: Shopper;
-  hide: string = 'visibility: hidden; width:50';
+  noSelect: Boolean= false;
+  mySelect: Boolean= false;
   getButton: Boolean=false;
 
   recipeResults() {
+    this.noSelect=true;
     console.log(this.searched);
     this.separate = this.searched.split(' ');
     this.cuisine = this.separate[0];
@@ -92,8 +85,8 @@ export class RecipeComponent implements OnInit {
     });
   }
   addToSelections = (r) => {
-    this.sTitle = 'My Selections';
-    this.hide = 'visibility:visible; width:50';
+   this.noSelect=false;
+   this.mySelect=true;
     for (let i = 0; i < this.resultList.length; i++) {
       if (r.r_id == this.resultList[i].r_id) {
         let tRec: Recipe = this.resultList[i];
@@ -116,13 +109,9 @@ export class RecipeComponent implements OnInit {
             this.riList =JSON.parse(JSON.stringify(response));
               for(let p=0;p<this.riList.length;p++){
                 let entry= new ShoppingListEntry(600,this.riList[p].ingredient,this.user,this.riList[p].amount)
-                this.rservice.addToMyList(this.user.u_id, entry).subscribe(
-                  (response) => {
-                  console.log('added');
-                  console.log(entry)
-                });
+                this.rservice.addToMyList(this.user.u_id, entry).subscribe();
           }
-        }
-      )}
+        });
+      }this.router.navigate(['/shoppinglist']);
     }
   }
