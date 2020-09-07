@@ -16,7 +16,7 @@
         <!--  -->
         <tr *ngFor="let s of shoppingList" [class] ="s.rowClicked ? 'table-primary' : '' "  (click) = "purchaseItem(s) ">
           <td (click) = "s.rowClicked = !s.rowClicked">{{ s.ingredient.name }}</td>
-            <td (click) = "s.rowClicked = !s.rowClicked" style="text-align:left">{{s.amount}}
+            <td (click) = "s.rowClicked = !s.rowClicked" style="text-align:left"><span>{{s.amount}}</span>
             <span style="margin-left: 12px;">{{s.ingredient.units}}</span>
             </td>
           <td> <button class = "btn btn-primary"(click) = "subtractQuantity(s)" style="border:none;background:none;color:rgb(199, 21, 21)"><b> &#8722; </b></button>
