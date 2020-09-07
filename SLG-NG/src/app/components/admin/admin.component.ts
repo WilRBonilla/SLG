@@ -17,7 +17,6 @@ export class AdminComponent implements OnInit {
   ngOnInit( ): void {
     this.getAllIngredients(),
     this.getAllRecipes()
-    // this.getAllStock()
   }
 
   allIngredients: Array<Ingredient> = [];
@@ -57,13 +56,6 @@ export class AdminComponent implements OnInit {
   inventoryPrice: number = null; 
   updatedAlert: boolean = false; 
   selectedInventoryId:number = 0;
-  
-  updateStock() {
-    console.log("update stock clicked");
-    console.log(this.selectedInventoryId);
-    
-
-  }
 
   onStockChange(newValue){
     console.log(newValue);
@@ -80,19 +72,6 @@ export class AdminComponent implements OnInit {
 
     )
   }
-
-  // getAllStock(){
-  //   this.slgService.getAllStock().subscribe(
-  //     (response) => {
-  //       console.log(response);
-  //       this.allStock = response;
-  //     },
-  //     (response => {
-  //       console.log("Failed to get stock list")
-  //     })
-  //   )
-  // }
-
 
   getAllIngredients(){
     this.slgService.getAllIngredients().subscribe(
@@ -221,6 +200,26 @@ export class AdminComponent implements OnInit {
   findIngredientFromArray(ingId){
     return this.allIngredients.find(i => i.ing_id == ingId)
   }
+
+  updateStock() {
+    console.log("update stock clicked");
+    console.log(this.selectedInventoryId);
+    let specificIngredient = this.findIngredientFromArray(this.selectedInventoryId)
+    let newIngredient = new Ingredient(specificIngredient.ing_id, specificIngredient.name, specificIngredient.units)
+    let newStock = new Stock(this.selectedInventoryId, newIngredient, this.inventoryAmount, this.inventoryPrice)
+    this.slgService.updateStock(this.selectedInventoryId, newStock).subscribe(
+      (response) => {
+        console.log("Stock Updated");
+        this.updatedAlert=true;
+      },
+      (response) => {
+        console.log("Something went wrong");
+      },
+      () => {
+        this.resetValues();
+      }
+    )
+  }
   
   addRecipeIngredient1(){
     let specificIngredient = this.findIngredientFromArray(this.recipeIngredientId1)
@@ -319,7 +318,9 @@ export class AdminComponent implements OnInit {
     this.recipeIngredientId3= null;
     this.recipeIngredientId4= null;
     this.recipeIngredientId5= null;
-
+    this.selectedInventoryId= null;
+    this.inventoryAmount = null;
+    this.inventoryPrice = null;
   }
 
 
