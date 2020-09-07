@@ -3,6 +3,7 @@ import { SlgService } from '../../services/slg.service';
 import { Ingredient } from '../../models/Ingredient';
 import { Recipe } from '../../models/Recipe';
 import { RecipeIngredient } from '../../models/RecipeIngredient';
+import { Stock } from 'src/app/models/Stock';
 
 @Component({
   selector: 'app-admin',
@@ -19,7 +20,8 @@ export class AdminComponent implements OnInit {
   }
 
   allIngredients: Array<Ingredient> = [];
-  allRecipes: Array<Recipe>=[];
+  allRecipes: Array<Recipe> = [];
+  allStock: Array<Stock> = [];
   rId: number = null;
   id: number = null;
   name: string = "";
@@ -50,7 +52,26 @@ export class AdminComponent implements OnInit {
   addedRecipeAlert: boolean = false;
   addedRecipeName: string = "";
   deletedRecipeAlert: boolean = false;
+  inventoryAmount: number = null;
+  inventoryPrice: number = null; 
+  updatedAlert: boolean = false; 
+  selectedInventoryId:number = 0;
 
+  onStockChange(newValue){
+    console.log(newValue);
+    this.selectedInventoryId = newValue
+    this.slgService.getSingleStock(newValue).subscribe(
+      (response) => {
+        console.log(response);
+        this.inventoryAmount = response.amount
+        this.inventoryPrice = response.price
+      },
+      (response) => {
+        console.log("Failed to get ingredients list")
+      }
+
+    )
+  }
 
   getAllIngredients(){
     this.slgService.getAllIngredients().subscribe(
@@ -179,6 +200,26 @@ export class AdminComponent implements OnInit {
   findIngredientFromArray(ingId){
     return this.allIngredients.find(i => i.ing_id == ingId)
   }
+
+  updateStock() {
+    console.log("update stock clicked");
+    console.log(this.selectedInventoryId);
+    let specificIngredient = this.findIngredientFromArray(this.selectedInventoryId)
+    let newIngredient = new Ingredient(specificIngredient.ing_id, specificIngredient.name, specificIngredient.units)
+    let newStock = new Stock(this.selectedInventoryId, newIngredient, this.inventoryAmount, this.inventoryPrice)
+    this.slgService.updateStock(this.selectedInventoryId, newStock).subscribe(
+      (response) => {
+        console.log("Stock Updated");
+        this.updatedAlert=true;
+      },
+      (response) => {
+        console.log("Something went wrong");
+      },
+      () => {
+        this.resetValues();
+      }
+    )
+  }
   
   addRecipeIngredient1(){
     let specificIngredient = this.findIngredientFromArray(this.recipeIngredientId1)
@@ -257,6 +298,7 @@ export class AdminComponent implements OnInit {
     )
   }
 
+
   resetValues() {
     this.id = this.allIngredients.length + 1;
     this.name = "";
@@ -276,7 +318,9 @@ export class AdminComponent implements OnInit {
     this.recipeIngredientId3= null;
     this.recipeIngredientId4= null;
     this.recipeIngredientId5= null;
-
+    this.selectedInventoryId= null;
+    this.inventoryAmount = null;
+    this.inventoryPrice = null;
   }
 
 

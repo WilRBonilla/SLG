@@ -167,5 +167,20 @@ export class SlgService {
   getAllStock() :Observable<Stock[]> {
     return this.http.get<Stock[]>(this.url+'stock')
   } 
+
+  getSingleStock(s_id: number): Observable<Stock> {
+    return this.http.get<Stock>(this.url + 'stock/' + s_id);
+  }
+
+  updateStock(s_id: number, change: Stock): Observable<Stock>{
+    return this.http.put<Stock>(this.url + 'stock/' + s_id, change, { headers: this.headers });
+  }
+
+  // updatePantry(pid: number, change: Pantry): Observable<Pantry> {
+  //   return this.http.put<Pantry>(this.url + 'pantry/' + pid, change, { headers: this.headers });
+  // }
+
+
+
   
 }
