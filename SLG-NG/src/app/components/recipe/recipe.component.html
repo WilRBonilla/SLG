@@ -7,10 +7,10 @@
 
   <div class="container" id="myGroup">
     <p>
-        <a class="btn btn-info" data-toggle="collapse" href="#collapser" role="button" aria-expanded="false" aria-controls="collapseExample" style="margin:30px; padding:15px 40px; width:250px">
+        <a id="searchD"class="btn btn-info" data-toggle="collapse" href="#collapser" role="button" aria-expanded="false" aria-controls="collapseExample" style="margin:30px; padding:15px 40px; width:250px">
             Search By Description 
         </a>
-        <button class="btn btn-info" type="button"  data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2" style="margin:30px; padding:15px 40px; width:250px">
+        <button id="searchN" class="btn btn-info" type="button"  data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2" style="margin:30px; padding:15px 40px; width:250px">
             Search By Name 
         </button>
     </p>
@@ -49,9 +49,9 @@
           <p class="card-text text-muted">#{{ r.cuisine }}</p>
           <p class="card-text text-muted">#{{ r.tag1 }}  &nbsp;&nbsp;  #{{ r.tag2 }}</p>
 
-          <button type="button" (click)="addToSelections(r)" class="btn btn-info" > Add to List &#43;</button>
+          <button id="add" type="button" (click)="addToSelections(r)" class="btn btn-info" > Add to List &#43;</button>
   
-          <button (click)="showRecipeIngredients(r)"type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal">View</button>
+          <button id="show" (click)="showRecipeIngredients(r)"type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal">View</button>
         
           
 
@@ -71,7 +71,7 @@
                 </ul>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button id ="close" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
               </div>
             </div>
@@ -83,7 +83,7 @@
 </section>
 <section class="col-3">
   <div *ngIf="noSelect" class="container">
-    <h5>Popular Searches</h5>
+    <h5 id="place">Popular Searches</h5>
     <ul class="list-group list-group-flush">
     <h4 class="list-group-item">#spicy</h4>
     <h4 class="list-group-item">#classic</h4>
@@ -99,7 +99,7 @@
         <h4 class="list-group-item" *ngFor="let r of selectList">{{r.title}}</h4>
       </ul>
       <br>
-    <button *ngIf="getButton" class="btn btn-primary" (click)="getIngredients()" >Add all to Shopping List</button>
+    <button id="send" *ngIf="getButton" class="btn btn-primary" (click)="getIngredients()" >Add all to Shopping List</button>
 
   </div>
   </section> 
