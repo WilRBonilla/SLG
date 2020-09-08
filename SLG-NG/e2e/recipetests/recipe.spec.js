@@ -4,7 +4,7 @@ describe('SLG Recipe Component', () => {
     browser.get(page);
     it('should reach the website correctly', () =>{
     expect(browser.getTitle()).toBe("Shopping List Generator");
-});
+
 
     it('should search for a recipe by tag', () => {
         searchDesc= element(by.id("searchD"));
@@ -40,4 +40,6 @@ describe('SLG Recipe Component', () => {
         send.click();
         expect(browser.getCurrentUrl()).toBe("http://localhost:4200/shoppinglist");
     });    
+});
+
 });
