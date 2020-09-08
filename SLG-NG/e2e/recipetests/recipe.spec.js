@@ -36,7 +36,7 @@ describe('SLG Recipe Component', () => {
     });
     
     it('should send recipes to shopping list', () => {
-        send= element(by.id("send"));
+        send= element(by.id("add"));
         send.click();
         expect(browser.getCurrentUrl()).toBe("http://localhost:4200/shoppinglist");
     });    

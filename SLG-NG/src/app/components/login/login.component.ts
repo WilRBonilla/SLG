@@ -58,8 +58,8 @@ export class LoginComponent implements OnInit {
         (response) => {
           console.log(response);
         }
-
       )
+      this.router.navigate(['/home']);
     }
 
   getLogin() {

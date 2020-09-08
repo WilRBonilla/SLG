@@ -46,7 +46,7 @@
           
         </div>
         <div class="card-body">
-          <img class=img-fluid mx-auto src="assets/{{r.title}}.jpg" alt="Icon">
+          <img class=img-fluid mx-auto src="assets/{{r.title}}.jpg" alt="New Recipe! Image Coming Soon" onerror="this.src='assets/Ingredients.jpg'">
           <p class="card-text text-muted">#{{ r.cuisine }}</p>
           <p class="card-text text-muted">#{{ r.tag1 }}  &nbsp;&nbsp;  #{{ r.tag2 }}</p>
           <button id="show" (click)="showRecipeIngredients(r)"type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal">View</button>

@@ -3,9 +3,13 @@ body {
     padding-top: 5%;
     padding-bottom: 5%;
     height: 100%;
+    background-color:teal;
+
     
   }
-  
+  #footer{
+    text-align: center;
+  }
   nav {
       animation: expand 1s;
       box-shadow: 2px 5px 9px lightslategray;
@@ -82,6 +86,8 @@ body {
   
     h1 {
       animation: expand 1.5s;
+      font-weight: 600;
+      font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
   }
   
   #register {
@@ -92,14 +98,16 @@ body {
     
       animation: expand 1s;
       box-shadow: 5px 10px 18px lightslategray;
-      padding: 20px;
-      width: 30%;
+      padding: 30px;
+      width: 40%;
       height: fit-content;
       font-family: sans-serif;
-      color: darkblue;  
+      color: darkblue; 
       border-radius: 35px;
       text-align: center;
       margin: auto;
+      background-color: rgb(224, 228, 238);
+      /* opacity: 0.9; */
   
   }
   
@@ -115,6 +123,7 @@ body {
       height: 30px;
       transition: 0.25s;
       outline: none;
+      opacity: 1;
   }
   
   .inputText:focus {
