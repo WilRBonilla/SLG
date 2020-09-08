@@ -3,6 +3,7 @@ body {
     padding-top: 5%;
     padding-bottom: 5%;
     height: 100%;
+
     
   }
   #footer{
@@ -46,7 +47,7 @@ body {
       border-radius: 10px;
       height: 50px;
       width: 160px;
-      background: none;
+      
       transition: 0.25s;
       outline: none;
   }
@@ -85,13 +86,28 @@ body {
     h1 {
       animation: expand 1.5s;
       font-weight: 600;
-      font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+      font-family:candara;
+      font-size:45px;
+    }
+  h2{
+    font-size:65px;
+    font-family:candara;
+    font-weight:600;
+
+  }
+
+  h4{
+    font-size:35px;
+    font-family:candara;
   }
   
   #register {
       animation: expand 1.5s;
   }
-  
+.my-container{
+  background-color:#45c3cc;
+}
+
   .container { 
     
       animation: expand 1s;
@@ -100,11 +116,12 @@ body {
       width: 40%;
       height: fit-content;
       font-family: sans-serif;
-      color: darkblue; 
+      font-weight:500;
+      color: rgb(4, 109, 112); 
       border-radius: 35px;
       text-align: center;
       margin: auto;
-      background-color: rgb(224, 228, 238);
+      background-color: rgb(231, 239, 240);
       /* opacity: 0.9; */
   
   }
@@ -133,7 +150,7 @@ body {
   .button {
       animation: expand 1.5s;
       border: 0;
-      background: none;
+      
       display: block;
       margin: 20px auto;
       text-align: center;
@@ -141,7 +158,7 @@ body {
       width: 40%;
       height: 50px;
       outline: none;
-      color: darkblue;
+      color: rgb(4, 109, 112);
       border-radius: 10px;
       transition: 0.25s;
       cursor: pointer  

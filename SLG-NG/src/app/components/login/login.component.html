@@ -6,7 +6,7 @@
     <a id="register" routerLink="/register" >Register new account?</a>
     
 </div> -->
-
+<div class="my-container">
 <div class="view" style="padding:170px 20px; height:77vh; width:100%; background-image: url('assets/Login.png'); background-size: cover; background-position: center center;">
     <div id="logincontainer" class="container-fluid" *ngIf="login" >
 <div id="logincont" class="container" style="opacity: 0.9; margin-bottom:5%"> 
@@ -17,9 +17,13 @@
     <a style="cursor:pointer" id="register"  (click)="loginPage()" >Register new account?</a> 
    
 </div>
-<div id="footer" class="bg-info d-flex" style="color:white; height: 23vh; ">
-        <h1 style="margin:50px 210px">Your Virtual Butler</h1>
-    <h4 style="margin:50px"><i>Create custom shopping lists based on your favorite recipes</i></h4>
+<div id="footer" class="container-fluid" style="color:white; height: 20vh; ">
+    <h2 style="margin-top:200px; margin-bottom:40px">Your Virtual Butler</h2>
+    <div class="row">
+    <h4 class="col-4"><i>Amazing Recipes</i></h4>
+    <h4 class="col-4"><i>Custom Grocery List Creation</i></h4>
+    <h4 class="col-4"><i>Intuitive Pantry Management</i></h4>
+</div>
 </div>
 </div>
 <div id="registercontainer" class="container" *ngIf="register" style="opacity: 0.9">
@@ -31,5 +35,6 @@
     <input id="lastnameText" class="inputText" type="text" [(ngModel)] = "l_name" placeholder="Last Name">
     <button id="registerButton" routerLink="/login" (click) = "addShopper()" class="button" onmouseover="style='background: linear-gradient(to right, lightblue, rgb(235, 239, 241), lightblue)'" onmousedown="style='background: linear-gradient(to right, rgb(235, 239, 241), lightblue, rgb(235, 239, 241))'" onmouseup="style='background: linear-gradient(to right, lightblue, rgb(235, 239, 241), lightblue)'" onmouseout="style='background: none'">REGISTER</button>
     <a style="cursor:pointer" (click)="registerPage()">Cancel</a>  
+</div>
 </div>
 </div>
