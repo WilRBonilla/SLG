@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
           console.log(response);
         }
       )
-      this.router.navigate(['/home']);
+      this.registerPage();
     }
 
   getLogin() {
@@ -77,6 +77,7 @@ export class LoginComponent implements OnInit {
         if (this.shopper.u_id != 0) {
           this.nav.show();
           this.router.navigate(['/home']);
+          
 
 
         }else {

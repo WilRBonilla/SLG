@@ -8,6 +8,7 @@ body {
   }
   #footer{
     text-align: center;
+   
   }
   nav {
       animation: expand 1s;
@@ -93,6 +94,7 @@ body {
     font-size:65px;
     font-family:candara;
     font-weight:600;
+    
 
   }
 

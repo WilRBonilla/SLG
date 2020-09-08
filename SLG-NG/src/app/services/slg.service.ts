@@ -155,7 +155,7 @@ export class SlgService {
 
 
   addRecipeIngredient(recipeIngredient: RecipeIngredient): Observable<RecipeIngredient> {
-   return this.http.post<RecipeIngredient>(this.url + 'recipeingredient/', recipeIngredient, { headers: this.headers });
+   return this.http.post<RecipeIngredient>(this.url+'recipeingredient', recipeIngredient, { headers: this.headers });
     }
 
   getRecipeIngredients(r_id): Observable <RecipeIngredient[]>{
