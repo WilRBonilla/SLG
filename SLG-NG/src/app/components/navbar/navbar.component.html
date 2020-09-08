@@ -3,6 +3,6 @@
     <button routerLink="/shoppinglist">Shopping List</button>
     <button routerLink="/recipe">Recipes</button>
     <button routerLink="/pantry">Pantry</button>
-    <button routerLink="">Logout</button>
     <button *ngIf="isAlfred" routerLink="/admin">Admin</button>
+    <button (click)="clearLocalStorage()" routerLink="">Logout</button>
 </nav>
