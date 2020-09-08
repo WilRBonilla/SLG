@@ -20,6 +20,7 @@ export class NavbarComponent implements OnInit {
 
   
   isYouAlfred(){
+    console.log("Inside alfred test");
     let currentUser = JSON.parse(localStorage.getItem("user"));
     let name = currentUser.f_name
     if(name == "Alfred"){
@@ -27,9 +28,13 @@ export class NavbarComponent implements OnInit {
     }
   }
 
+  clearLocalStorage(){
+    localStorage.removeItem('user');
+    console.log("local storage clear");
+  }
+
   directToAdmin(){
     console.log("admin clicked");
-    
   }
 
 }

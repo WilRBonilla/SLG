@@ -3,8 +3,7 @@ describe('SLG Recipe Component', () => {
     page = 'http://localhost:4200/recipe';
     browser.get(page);
     it('should reach the website correctly', () =>{
-    expect(browser.getTitle()).toBe("Shopping List Generator");
-
+        expect(browser.getTitle()).toBe("Alfred's List");
 
     it('should search for a recipe by tag', () => {
         searchDesc= element(by.id("searchD"));
