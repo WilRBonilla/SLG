@@ -131,7 +131,7 @@ describe('SLG Login Component', () => {
     passwordInput.sendKeys("12");
     let loginButton = element(by.id("loginButton"));
     loginButton.click();
-    let pantryNavButton = element(by.id("pantryNavButton"));
+    let pantryNavButton = element(by.xpath("/html/body/app-root/div[1]/app-navbar/nav/button[4]"));
     pantryNavButton.click();
     let addFoodItemButton = element(by.id("addFoodItemButton"));
     addFoodItemButton.click();
@@ -154,7 +154,7 @@ describe('SLG Login Component', () => {
     passwordInput.sendKeys("12");
     let loginButton = element(by.id("loginButton"));
     loginButton.click();
-    let pantryNavButton = element(by.id("pantryNavButton"));
+    let pantryNavButton = element(by.xpath("/html/body/app-root/div[1]/app-navbar/nav/button[4]"));
     pantryNavButton.click();
     let selectedRow = element(by.xpath("//*[@id='RecipeSeletions']/tr[1]"));
     selectedRow.click();
@@ -170,7 +170,7 @@ describe('SLG Login Component', () => {
     passwordInput.sendKeys("12");
     let loginButton = element(by.id("loginButton"));
     loginButton.click();
-    let pantryNavButton = element(by.id("pantryNavButton"));
+    let pantryNavButton = element(by.xpath("/html/body/app-root/div[1]/app-navbar/nav/button[4]"));
     pantryNavButton.click();
     let selectedRow = element(by.xpath("//*[@id='RecipeSeletions']/tr[1]"));
     let addinput = element(by.id("addinput"));
