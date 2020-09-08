@@ -30,6 +30,7 @@ describe('Admin Component', () => {
         element(by.css("#ingredients [value='42']")).click();
 
         deleteButton = element(by.id("deleteIngredient"));
+        deleteButton.click();
     });
 
 
