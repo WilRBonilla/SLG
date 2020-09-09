@@ -8,7 +8,7 @@
   <div class="container">
     <table class="table table-sm table-hover">
       <tr style="background-color:lavenderblush">
-      <th>Item</th>
+      <th style="text-align:left">Item</th>
       <th style="text-align:left">Quantity</th>
       <th></th>
       <th style="text-align:left;">Update</th>
@@ -16,7 +16,7 @@
       <tbody>
         <!--  -->
         <tr *ngFor="let s of shoppingList"  [style]= "tstyle" [class] ="s.rowClicked ? 'table-primary' : '' "  (click) = "purchaseItem(s) ">
-          <td  (click) = "s.rowClicked = !s.rowClicked">{{ s.ingredient.name }}</td>
+          <td  (click) = "s.rowClicked = !s.rowClicked" style="text-align:left">{{ s.ingredient.name }}</td>
             <td (click) = "s.rowClicked = !s.rowClicked" style="text-align:left"><span>{{s.amount}}</span>
             <span style="margin-left: 12px;">{{s.ingredient.units}}</span>
             </td>
