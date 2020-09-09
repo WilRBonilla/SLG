@@ -27,7 +27,7 @@
         </tr>
         <tr></tr>
         <tr *ngFor="let c of customItems" [style]="tstyle" [class] = "c.rowClicked ? 'table-primary' : '' ">
-          <td (click) = "c.rowClicked = !c.rowClicked">{{ c.ingredient.name }}</td>
+          <td (click) = "c.rowClicked = !c.rowClicked" style="text-align:left">{{ c.ingredient.name }}</td>
           <td (click) = "c.rowClicked = !c.rowClicked" style="text-align:left">{{ c.amount }}</td>
           <td> <button class = "btn"(click) = "deletecustom(c)" style="border:none;background:none;color:rgb(199, 21, 21)"><b> &#8722; </b></button>
           </td>
