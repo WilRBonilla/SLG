@@ -34,6 +34,7 @@ export class ShoppinglistComponent implements OnInit {
   purchaseList: Array<Pantry> = [];
   customItems: Array<ShoppingListEntry> = [];
   outPantry: Array<Pantry> = [];
+  tstyle: String;
 
   selected: boolean;
   notes: string = '';
@@ -105,11 +106,13 @@ export class ShoppinglistComponent implements OnInit {
 
   selectAll() {
     this.shoppingList.forEach((e) => {
+      this.tstyle="background-color:#b8d7fc"
       this.purchaseItem(e);
     });
   }
   deselectAll() {
     this.purchaseList = [];
+    
   }
 
   // Functions dealing with the pantrylist
@@ -158,6 +161,12 @@ export class ShoppinglistComponent implements OnInit {
     this.router.navigate(['/shoppinglist']);
   }
 
+  addcustom=(c)=>{
+    c.amount=c.amount+1;
+  }
+  deletecustom=(c)=>{
+    c.amount=(c.amount-1);
+  }
 
 
  
@@ -236,6 +245,7 @@ export class ShoppinglistComponent implements OnInit {
     this.purchaseList = [];
     console.log('CLEARING SELECTIONS');
     console.log(this.purchaseList);
+    this.tstyle=""
   }
   // DELETES ALL
   clearList() {

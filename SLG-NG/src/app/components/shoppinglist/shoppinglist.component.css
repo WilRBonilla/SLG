@@ -9,6 +9,9 @@ table{
     cursor: pointer 
 }
 
+th{
+    font-size:20px
+}
 
 .div {
     animation: expand 1s;

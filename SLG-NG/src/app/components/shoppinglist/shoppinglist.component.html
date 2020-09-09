@@ -1,38 +1,44 @@
 <div class="myShoppingList div">
   <div class=container-fluid
-    style=" text-align:left; color:white; border: 2px solid; background-color:  #45c3cc">
+    style=" text-align:left;border-radius:15px; color:white; border: 2px solid; background-color:  #45c3cc">
   <h1 style="font-size:48px;font-style:bold; padding: 40px 70px;">My Shopping List</h1>
 </div>
-<h6 style = "text-align: center;">Simply click the items you want to select or 'Select All' at the bottom.</h6>
+<h5 style = "text-align: center; margin:18px">Select Items to Move to Your Pantry</h5>
 
   <div class="container">
-    <table class="table table-sm table-striped table-hover">
-      <tr>
-      <th>Item</th>
+    <table class="table table-sm table-hover">
+      <tr style="background-color:lavenderblush">
+      <th style="text-align:left">Item</th>
       <th style="text-align:left">Quantity</th>
-      <th>Update</th>
+      <th></th>
+      <th style="text-align:left;">Update</th>
       </tr>
       <tbody>
         <!--  -->
-        <tr *ngFor="let s of shoppingList" [class] ="s.rowClicked ? 'table-primary' : '' "  (click) = "purchaseItem(s) ">
-          <td (click) = "s.rowClicked = !s.rowClicked">{{ s.ingredient.name }}</td>
+        <tr *ngFor="let s of shoppingList"  [style]= "tstyle" [class] ="s.rowClicked ? 'table-primary' : '' "  (click) = "purchaseItem(s) ">
+          <td  (click) = "s.rowClicked = !s.rowClicked" style="text-align:left">{{ s.ingredient.name }}</td>
             <td (click) = "s.rowClicked = !s.rowClicked" style="text-align:left"><span>{{s.amount}}</span>
             <span style="margin-left: 12px;">{{s.ingredient.units}}</span>
             </td>
-          <td> <button class = "btn btn-primary"(click) = "subtractQuantity(s)" style="border:none;background:none;color:rgb(199, 21, 21)"><b> &#8722; </b></button>
+          <td> <button class = "btn" (click) = "subtractQuantity(s)" style="border:none;background:none;color:rgb(199, 21, 21)"><b> &#8722; </b></button>
           </td>
-          <td><button (click) = "addQuantity(s)" style="border:none;background:none;color:rgb(35, 187, 35)"><b> &#43; </b></button>
+          <td><button class = "btn" (click) = "addQuantity(s)" style="border:none;background:none;color:rgb(35, 187, 35)"><b> &#43; </b></button>
             </td>
         </tr>
-        <tr *ngFor="let c of customItems"  [style.background-color] = "c.rowClicked ? 'lightblue' : 'white' "  (click) = "c.rowClicked = !c.rowClicked">
-          <td>{{ c.ingredient.name }}</td>
-          <td><span>{{ c.amount }}</span></td>
+        <tr></tr>
+        <tr *ngFor="let c of customItems" [style]="tstyle" [class] = "c.rowClicked ? 'table-primary' : '' ">
+          <td (click) = "c.rowClicked = !c.rowClicked" style="text-align:left">{{ c.ingredient.name }}</td>
+          <td (click) = "c.rowClicked = !c.rowClicked" style="text-align:left">{{ c.amount }}</td>
+          <td> <button class = "btn"(click) = "deletecustom(c)" style="border:none;background:none;color:rgb(199, 21, 21)"><b> &#8722; </b></button>
+          </td>
+          <td><button class = "btn" (click) = "addcustom(c)" style="border:none;background:none;color:rgb(35, 187, 35)"><b> &#43; </b></button>
+            </td>
         </tr>
         <tr>
           <td colspan="2">Custom Item: 
           <input type="text" [(ngModel)]="notes" style="width: max-content;"/>
           <button class = "btn btn-secondary" (click) = "addCustom()">Add Custom Item</button>
-        </td>
+        </td><td>&nbsp;</td><td></td>
         </tr>
 
       </tbody>

@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
   onHomepageLoad(){
     let currentUser = JSON.parse(localStorage.getItem("user"));
     this.username = currentUser.f_name
+    console.log(this.username);
   }
 
 }

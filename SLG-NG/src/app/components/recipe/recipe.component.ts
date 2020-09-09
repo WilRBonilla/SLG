@@ -38,12 +38,16 @@ export class RecipeComponent implements OnInit {
   mySelect: Boolean= false;
   getButton: Boolean=false;
   finish: Boolean = false;
+  t:Boolean= false;
 
 
 
   recipeResults() {
+    this.t=false;
+    if(this.selectList.length==0){
     this.noSelect=true;
-    console.log(this.searched);
+  }else{this.noSelect=false
+  }
     this.separate = this.searched.split(' ');
     this.cuisine = this.separate[0];
     this.tag1 = this.separate[1];
@@ -85,7 +89,30 @@ export class RecipeComponent implements OnInit {
       this.resultList = response;
     });
   }
+
+  spicysearch(){
+    this.searched="spicy";
+    this.recipeResults();
+  }
+  classicsearch(){
+    this.searched="classic";
+    this.recipeResults();
+  }
+  vegansearch(){
+    this.searched="vegan";
+    this.recipeResults();
+  }
+  easysearch(){
+    this.searched="spicy";
+    this.recipeResults();
+  }
+
   nameResults() {
+    this.t=true;
+    if(this.selectList.length==0){
+      this.noSelect=true;
+    }else{this.noSelect=false
+    }
     this.rservice.getResultsByName(this.name).subscribe((response) => {
       this.resultList = [];
       this.resultList.push(response);
